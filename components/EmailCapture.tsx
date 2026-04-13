@@ -24,6 +24,10 @@ export default function EmailCapture() {
       if (!res.ok) throw new Error('Failed')
       setStatus('success')
       form.reset()
+      // Redirect to primary site after successful capture
+      setTimeout(() => {
+        window.location.href = 'https://www.aaroncuha.com/services/youtube-services'
+      }, 2500)
     } catch {
       setStatus('error')
     }
@@ -105,13 +109,14 @@ export default function EmailCapture() {
               <p className="font-body text-white/70 text-sm mt-1">
                 Check your inbox — the Chapter Companion Kit is on its way.
               </p>
+              <p className="font-body text-white/40 text-xs mt-3">
+                Redirecting you to explore coaching &amp; services...
+              </p>
               <a
                 href="https://www.aaroncuha.com/services/youtube-services"
-                target="_blank"
-                rel="noopener noreferrer"
                 className="inline-block mt-3 px-6 py-2.5 bg-white text-brand-charcoal font-body font-bold text-sm rounded-lg hover:bg-white/90 transition-colors"
               >
-                Explore YouTube Coaching &amp; Services →
+                Go Now →
               </a>
             </div>
           ) : (
