@@ -9,7 +9,6 @@ export default function AboutAuthor() {
       id="author"
       className="relative bg-brand-charcoal py-24 lg:py-32 overflow-hidden noise-overlay"
     >
-      {/* Grid bg */}
       <div
         className="absolute inset-0 opacity-[0.015]"
         style={{
@@ -21,7 +20,7 @@ export default function AboutAuthor() {
 
       <div className="relative z-10 max-w-6xl mx-auto px-5 sm:px-8">
         <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-10 lg:gap-16 xl:gap-24 items-center">
-          {/* Photo placeholder */}
+          {/* Photo */}
           <motion.div
             className="relative max-w-md mx-auto lg:mx-0"
             initial={{ opacity: 0, x: -24 }}
@@ -37,11 +36,8 @@ export default function AboutAuthor() {
                 className="object-cover object-top"
                 sizes="(max-width: 1024px) 400px, 350px"
               />
-              {/* Red accent corner */}
               <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-gradient-to-tl from-brand-red/[0.06] to-transparent" />
             </div>
-
-            {/* Offset frame */}
             <div className="absolute -bottom-3 -right-3 w-full h-full rounded-2xl border border-brand-red/[0.08] -z-10" />
           </motion.div>
 
@@ -61,37 +57,45 @@ export default function AboutAuthor() {
 
             <div className="mt-6 space-y-4 text-brand-cream/50 font-body leading-relaxed text-[0.95rem]">
               <p>
-                Aaron Cuha has spent over 15,000 hours coaching business owners
-                on how to build systems that scale — and YouTube is the engine
-                that drives it all.
-              </p>
-              <p>
-                With 200,000+ subscribers across his channels (@aaroncuha
-                and @vanlife) and a track record of helping clients build
-                channels with over 1 million subscribers, Aaron wrote{' '}
+                Aaron runs two YouTube channels — @VanLife (120,000+ subscribers)
+                and @GotCoach (50,000+ subscribers) — built on the exact strategies
+                in this book. But the credential that matters most: he uses YouTube
+                to run actual businesses. Not to teach YouTube. Not to sell courses
+                about YouTube.{' '}
                 <span className="text-brand-cream/70 font-medium">
-                  Crazy Simple YouTube
-                </span>{' '}
-                to give every business owner the exact system that works —
-                without the fluff, hype, or influencer tactics that don&apos;t
-                apply to real businesses.
+                  To generate leads, close clients, and build revenue.
+                </span>
               </p>
               <p>
-                He&apos;s a Tom Ferry Mastery Coach &amp; Speaker, ICF
-                credentialed coach, NLP Master Practitioner, and licensed broker
-                in 12 states. He founded DirectLender.com (280 offices, 3,000
-                employees) and now leads Dominion Partners — helping business
-                owners build authority through content and systems.
+                With over 15,000 hours of one-on-one coaching, Aaron has helped
+                hundreds of business owners build YouTube channels that generate
+                real revenue. He launched @VanLife specifically as a testing lab —
+                every strategy in this book was validated with real data before it
+                was ever put in front of a client.
+              </p>
+              <p>
+                He&apos;s a Tom Ferry Mastery Coach &amp; Speaker, ICF credentialed
+                coach, NLP Master Practitioner, licensed broker in 12 states, and
+                founder of DirectLender.com (280 offices, 3,000 employees). He
+                also runs a YouTube management company that handles everything
+                from strategy to production for business owners who want it
+                done for them.
+              </p>
+              <p className="text-brand-cream/60 font-medium italic">
+                &ldquo;YouTube growth has been overcomplicated by people who profit
+                from making it seem harder than it is. I&apos;m here to strip all
+                that away and give you the playbook that actually works.&rdquo;
               </p>
             </div>
 
             <div className="mt-7 flex flex-wrap gap-2.5">
               {[
-                'ICF Coach',
-                'NLP Master Practitioner',
+                '170K+ Subscribers',
+                '15K+ Coaching Hours',
                 'Tom Ferry Speaker',
                 '12-State Broker',
-                'DISC Certified',
+                'ICF Coach',
+                'NLP Master Practitioner',
               ].map((cred) => (
                 <span
                   key={cred}

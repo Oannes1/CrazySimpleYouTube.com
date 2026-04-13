@@ -2,42 +2,54 @@
 
 import { motion } from 'framer-motion'
 
-/* TODO: Replace placeholder quotes with real testimonials */
 const testimonials = [
   {
+    name: 'Scott Himelstein',
+    role: 'Real Estate Agent',
+    result: '$300K+ revenue in year one',
+    quote:
+      "12 years on YouTube with 200 subscribers. Then I applied Aaron's system — 90 days later I had 2,000 subs and $87K in commissions. By year end, over $300K.",
+    initials: 'SH',
+  },
+  {
     name: 'Daniel Kotula',
+    role: 'Consultant, Prague',
     result: 'Consistent leads from every video',
     quote:
-      "Aaron's system transformed how I approach YouTube for my business. Within 3 months, I was generating consistent leads from every video I published.",
+      "I was doing everything the YouTube gurus said. Six months in: 247 subscribers and zero clients. Aaron's system completely changed my approach and the leads started flowing.",
     initials: 'DK',
   },
   {
-    name: 'Rachel Smith',
-    result: '10K subscribers in 6 months',
-    quote:
-      "I went from zero to 10,000 subscribers in 6 months using exactly what's in this book. The lead generation chapter alone was worth 10x the price.",
-    initials: 'RS',
-  },
-  {
     name: 'Leah Courage',
-    result: 'First video ranking in a weekend',
+    role: 'Real Estate Agent, WA',
+    result: '$180K in commissions from YouTube',
     quote:
-      'As a real estate agent, I was skeptical about YouTube. This book broke it down so simply that I had my first video up and ranking in a weekend.',
+      "I was skeptical about YouTube. Four months in I had 280 subscribers and wondered if it was working. Then the compound effect kicked in — 14 YouTube-sourced deals and $180K.",
     initials: 'LC',
   },
   {
     name: 'Natalia Echeverri',
+    role: 'Business Owner',
     result: 'Videos ranking on page one',
     quote:
-      'The keyword research system in Chapter 8 changed everything. My videos started ranking on page one immediately and the leads followed.',
+      "The keyword research system changed everything. My videos started ranking on page one and the leads followed. This isn't theory — it's a real system that works.",
     initials: 'NE',
   },
   {
     name: "Patrick O'Connor",
+    role: 'Business Owner',
     result: 'Business results, not vanity metrics',
     quote:
       "I've bought every YouTube course out there. This is the only resource that focuses on actual business results, not vanity metrics. Worth every penny.",
     initials: 'PO',
+  },
+  {
+    name: 'Rachel Smith',
+    role: 'Coach',
+    result: '10K subscribers in 6 months',
+    quote:
+      "Went from zero to 10,000 subscribers in 6 months using exactly what's in this book. The lead generation chapter alone was worth 10x the price.",
+    initials: 'RS',
   },
 ]
 
@@ -55,7 +67,6 @@ export default function Testimonials() {
       id="testimonials"
       className="relative bg-brand-cream py-24 lg:py-32 overflow-hidden"
     >
-      {/* Dot pattern */}
       <div
         className="absolute inset-0 opacity-[0.035]"
         style={{
@@ -73,7 +84,7 @@ export default function Testimonials() {
           viewport={{ once: true }}
         >
           <span className="font-body text-xs sm:text-sm tracking-[0.25em] uppercase text-brand-red-dark font-medium">
-            What Readers Say
+            From the Readers
           </span>
           <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-black text-brand-charcoal text-balance">
             Real Results from Real
@@ -85,9 +96,7 @@ export default function Testimonials() {
           {testimonials.map((t, i) => (
             <motion.div
               key={t.name}
-              className={`group bg-white rounded-2xl p-7 sm:p-8 shadow-sm border border-brand-charcoal/[0.04] hover:shadow-md hover:border-brand-red/10 transition-all duration-300 ${
-                i === 3 ? 'lg:col-span-1' : ''
-              } ${i === 4 ? 'md:col-span-2 lg:col-span-1' : ''}`}
+              className="group bg-white rounded-2xl p-7 sm:p-8 shadow-sm border border-brand-charcoal/[0.04] hover:shadow-md hover:border-brand-red/10 transition-all duration-300"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -113,7 +122,10 @@ export default function Testimonials() {
                   <div className="font-body font-semibold text-brand-charcoal text-sm">
                     {t.name}
                   </div>
-                  <div className="font-body text-brand-red-dark text-xs mt-0.5">
+                  <div className="font-body text-brand-charcoal/40 text-xs mt-0.5">
+                    {t.role}
+                  </div>
+                  <div className="font-body text-brand-red-dark text-xs font-medium mt-0.5">
                     {t.result}
                   </div>
                 </div>

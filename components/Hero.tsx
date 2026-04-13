@@ -11,10 +11,8 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-brand-charcoal noise-overlay">
       {/* ── Background layers ── */}
-      {/* Vignette */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_40%,transparent_0%,#0a0a0a_75%)]" />
 
-      {/* Subtle grid */}
       <div
         className="absolute inset-0 opacity-[0.025]"
         style={{
@@ -24,10 +22,7 @@ export default function Hero() {
         }}
       />
 
-      {/* Red glow orb behind book area */}
       <div className="absolute top-1/2 right-[20%] -translate-y-1/2 w-[500px] h-[500px] bg-brand-red/[0.07] rounded-full blur-[160px] animate-glow-pulse" />
-
-      {/* Secondary warm glow */}
       <div className="absolute top-[30%] left-[10%] w-[300px] h-[300px] bg-brand-red/[0.03] rounded-full blur-[120px]" />
 
       {/* ── Content ── */}
@@ -43,7 +38,7 @@ export default function Hero() {
           >
             <span className="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse" />
             <span className="font-body text-xs sm:text-sm tracking-wide text-brand-red font-medium">
-              Vol. 01 — Now Available
+              The 2026 YouTube Playbook
             </span>
           </motion.div>
 
@@ -54,11 +49,11 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease }}
           >
-            The YouTube Growth System Built for{' '}
-            <span className="text-brand-red">Business Owners.</span>
+            One Video Made{' '}
+            <span className="text-brand-red">$387,000.</span>
             <br />
-            <span className="text-brand-cream/30 italic font-light">
-              Not Influencers.
+            <span className="text-brand-cream/30 italic font-light text-[0.75em]">
+              Here&apos;s the System Behind It.
             </span>
           </motion.h1>
 
@@ -69,10 +64,32 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.25, ease }}
           >
-            24 chapters. Zero fluff. The exact system behind{' '}
+            The exact YouTube growth system behind{' '}
             <span className="text-brand-cream/80 font-medium">200,000+ subscribers</span>{' '}
-            and hundreds of real estate leads.
+            and millions in client revenue — built for business owners who want leads, not likes.
+            Coaches, consultants, agents, attorneys, contractors — if you sell expertise, this is your playbook.
           </motion.p>
+
+          {/* Proof points */}
+          <motion.div
+            className="mt-7 flex flex-wrap gap-x-6 gap-y-2"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.35, ease }}
+          >
+            {[
+              '24 chapters, zero fluff',
+              'AI prompts for every chapter',
+              '90-day launch roadmap',
+            ].map((item) => (
+              <div key={item} className="flex items-center gap-2">
+                <svg className="w-4 h-4 text-brand-red flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <span className="font-body text-sm text-brand-cream/50">{item}</span>
+              </div>
+            ))}
+          </motion.div>
 
           {/* CTAs */}
           <motion.div
@@ -87,7 +104,7 @@ export default function Hero() {
               rel="noopener noreferrer"
               className="group relative inline-flex items-center justify-center gap-2.5 px-7 sm:px-8 py-4 bg-brand-red text-white font-body font-bold text-base sm:text-lg rounded-xl overflow-hidden transition-all hover:shadow-[0_0_50px_rgba(220,38,38,0.3)] hover:scale-[1.02] active:scale-[0.98]"
             >
-              <span className="relative z-10">Get Your Copy on Amazon</span>
+              <span className="relative z-10">Get Your Copy — $19.99</span>
               <svg
                 className="relative z-10 w-5 h-5 transition-transform group-hover:translate-x-1"
                 fill="none"
@@ -103,7 +120,7 @@ export default function Hero() {
               href="/bonus"
               className="inline-flex items-center justify-center gap-2 px-7 sm:px-8 py-4 border border-brand-cream/15 text-brand-cream/80 font-body font-medium text-base sm:text-lg rounded-xl transition-all hover:border-brand-red/40 hover:text-brand-red hover:bg-brand-red/[0.04]"
             >
-              Join the Free Community
+              Get the Free Chapter Kit
             </a>
           </motion.div>
 
@@ -114,7 +131,7 @@ export default function Hero() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            A Success Guide by Aaron Cuha &middot; $19.99
+            By Aaron Cuha &middot; 15,000+ hours coaching business owners on YouTube
           </motion.p>
         </div>
 
@@ -125,10 +142,8 @@ export default function Hero() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1.1, delay: 0.2, ease }}
         >
-          {/* Glow behind book */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[90%] bg-brand-red/[0.06] rounded-full blur-[120px] animate-glow-pulse" />
 
-          {/* 3D Book mockup render */}
           <div className="animate-float relative">
             <Image
               src="/book-display.jpg"

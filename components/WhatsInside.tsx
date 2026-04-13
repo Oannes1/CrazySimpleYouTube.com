@@ -9,28 +9,31 @@ const parts = [
   {
     number: '01',
     title: 'Foundation',
-    chapters: 'Chapters 1–5',
+    chapters: 'Chapters 1–6',
     description:
-      'Your channel identity, equipment setup, branding, and the mindset shift from consumer to creator.',
+      'Destroy the myths holding you back, decode how the 2026 algorithm actually works, build your business model around YouTube, get your equipment sorted for less than you think, and set up a channel that converts visitors into leads.',
     highlights: [
-      'Why business owners have an unfair advantage on YouTube',
-      'The minimum viable setup — you already own everything you need',
-      'Channel branding that attracts clients, not just viewers',
+      'Calculate your YouTube Hourly Rate — the number that kills the "I don\'t have time" excuse',
+      'The minimum viable setup: your phone + a window with natural light',
+      'Channel branding that attracts clients, not random viewers',
+      '6 myths that are quietly destroying your chances (Chapter 2)',
     ],
   },
   {
     number: '02',
-    title: 'Content Strategy',
-    chapters: 'Chapters 6–10',
+    title: 'Content Engine',
+    chapters: 'Chapters 7–10',
     description:
-      'Keyword research, content planning, and the SEO system that gets your videos found by buyers.',
+      'Finding topics your audience actually searches for, crafting titles and thumbnails that get clicks, writing hooks that stop the scroll, and structuring videos for maximum retention.',
     highlights: [
-      'The 3-bucket content system for consistent publishing',
-      'How to never run out of video ideas again',
+      'The research system that surfaces high-intent keywords your competitors ignore',
+      'Faces outperform text-only thumbnails by 3x in click-through rate',
+      'The first 30 seconds: hook structures that keep viewers watching',
+      'Video structures that earn watch time — not just fill it',
     ],
     spotlight: {
-      chapter: 'Chapter 8: Keyword Research & SEO',
-      desc: 'The exact research system that surfaces high-intent keywords your competitors ignore. Stop guessing — start ranking.',
+      chapter: 'Chapter 8: Titles & Thumbnails That Get Clicks',
+      desc: 'Battle-tested thumbnail formulas and the "curiosity gap" title strategy that consistently outperforms straightforward descriptions.',
     },
   },
   {
@@ -38,11 +41,12 @@ const parts = [
     title: 'Production',
     chapters: 'Chapters 11–14',
     description:
-      'Filming, editing, thumbnails, and titles — the production system that makes quality repeatable.',
+      'Scripting your delivery, finding your on-camera voice, editing for engagement, and the publishing launch sequence that gives every video its best chance.',
     highlights: [
-      'The 80/20 editing framework — done is better than perfect',
-      'Thumbnail formulas that drive clicks without clickbait',
-      'Batch production: how to film a month of content in one day',
+      'The 80/20 editing framework — a good video published beats a perfect video in progress',
+      'Batch production: film a month of content in one day',
+      'The publishing and optimization launch sequence',
+      'Building a content calendar you\'ll actually stick to',
     ],
   },
   {
@@ -50,13 +54,16 @@ const parts = [
     title: 'Growth & Leads',
     chapters: 'Chapters 15–19',
     description:
-      'The lead generation and conversion system that turns viewers into paying clients.',
+      'Analytics that actually matter, YouTube Shorts strategy, the lead generation system, and converting YouTube viewers into paying clients.',
     highlights: [
-      'YouTube ads for business owners — not what you think',
+      'The 3 metrics that matter — ignore everything else',
+      'YouTube Shorts: strategic approach (not random clips)',
+      'The complete lead generation system: viewers to booked appointments',
+      'Converting warm YouTube leads to closed clients',
     ],
     spotlight: {
       chapter: 'Chapters 17 & 18: Lead Gen + Conversion',
-      desc: 'The complete system for turning YouTube viewers into booked appointments and closed deals. This is where the ROI lives.',
+      desc: 'The complete system that turned $0 into $140K in commission for one agent — same audience, same content, just added the system from these chapters.',
     },
   },
   {
@@ -64,11 +71,12 @@ const parts = [
     title: 'Scale & Systems',
     chapters: 'Chapters 20–24',
     description:
-      'Automation, team building, and the long-term strategy that turns your channel into a business asset.',
+      'The mental game, building your community, repurposing content across platforms, measuring real ROI, and your 90-day roadmap from here to 10,000 subscribers.',
     highlights: [
       'Building a content team — even on a small budget',
-      'Repurposing: one video becomes 12 pieces of content',
-      'The compounding effect — why YouTube is a 10-year asset',
+      'One video becomes 12 pieces of content across platforms',
+      'Tracking what actually matters: YouTube ROI in real numbers',
+      'Your 90-day launch roadmap — step by step from day one',
     ],
   },
 ]
@@ -81,7 +89,6 @@ export default function WhatsInside() {
       id="inside"
       className="relative bg-brand-charcoal py-24 lg:py-32 overflow-hidden noise-overlay"
     >
-      {/* Grid bg */}
       <div
         className="absolute inset-0 opacity-[0.018]"
         style={{
@@ -99,14 +106,18 @@ export default function WhatsInside() {
           viewport={{ once: true }}
         >
           <span className="font-body text-xs sm:text-sm tracking-[0.25em] uppercase text-brand-red font-medium">
-            24 Chapters &middot; 5 Parts
+            24 Chapters &middot; 5 Parts &middot; AI Prompts in Every Chapter
           </span>
           <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-black text-brand-cream text-balance">
-            What&apos;s Inside the Book
+            A Complete System —
+            <br className="hidden sm:block" />
+            Not Random Tactics
           </h2>
           <p className="mt-4 text-brand-cream/40 font-body max-w-2xl mx-auto text-base sm:text-lg">
-            A complete system — not random tactics. Each part builds on the
-            last, taking you from zero to a lead-generating YouTube machine.
+            Every chapter follows the same format: a real story, the tactical
+            framework, AI tools you can use immediately, a case study with real
+            results, and an action step you can complete in one sitting. No
+            theory for the sake of theory. No filler.
           </p>
         </motion.div>
 
@@ -146,11 +157,7 @@ export default function WhatsInside() {
                   stroke="currentColor"
                   strokeWidth={2}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M19 9l-7 7-7-7"
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
 
@@ -213,18 +220,8 @@ export default function WhatsInside() {
             className="inline-flex items-center gap-2.5 px-8 py-4 bg-brand-red text-white font-body font-bold text-lg rounded-xl hover:bg-brand-red-light transition-colors hover:shadow-[0_0_40px_rgba(220,38,38,0.2)]"
           >
             Get Your Copy on Amazon
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2.5}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>
         </motion.div>
