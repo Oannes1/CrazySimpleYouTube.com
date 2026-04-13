@@ -12,13 +12,14 @@ export default function EmailCapture() {
 
     const form = e.currentTarget
     const formData = new FormData(form)
+    const firstName = formData.get('firstName') as string
     const email = formData.get('email') as string
 
     try {
       const res = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, firstName: '' }),
+        body: JSON.stringify({ email, firstName }),
       })
 
       if (!res.ok) throw new Error('Failed')
@@ -125,9 +126,17 @@ export default function EmailCapture() {
               onSubmit={handleSubmit}
             >
               <input
+                type="text"
+                name="firstName"
+                placeholder="First name"
+                className="sm:w-36 px-5 py-4 rounded-xl bg-white/95 backdrop-blur border-0 font-body text-brand-charcoal placeholder:text-brand-charcoal/35 focus:outline-none focus:ring-2 focus:ring-white/40 shadow-lg"
+                required
+                disabled={status === 'loading'}
+              />
+              <input
                 type="email"
                 name="email"
-                placeholder="Enter your email"
+                placeholder="Email address"
                 className="flex-1 px-5 py-4 rounded-xl bg-white/95 backdrop-blur border-0 font-body text-brand-charcoal placeholder:text-brand-charcoal/35 focus:outline-none focus:ring-2 focus:ring-white/40 shadow-lg"
                 required
                 disabled={status === 'loading'}
