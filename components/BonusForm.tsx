@@ -48,6 +48,14 @@ export default function BonusForm() {
         <p className="font-body text-brand-cream/50 text-sm mt-2">
           Check your inbox — the Chapter Companion Kit is on its way.
         </p>
+        <a
+          href="https://www.aaroncuha.com/services/youtube-services"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block mt-4 px-6 py-2.5 bg-brand-red text-white font-body font-bold text-sm rounded-lg hover:bg-brand-red-light transition-colors"
+        >
+          Explore YouTube Coaching &amp; Services →
+        </a>
       </div>
     )
   }
