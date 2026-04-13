@@ -1,8 +1,34 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 
 export default function EmailCapture() {
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    setStatus('loading')
+
+    const form = e.currentTarget
+    const formData = new FormData(form)
+    const email = formData.get('email') as string
+
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, firstName: '' }),
+      })
+
+      if (!res.ok) throw new Error('Failed')
+      setStatus('success')
+      form.reset()
+    } catch {
+      setStatus('error')
+    }
+  }
+
   return (
     <section className="relative py-24 lg:py-32 overflow-hidden">
       {/* Red gradient background */}
@@ -73,27 +99,41 @@ export default function EmailCapture() {
             ))}
           </div>
 
-          {/* Form — integrate with GHL/Brevo */}
-          <form
-            className="mt-9 flex flex-col sm:flex-row gap-3 max-w-lg mx-auto"
-            onSubmit={(e) => {
-              e.preventDefault()
-              /* TODO: Connect to GHL/Brevo API */
-            }}
-          >
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 px-5 py-4 rounded-xl bg-white/95 backdrop-blur border-0 font-body text-brand-charcoal placeholder:text-brand-charcoal/35 focus:outline-none focus:ring-2 focus:ring-white/40 shadow-lg"
-              required
-            />
-            <button
-              type="submit"
-              className="px-8 py-4 bg-brand-charcoal text-brand-cream font-body font-bold rounded-xl hover:bg-brand-charcoal/90 transition-colors whitespace-nowrap shadow-lg"
+          {status === 'success' ? (
+            <div className="mt-9 p-6 rounded-xl bg-white/10 backdrop-blur max-w-lg mx-auto">
+              <p className="font-body font-bold text-white text-lg">You&apos;re in! 🎉</p>
+              <p className="font-body text-white/70 text-sm mt-1">
+                Check your inbox — the Chapter Companion Kit is on its way.
+              </p>
+            </div>
+          ) : (
+            <form
+              className="mt-9 flex flex-col sm:flex-row gap-3 max-w-lg mx-auto"
+              onSubmit={handleSubmit}
             >
-              Get Free Access
-            </button>
-          </form>
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                className="flex-1 px-5 py-4 rounded-xl bg-white/95 backdrop-blur border-0 font-body text-brand-charcoal placeholder:text-brand-charcoal/35 focus:outline-none focus:ring-2 focus:ring-white/40 shadow-lg"
+                required
+                disabled={status === 'loading'}
+              />
+              <button
+                type="submit"
+                disabled={status === 'loading'}
+                className="px-8 py-4 bg-brand-charcoal text-brand-cream font-body font-bold rounded-xl hover:bg-brand-charcoal/90 transition-colors whitespace-nowrap shadow-lg disabled:opacity-60"
+              >
+                {status === 'loading' ? 'Sending...' : 'Get Free Access'}
+              </button>
+            </form>
+          )}
+
+          {status === 'error' && (
+            <p className="mt-3 text-white/70 font-body text-sm">
+              Something went wrong. Please try again.
+            </p>
+          )}
 
           <p className="mt-4 text-white/30 font-body text-xs">
             No spam. Unsubscribe anytime. We respect your privacy.
