@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 const myths = [
   {
     myth: '"Posting once a week is enough"',
-    truth: 'The more you post, the faster you grow. Every video is another asset working for you 24/7. Consistency and volume compound — the creators who post the most, win the most. There\'s no ceiling on how much great content you can publish.',
+    truth: 'One long-form video becomes 10 Shorts. One shoot becomes omnipresence across every platform. Pair that with SEO tools and content repurposing systems and you\'re publishing daily without filming daily. Volume wins — the creators who show up everywhere, win everywhere.',
   },
   {
     myth: '"You need expensive equipment"',
