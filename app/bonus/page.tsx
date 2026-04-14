@@ -55,8 +55,8 @@ export default function BonusPage() {
               desc: 'Watch Aaron walk through key strategies',
             },
             {
-              title: 'Community Access',
-              desc: 'Join business owners building YouTube channels together',
+              title: 'Community Pre-Access',
+              desc: 'First in line when the community launches May 2026',
             },
           ].map((item) => (
             <div

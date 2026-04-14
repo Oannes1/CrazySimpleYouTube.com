@@ -53,7 +53,7 @@ const resourceGroups = [
     part: 'Part 5 — Scale & Systems',
     chapters: '(Chapters 20–24)',
     items: [
-      { name: 'Systems Over Hustle Community', desc: 'Weekly coaching and accountability ($47/mo)', link: 'https://aaroncuha.com/skool' },
+      { name: 'Systems Over Hustle Community', desc: 'Weekly coaching and accountability — launching May 2026 ($47/mo)', link: 'https://aaroncuha.com/community' },
       { name: 'GROW Coaching Program', desc: 'Personalized YouTube growth coaching', link: 'https://aaroncuha.com' },
       { name: 'Repurposing Workflow Template', desc: 'From the Chapter Companion Kit', link: '/bonus' },
     ],
