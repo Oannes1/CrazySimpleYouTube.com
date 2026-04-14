@@ -4,8 +4,8 @@ import { motion } from 'framer-motion'
 
 const myths = [
   {
-    myth: '"Posting once a week is enough"',
-    truth: 'One long-form video becomes 10 Shorts. One shoot becomes omnipresence across every platform. Pair that with SEO tools and content repurposing systems and you\'re publishing daily without filming daily. Volume wins — the creators who show up everywhere, win everywhere.',
+    myth: '"You need to film every day to grow"',
+    truth: 'Every video you publish compounds — but you don\'t need to be on camera daily to make it happen. One long-form video becomes 10 Shorts across multiple channels. With the right systems, SEO tools, and repurposing workflows, a single filming session compounds into omnipresence. More content wins, but smart systems do the heavy lifting.',
   },
   {
     myth: '"You need expensive equipment"',
