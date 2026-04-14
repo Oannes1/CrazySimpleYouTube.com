@@ -4,8 +4,8 @@ import { motion } from 'framer-motion'
 
 const myths = [
   {
-    myth: '"You need to post every day"',
-    truth: 'One great video per week beats five forgettable ones. YouTube rewards watch time, not upload frequency. Aaron tested this on his own channels — 2 videos/week outperformed 5/week in every metric.',
+    myth: '"Posting once a week is enough"',
+    truth: 'The more you post, the faster you grow. Every video is another asset working for you 24/7. Consistency and volume compound — the creators who post the most, win the most. There\'s no ceiling on how much great content you can publish.',
   },
   {
     myth: '"You need expensive equipment"',
