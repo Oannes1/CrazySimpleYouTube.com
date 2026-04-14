@@ -12,7 +12,7 @@ const results = [
     color: 'brand-red',
   },
   {
-    industry: 'Legal',
+    industry: 'Coaching',
     name: 'Sandra',
     before: '4 leads in 8 months',
     after: '60+ leads per quarter',

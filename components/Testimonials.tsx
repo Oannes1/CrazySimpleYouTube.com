@@ -13,10 +13,10 @@ const testimonials = [
   },
   {
     name: 'Sandra',
-    role: 'Divorce Attorney',
+    role: 'Coach',
     result: '$93,500 in 90 days',
     quote:
-      "I had 3,200 subscribers and exactly four leads in eight months. After installing the lead generation system from the book, I went from 4 leads to over 60 per quarter.",
+      "I had subscribers and views but almost no leads. After installing the lead generation system from the book, I went from 4 leads in 8 months to over 60 per quarter. Same content — just added the system.",
     initials: 'S',
   },
   {
