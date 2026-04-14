@@ -22,14 +22,14 @@ const testimonials = [
   {
     name: 'Leah Courage',
     role: 'Real Estate Agent, WA',
-    result: '$180K in commissions from YouTube',
+    result: '20K subscribers in 8 weeks',
     quote:
-      "I was skeptical about YouTube. Four months in I had 280 subscribers and wondered if it was working. Then the compound effect kicked in — 14 YouTube-sourced deals and $180K.",
+      "I was skeptical about YouTube. Then the compound effect kicked in — 20,000 subscribers in just 8 weeks. The system works exactly like Aaron says it does.",
     initials: 'LC',
   },
   {
     name: 'Natalia Echeverri',
-    role: 'Business Owner',
+    role: 'Real Estate Agent',
     result: 'Videos ranking on page one',
     quote:
       "The keyword research system changed everything. My videos started ranking on page one and the leads followed. This isn't theory — it's a real system that works.",
@@ -37,18 +37,18 @@ const testimonials = [
   },
   {
     name: "Patrick O'Connor",
-    role: 'Business Owner',
-    result: 'Business results, not vanity metrics',
+    role: 'Real Estate Agent',
+    result: '10K+ subscribers in 6 weeks',
     quote:
-      "I've bought every YouTube course out there. This is the only resource that focuses on actual business results, not vanity metrics. Worth every penny.",
+      "I've bought every YouTube course out there. This is the only resource that focuses on actual business results, not vanity metrics. Over 10,000 subscribers in six weeks.",
     initials: 'PO',
   },
   {
     name: 'Rachel Smith',
-    role: 'Coach',
-    result: '10K subscribers in 6 months',
+    role: 'Real Estate Agent',
+    result: '1K to 160K subscribers in 18 months',
     quote:
-      "Went from zero to 10,000 subscribers in 6 months using exactly what's in this book. The lead generation chapter alone was worth 10x the price.",
+      "Went from 1,000 to 160,000 subscribers in 18 months using exactly what's in this book. The lead generation chapter alone was worth 10x the price.",
     initials: 'RS',
   },
 ]
