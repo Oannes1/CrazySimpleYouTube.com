@@ -27,7 +27,7 @@ export default function EmailCapture() {
       form.reset()
       // Redirect to primary site after successful capture
       setTimeout(() => {
-        window.location.href = 'https://www.aaroncuha.com/services/youtube-services'
+        window.location.href = 'https://aaroncuha.com/services/youtube-services'
       }, 2500)
     } catch {
       setStatus('error')
@@ -114,7 +114,7 @@ export default function EmailCapture() {
                 Redirecting you to explore coaching &amp; services...
               </p>
               <a
-                href="https://www.aaroncuha.com/services/youtube-services"
+                href="https://aaroncuha.com/services/youtube-services"
                 className="inline-block mt-3 px-6 py-2.5 bg-white text-brand-charcoal font-body font-bold text-sm rounded-lg hover:bg-white/90 transition-colors"
               >
                 Go Now →

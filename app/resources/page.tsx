@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 const AMAZON_LINK = process.env.NEXT_PUBLIC_AMAZON_LINK || 'https://www.amazon.com/dp/B0GWYK8TX6'
 
-/* TODO: Populate with actual resources from the book */
+/* Resources referenced in the book, organized by part */
 const resourceGroups = [
   {
     part: 'Part 1 — Foundation',

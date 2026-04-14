@@ -88,7 +88,7 @@ export default function BonusPage() {
           ))}
         </div>
 
-        {/* Form — integrate with GHL/Brevo */}
+        {/* Email capture form */}
         <BonusForm />
 
         <p className="mt-4 text-brand-cream/20 font-body text-xs">

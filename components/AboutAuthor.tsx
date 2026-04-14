@@ -90,7 +90,7 @@ export default function AboutAuthor() {
 
             <div className="mt-7 flex flex-wrap gap-2.5">
               {[
-                '170K+ Subscribers',
+                '200K+ Subscribers',
                 '15K+ Coaching Hours',
                 'Tom Ferry Speaker',
                 '12-State Broker',

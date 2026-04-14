@@ -32,7 +32,7 @@ export default function BonusForm() {
       form.reset()
       // Redirect to primary site after successful capture
       setTimeout(() => {
-        window.location.href = 'https://www.aaroncuha.com/services/youtube-services'
+        window.location.href = 'https://aaroncuha.com/services/youtube-services'
       }, 2500)
     } catch (err) {
       setStatus('error')
@@ -56,7 +56,7 @@ export default function BonusForm() {
           Redirecting you to explore coaching &amp; services...
         </p>
         <a
-          href="https://www.aaroncuha.com/services/youtube-services"
+          href="https://aaroncuha.com/services/youtube-services"
           className="inline-block mt-4 px-6 py-2.5 bg-brand-red text-white font-body font-bold text-sm rounded-lg hover:bg-brand-red-light transition-colors"
         >
           Go Now →

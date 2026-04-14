@@ -4,6 +4,22 @@ import { motion } from 'framer-motion'
 
 const testimonials = [
   {
+    name: 'Rachel Smith',
+    role: 'Real Estate Agent',
+    result: '1K to 160K subscribers in 18 months',
+    quote:
+      "Went from 1,000 to 160,000 subscribers in 18 months using exactly what's in this book. The lead generation chapter alone was worth 10x the price.",
+    initials: 'RS',
+  },
+  {
+    name: 'Sandra',
+    role: 'Divorce Attorney',
+    result: '$93,500 in 90 days',
+    quote:
+      "I had 3,200 subscribers and exactly four leads in eight months. After installing the lead generation system from the book, I went from 4 leads to over 60 per quarter.",
+    initials: 'S',
+  },
+  {
     name: 'Scott Himelstein',
     role: 'Real Estate Agent',
     result: '$300K+ revenue in year one',
@@ -28,12 +44,12 @@ const testimonials = [
     initials: 'LC',
   },
   {
-    name: 'Natalia Echeverri',
-    role: 'Real Estate Agent',
-    result: 'Videos ranking on page one',
+    name: 'Kevin',
+    role: 'Financial Advisor',
+    result: '5x client inquiries',
     quote:
-      "The keyword research system changed everything. My videos started ranking on page one and the leads followed. This isn't theory — it's a real system that works.",
-    initials: 'NE',
+      "Views went from 500 to 2,100. Client inquiries jumped from 1-2 per month to 8-10. The analytics chapter showed me exactly which metrics actually move the needle.",
+    initials: 'K',
   },
   {
     name: "Patrick O'Connor",
@@ -44,12 +60,20 @@ const testimonials = [
     initials: 'PO',
   },
   {
-    name: 'Rachel Smith',
+    name: 'Natalia Echeverri',
     role: 'Real Estate Agent',
-    result: '1K to 160K subscribers in 18 months',
+    result: 'Videos ranking on page one',
     quote:
-      "Went from 1,000 to 160,000 subscribers in 18 months using exactly what's in this book. The lead generation chapter alone was worth 10x the price.",
-    initials: 'RS',
+      "The keyword research system changed everything. My videos started ranking on page one and the leads followed. This isn't theory — it's a real system that works.",
+    initials: 'NE',
+  },
+  {
+    name: 'David',
+    role: 'Business Attorney',
+    result: 'Leads tripled via repurposing',
+    quote:
+      "I'm not creating more content. I'm distributing the same content more intelligently. My ideas reach five times as many people with maybe 20% more effort. Leads went from 3-4 to 12-15 per month.",
+    initials: 'D',
   },
 ]
 

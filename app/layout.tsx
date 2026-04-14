@@ -21,11 +21,11 @@ const GA_ID = process.env.NEXT_PUBLIC_GA_ID
 export const metadata: Metadata = {
   title: 'Crazy Simple YouTube — The YouTube Growth System for Business Owners',
   description:
-    '24 chapters. Zero fluff. The exact YouTube growth system behind 200,000+ subscribers and hundreds of real estate leads. Turn views into clients. By Aaron Cuha.',
+    '24 chapters. Zero fluff. The exact YouTube growth system behind 200,000+ subscribers and millions in client revenue. Turn views into clients. By Aaron Cuha.',
   openGraph: {
     title: 'Crazy Simple YouTube — Turn Views Into Clients',
     description:
-      '24 chapters. Zero fluff. The exact system behind 200,000+ subscribers and hundreds of real estate leads.',
+      '24 chapters. Zero fluff. The exact system behind 200,000+ subscribers and millions in client revenue.',
     type: 'website',
     url: 'https://crazysimpleyoutube.com',
     images: [
