@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 const myths = [
   {
     myth: '"You need to film every day to grow"',
-    truth: 'Every video you publish compounds — but you don\'t need to be on camera daily to make it happen. One long-form video becomes 10 Shorts across multiple channels. With the right systems, SEO tools, and repurposing workflows, a single filming session compounds into omnipresence. More content wins, but smart systems do the heavy lifting.',
+    truth: 'You don\'t film every day — you batch film. One Sunday, one outfit, 4–8 videos in a single session. Then tools like OpusClip turn each long-form into 10–15 Shorts automatically. Schedule everything in advance and you\'re publishing daily across YouTube, Instagram, TikTok, and LinkedIn without touching a camera. Every piece compounds forever. That\'s not hustle — that\'s a system.',
   },
   {
     myth: '"You need expensive equipment"',
