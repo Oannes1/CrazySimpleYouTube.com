@@ -21,8 +21,9 @@ const config: Config = {
         },
       },
       fontFamily: {
-        display: ['var(--font-fraunces)', 'Georgia', 'serif'],
-        body: ['var(--font-dm-sans)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-anton)', 'Impact', 'sans-serif'],
+        body: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        accent: ['var(--font-caveat)', 'cursive'],
       },
       animation: {
         float: 'float 6s ease-in-out infinite',

@@ -1,17 +1,24 @@
 import type { Metadata } from 'next'
-import { Fraunces, DM_Sans } from 'next/font/google'
+import { Anton, Inter, Caveat } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
 
-const fraunces = Fraunces({
+const anton = Anton({
+  weight: '400',
   subsets: ['latin'],
-  variable: '--font-fraunces',
+  variable: '--font-anton',
   display: 'swap',
 })
 
-const dmSans = DM_Sans({
+const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-dm-sans',
+  variable: '--font-inter',
+  display: 'swap',
+})
+
+const caveat = Caveat({
+  subsets: ['latin'],
+  variable: '--font-caveat',
   display: 'swap',
 })
 
@@ -53,7 +60,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${dmSans.variable}`}>
+    <html lang="en" className={`${anton.variable} ${inter.variable} ${caveat.variable}`}>
       <head>
         <script
           type="application/ld+json"

@@ -82,7 +82,7 @@ const parts = [
 ]
 
 export default function WhatsInside() {
-  const [openPart, setOpenPart] = useState<number>(1)
+  const [openPart, setOpenPart] = useState<number>(3)
 
   return (
     <section
@@ -108,7 +108,7 @@ export default function WhatsInside() {
           <span className="font-body text-xs sm:text-sm tracking-[0.25em] uppercase text-brand-red font-medium">
             24 Chapters &middot; 5 Parts &middot; AI Prompts in Every Chapter
           </span>
-          <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-black text-brand-cream text-balance">
+          <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-normal uppercase text-brand-cream">
             A Complete System —
             <br className="hidden sm:block" />
             Not Random Tactics

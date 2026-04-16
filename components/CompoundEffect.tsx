@@ -43,13 +43,14 @@ export default function CompoundEffect() {
           <span className="font-body text-xs sm:text-sm tracking-[0.25em] uppercase text-brand-red font-medium">
             The Compound Effect
           </span>
-          <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-black text-brand-cream text-balance">
+          <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-normal uppercase text-brand-cream">
             Every Video Is a Brick in a Building
             <br className="hidden sm:block" />
             <span className="text-brand-cream/30">That Gets More Valuable Over Time</span>
           </h2>
-          <p className="mt-5 text-brand-cream/45 font-body text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-            On Instagram, your content dies in 48 hours. On YouTube, it compounds for years.
+          <p className="mt-5 text-brand-cream/60 font-body text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+            On Instagram, your content dies in 48 hours. On YouTube, it{' '}
+            <strong className="text-brand-cream font-semibold">compounds for years</strong>.
             The growth isn&apos;t linear — it&apos;s exponential.
           </p>
         </motion.div>

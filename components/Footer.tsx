@@ -14,8 +14,8 @@ export default function Footer() {
     <footer className="bg-brand-charcoal border-t border-white/[0.04]">
       {/* Final CTA */}
       <div className="max-w-7xl mx-auto px-5 sm:px-8 py-16 sm:py-20 text-center">
-        <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl font-black text-brand-cream text-balance">
-          Ready to Turn Views Into Clients?
+        <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl font-normal uppercase text-brand-cream">
+          The Next 90 Days Pass Either Way.
         </h3>
         <p className="mt-3 text-brand-cream/35 font-body max-w-md mx-auto">
           Join thousands of business owners who are building their YouTube
@@ -37,7 +37,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <a
               href="/"
-              className="font-display text-lg font-bold text-brand-cream tracking-tight"
+              className="font-display text-lg font-normal uppercase text-brand-cream tracking-wide"
             >
               Crazy Simple <span className="text-brand-red">YouTube</span>
             </a>

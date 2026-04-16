@@ -5,29 +5,42 @@ import { motion } from 'framer-motion'
 const myths = [
   {
     myth: '"You need to film every day to grow"',
-    truth: 'You don\'t film every day — you batch film. One Sunday, one outfit, 4–8 videos in a single session. Then tools like OpusClip turn each long-form into 10–15 Shorts automatically. Schedule everything in advance and you\'re publishing daily across YouTube, Instagram, TikTok, and LinkedIn without touching a camera. Every piece compounds forever. That\'s not hustle — that\'s a system.',
+    truth: 'You don\'t film every day — you **batch film**. One Sunday, one outfit, 4–8 videos in a single session. Then tools like OpusClip turn each long-form into **10–15 Shorts automatically**. Schedule everything in advance and you\'re publishing daily across YouTube, Instagram, TikTok, and LinkedIn without touching a camera. Every piece **compounds forever**. That\'s not hustle — that\'s a system.',
   },
   {
     myth: '"You need expensive equipment"',
-    truth: 'Your phone shoots 4K. One creator built 200K+ subscribers and 7 figures using an iPhone 8 and free earbuds. Start with what you have. Upgrade when the channel demands it.',
+    truth: 'Your phone shoots 4K. One creator built **200K+ subscribers and 7 figures** using an iPhone 8 and free earbuds. Start with what you have. Upgrade when the channel demands it.',
   },
   {
     myth: '"Short videos are better"',
-    truth: '18-minute videos generated 5,000+ new subscribers/month. 3-minute videos? 300–400. That\'s a 10x difference. Longer content wins when every minute delivers value.',
+    truth: '**18-minute videos** generated 5,000+ new subscribers/month. 3-minute videos? 300–400. That\'s a **10x difference**. Longer content wins when every minute delivers value.',
   },
   {
     myth: '"You need to go viral"',
-    truth: 'Small audiences that convert beat massive audiences that don\'t. Every single time. 500 views from your ideal client beats 500,000 from teenagers who\'ll never buy.',
+    truth: 'Small audiences that convert beat massive audiences that don\'t. Every single time. **500 views from your ideal client** beats 500,000 from teenagers who\'ll never buy.',
   },
   {
     myth: '"Subscribers are everything"',
-    truth: 'Subscribers are a vanity metric. A channel with 500 subs and 50% watch-through will generate more leads than one with 50,000 subs and 15% watch-through.',
+    truth: 'Subscribers are a vanity metric. A channel with **500 subs and 50% watch-through** will generate more leads than one with 50,000 subs and 15% watch-through.',
   },
   {
     myth: '"The algorithm hates small channels"',
-    truth: 'The algorithm has one job: keep people watching. If your content does that, the algorithm is your biggest ally. It rewards exactly the kind of content business owners should be making.',
+    truth: 'The algorithm has one job: **keep people watching**. If your content does that, the algorithm is your biggest ally. It rewards exactly the kind of content business owners should be making.',
   },
 ]
+
+function renderBold(text: string) {
+  const parts = text.split(/\*\*(.*?)\*\*/g)
+  return parts.map((part, i) =>
+    i % 2 === 1 ? (
+      <strong key={i} className="text-brand-cream/80 font-semibold">
+        {part}
+      </strong>
+    ) : (
+      part
+    )
+  )
+}
 
 export default function MythBuster() {
   return (
@@ -51,14 +64,15 @@ export default function MythBuster() {
           <span className="font-body text-xs sm:text-sm tracking-[0.25em] uppercase text-brand-red font-medium">
             Chapter 2 Preview
           </span>
-          <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-black text-brand-cream text-balance">
-            Everything You&apos;ve Heard About
+          <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-normal uppercase text-brand-cream">
+            The 6 Lies That Keep Business Owners
             <br className="hidden sm:block" />
-            <span className="text-brand-red">YouTube Is Wrong</span>
+            <span className="text-brand-red">Off YouTube</span>
           </h2>
-          <p className="mt-5 text-brand-cream/45 font-body text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-            The gurus who teach YouTube have never generated a single
-            client from a video. Their advice sounds smart — and quietly
+          <p className="mt-5 text-brand-cream/60 font-body text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+            The gurus who teach YouTube have{' '}
+            <strong className="text-brand-cream font-semibold">never generated a single client</strong>{' '}
+            from a video. Their advice sounds smart — and quietly
             destroys your chances of building a channel that makes money.
           </p>
         </motion.div>
@@ -80,11 +94,14 @@ export default function MythBuster() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="font-display text-base sm:text-lg font-bold text-brand-cream/70">
+                  <div className="font-body text-[0.65rem] tracking-[0.2em] uppercase text-brand-red/40 font-medium mb-1.5">
+                    Lie {i + 1} of {myths.length}
+                  </div>
+                  <h3 className="font-body text-base sm:text-lg font-bold text-brand-cream/70">
                     {m.myth}
                   </h3>
-                  <p className="mt-2 font-body text-sm text-brand-cream/45 leading-relaxed">
-                    {m.truth}
+                  <p className="mt-2 font-body text-sm text-brand-cream/50 leading-relaxed">
+                    {renderBold(m.truth)}
                   </p>
                 </div>
               </div>

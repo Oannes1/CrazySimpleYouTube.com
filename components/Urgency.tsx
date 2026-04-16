@@ -18,42 +18,54 @@ export default function Urgency() {
           <span className="font-body text-xs sm:text-sm tracking-[0.25em] uppercase text-brand-red font-medium">
             The 2026 Window
           </span>
-          <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-black text-brand-cream text-balance">
-            Your Competitors Still
+          <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-normal uppercase text-brand-cream">
+            In 6 Months, You&apos;ll Wish
             <br className="hidden sm:block" />
-            Aren&apos;t on YouTube
+            <span className="text-brand-red">You Started Today</span>
           </h2>
-          <p className="mt-6 text-brand-cream/50 font-body text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
+          <p className="mt-6 text-brand-cream/60 font-body text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
             In most industries — real estate, coaching, consulting, financial
-            services, legal, home services — your direct competitors are either
-            completely absent from YouTube or doing it so poorly it barely counts.
+            services, legal, home services — your direct competitors are either{' '}
+            <strong className="text-brand-cream font-semibold">completely absent from YouTube</strong>{' '}
+            or doing it so poorly it barely counts.
           </p>
-          <p className="mt-4 text-brand-cream/50 font-body text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
+          <p className="mt-4 text-brand-cream/60 font-body text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
             The business owners who figure this out right now will own their markets
             for the next decade. That&apos;s not hype.{' '}
-            <span className="text-brand-cream/80 font-medium">That&apos;s math.</span>
+            <strong className="text-brand-cream font-bold">That&apos;s math.</strong>
           </p>
 
-          {/* Stats row */}
+          {/* Stats row — personal, not platform */}
           <div className="mt-10 grid grid-cols-3 gap-6 max-w-lg mx-auto">
             <div>
-              <div className="font-display text-2xl sm:text-3xl font-black text-brand-red">2.5B</div>
-              <div className="mt-1 font-body text-[0.65rem] sm:text-xs text-brand-cream/30 uppercase tracking-wider">Monthly Users</div>
+              <div className="font-display text-2xl sm:text-3xl font-normal uppercase text-brand-red">90 Days</div>
+              <div className="mt-1 font-body text-[0.65rem] sm:text-xs text-brand-cream/30 uppercase tracking-wider">To Your First Lead</div>
             </div>
             <div>
-              <div className="font-display text-2xl sm:text-3xl font-black text-brand-red">40+</div>
-              <div className="mt-1 font-body text-[0.65rem] sm:text-xs text-brand-cream/30 uppercase tracking-wider">Min Avg Session</div>
+              <div className="font-display text-2xl sm:text-3xl font-normal uppercase text-brand-red">1 Sunday</div>
+              <div className="mt-1 font-body text-[0.65rem] sm:text-xs text-brand-cream/30 uppercase tracking-wider">To Film a Month</div>
             </div>
             <div>
-              <div className="font-display text-2xl sm:text-3xl font-black text-brand-red">#2</div>
-              <div className="mt-1 font-body text-[0.65rem] sm:text-xs text-brand-cream/30 uppercase tracking-wider">Search Engine</div>
+              <div className="font-display text-2xl sm:text-3xl font-normal uppercase text-brand-red">$19.99</div>
+              <div className="mt-1 font-body text-[0.65rem] sm:text-xs text-brand-cream/30 uppercase tracking-wider">Total Investment</div>
             </div>
           </div>
 
-          <p className="mt-10 font-body text-brand-cream/35 text-sm max-w-lg mx-auto leading-relaxed">
-            The next 90 days pass whether you build your channel or not.
-            You have everything you need. Not most of it.{' '}
-            <span className="text-brand-cream/60 font-medium">All of it.</span>
+          {/* Two paths — NLP binary choice */}
+          <div className="mt-10 max-w-xl mx-auto p-6 sm:p-8 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+            <p className="font-body text-brand-cream/60 text-sm sm:text-base leading-relaxed">
+              Six months from now, one of two things will be true:
+            </p>
+            <p className="mt-3 font-body text-brand-cream/80 text-sm sm:text-base leading-relaxed font-medium">
+              You&apos;ll have a YouTube channel generating leads while you sleep.
+            </p>
+            <p className="mt-2 font-body text-brand-cream/40 text-sm sm:text-base leading-relaxed">
+              Or you&apos;ll be six months closer to wishing you&apos;d started.
+            </p>
+          </div>
+
+          <p className="mt-6 font-body text-brand-cream/30 text-xs max-w-md mx-auto">
+            Most readers finish the book in a weekend.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">

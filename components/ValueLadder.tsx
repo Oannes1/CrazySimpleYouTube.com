@@ -83,10 +83,10 @@ export default function ValueLadder() {
           <span className="font-body text-xs sm:text-sm tracking-[0.25em] uppercase text-brand-red-dark font-medium">
             Your Growth Path
           </span>
-          <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-black text-brand-charcoal text-balance">
-            Start With the Book.
+          <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-normal uppercase text-brand-charcoal">
+            Choose Your
             <br />
-            Go as Far as You Want.
+            Starting Point
           </h2>
         </motion.div>
 

@@ -27,7 +27,7 @@ export default function Navigation() {
         <div className="max-w-7xl mx-auto px-5 sm:px-8 h-16 sm:h-20 flex items-center justify-between">
           <a
             href="/"
-            className="font-display text-lg sm:text-xl font-bold text-brand-cream tracking-tight"
+            className="font-display text-lg sm:text-xl font-normal uppercase text-brand-cream tracking-wide"
           >
             Crazy Simple{' '}
             <span className="text-brand-red">YouTube</span>
@@ -59,7 +59,7 @@ export default function Navigation() {
               rel="noopener noreferrer"
               className="px-5 py-2.5 bg-brand-red text-white font-body font-semibold text-sm rounded-lg hover:bg-brand-red-light transition-colors shadow-lg shadow-brand-red/20"
             >
-              Get Your Copy
+              Get The Book — $19.99
             </a>
           </div>
 
@@ -110,7 +110,7 @@ export default function Navigation() {
                   rel="noopener noreferrer"
                   className="mt-2 px-6 py-3.5 bg-brand-red text-white font-body font-semibold text-center rounded-lg"
                 >
-                  Get Your Copy on Amazon
+                  Get The Book — $19.99
                 </a>
               </div>
             </motion.div>
@@ -134,7 +134,7 @@ export default function Navigation() {
               rel="noopener noreferrer"
               className="block w-full py-3.5 bg-brand-red text-white font-body font-semibold text-center rounded-lg shadow-lg shadow-brand-red/25"
             >
-              Get Your Copy on Amazon — $19.99
+              Get The Book — $19.99 →
             </a>
           </motion.div>
         )}

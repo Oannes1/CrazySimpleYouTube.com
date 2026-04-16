@@ -73,15 +73,16 @@ export default function Results() {
           viewport={{ once: true }}
         >
           <span className="font-body text-xs sm:text-sm tracking-[0.25em] uppercase text-brand-red-dark font-medium">
-            Real Numbers, Real Businesses
+            The Proof
           </span>
-          <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-black text-brand-charcoal text-balance">
-            This Works Across
-            <br className="hidden sm:block" /> Every Industry
+          <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-normal uppercase text-brand-charcoal">
+            Six Industries. One System.
+            <br className="hidden sm:block" /> Same Result.
           </h2>
-          <p className="mt-5 text-brand-charcoal/50 font-body text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-            Agents, attorneys, financial planners, consultants, coaches — the
-            system is the same. The results speak for themselves.
+          <p className="mt-5 text-brand-charcoal/60 font-body text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+            These aren&apos;t influencers. They&apos;re{' '}
+            <strong className="text-brand-charcoal font-semibold">business owners like you</strong>{' '}
+            who installed the system and watched it compound.
           </p>
         </motion.div>
 
@@ -113,7 +114,7 @@ export default function Results() {
                       <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                   </span>
-                  <p className="font-body text-sm text-brand-charcoal/40 leading-relaxed line-through decoration-brand-charcoal/20">
+                  <p className="font-body text-sm text-brand-charcoal/40 leading-relaxed line-through decoration-brand-red/40">
                     {r.before}
                   </p>
                 </div>
@@ -131,7 +132,7 @@ export default function Results() {
 
               {/* Highlight stat */}
               <div className="mt-5 pt-4 border-t border-brand-charcoal/[0.06]">
-                <div className="font-display text-lg font-black text-brand-red">
+                <div className="font-display text-xl sm:text-2xl font-normal uppercase text-brand-red">
                   {r.highlight}
                 </div>
               </div>

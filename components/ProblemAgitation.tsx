@@ -9,7 +9,7 @@ const problems = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
       </svg>
     ),
-    title: 'Cold calls that go nowhere',
+    title: 'That sinking feeling at dial #47',
     description: '50 dials for one lukewarm appointment. Your time is worth more than that.',
   },
   {
@@ -18,7 +18,7 @@ const problems = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
-    title: 'Ad spend that vanishes',
+    title: 'Watching your ad budget evaporate',
     description: 'Paying for cold leads who don\'t know you, don\'t trust you, and ghost after the first call.',
   },
   {
@@ -27,7 +27,7 @@ const problems = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182" />
       </svg>
     ),
-    title: 'The content treadmill',
+    title: 'Posting every day and hearing nothing back',
     description: 'Instagram posts that die in 48 hours. Starting from zero every single day. Never building anything.',
   },
   {
@@ -36,7 +36,7 @@ const problems = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
-    title: 'Networking events that waste weekends',
+    title: 'Standing in rooms full of people who don\'t need you',
     description: 'Open houses, conferences, happy hours — hoping someone walks in. That\'s not a strategy.',
   },
 ]
@@ -63,15 +63,16 @@ export default function ProblemAgitation() {
           <span className="font-body text-xs sm:text-sm tracking-[0.25em] uppercase text-brand-red-dark font-medium">
             Sound Familiar?
           </span>
-          <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-black text-brand-charcoal text-balance">
-            You&apos;re Great at What You Do.
+          <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-normal uppercase text-brand-charcoal">
+            You&apos;re Exceptional at What You Do.
             <br className="hidden sm:block" />
-            <span className="text-brand-charcoal/30">Your Marketing Doesn&apos;t Show It.</span>
+            <span className="text-brand-charcoal/30">Your Next 100 Clients Don&apos;t Know You Exist.</span>
           </h2>
-          <p className="mt-5 text-brand-charcoal/50 font-body text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-5 text-brand-charcoal/70 font-body text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
             You&apos;re a coach, consultant, agent, attorney, contractor, or service
-            provider. You&apos;re excellent at your craft — but your lead generation
-            feels like a full-time job that never compounds.
+            provider. You&apos;re excellent at your craft — but your{' '}
+            <strong className="text-brand-charcoal font-semibold">lead generation feels like a full-time job</strong>{' '}
+            that never compounds.
           </p>
         </motion.div>
 
@@ -109,12 +110,13 @@ export default function ProblemAgitation() {
               What If Your Marketing Worked{' '}
               <span className="text-brand-red">While You Slept?</span>
             </h3>
-            <p className="mt-4 font-body text-brand-cream/50 text-sm sm:text-base leading-relaxed max-w-lg mx-auto">
-              YouTube is the only platform where a single video can generate
-              leads for years. Not days. Not weeks.{' '}
-              <span className="text-brand-cream/70 font-medium">Years.</span>{' '}
-              Every video you create is a brick in a building that gets more valuable
-              over time — while your competitors start from zero every single day.
+            <p className="mt-4 font-body text-brand-cream/60 text-sm sm:text-base leading-relaxed max-w-lg mx-auto">
+              YouTube is the only platform where a single video can{' '}
+              <strong className="text-brand-cream font-semibold">generate leads for years</strong>.
+              Not days. Not weeks.{' '}
+              <strong className="text-brand-red font-bold">Years.</strong>{' '}
+              Every video you create compounds — while your competitors
+              start from zero every single day.
             </p>
           </div>
         </motion.div>

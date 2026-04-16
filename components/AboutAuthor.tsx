@@ -49,42 +49,35 @@ export default function AboutAuthor() {
             transition={{ duration: 0.6 }}
           >
             <span className="font-body text-xs sm:text-sm tracking-[0.25em] uppercase text-brand-red font-medium">
-              About the Author
+              Who Wrote This
             </span>
-            <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-black text-brand-cream">
+            <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-normal uppercase text-brand-cream">
               Aaron Cuha
             </h2>
 
-            <div className="mt-6 space-y-4 text-brand-cream/50 font-body leading-relaxed text-[0.95rem]">
+            <div className="mt-6 space-y-4 text-brand-cream/60 font-body leading-relaxed text-[0.95rem]">
+              <p className="text-brand-cream/80 font-medium text-base sm:text-lg">
+                I&apos;m not a YouTube guru. I&apos;m a broker who figured out a system.
+              </p>
               <p>
                 Aaron runs two YouTube channels — @VanLife (120,000+ subscribers)
                 and @GotCoach (50,000+ subscribers) — built on the exact strategies
-                in this book. But the credential that matters most: he uses YouTube
-                to run actual businesses. Not to teach YouTube. Not to sell courses
-                about YouTube.{' '}
-                <span className="text-brand-cream/70 font-medium">
-                  To generate leads, close clients, and build revenue.
-                </span>
+                in this book. The credential that matters most:{' '}
+                <strong className="text-brand-cream font-semibold">
+                  he uses YouTube to run actual businesses
+                </strong>. Not to teach YouTube. Not to sell courses about YouTube.
+                To generate leads, close clients, and build revenue.
               </p>
               <p>
-                With over 15,000 hours of one-on-one coaching, Aaron has helped
-                hundreds of business owners build YouTube channels that generate
-                real revenue. He launched @VanLife specifically as a testing lab —
+                With over <strong className="text-brand-cream font-semibold">15,000 hours of one-on-one coaching</strong>,
+                Aaron has helped hundreds of business owners build YouTube channels that
+                generate real revenue. He launched @VanLife specifically as a testing lab —
                 every strategy in this book was validated with real data before it
                 was ever put in front of a client.
               </p>
-              <p>
-                He&apos;s a Tom Ferry Mastery Coach &amp; Speaker, ICF credentialed
-                coach, NLP Master Practitioner, licensed broker in 12 states, and
-                founder of DirectLender.com (280 offices, 3,000 employees). He
-                also runs a YouTube management company that handles everything
-                from strategy to production for business owners who want it
-                done for them.
-              </p>
-              <p className="text-brand-cream/60 font-medium italic">
-                &ldquo;YouTube growth has been overcomplicated by people who profit
-                from making it seem harder than it is. I&apos;m here to strip all
-                that away and give you the playbook that actually works.&rdquo;
+              <p className="text-brand-cream/70 font-medium italic border-l-2 border-brand-red/40 pl-4">
+                &ldquo;I wrote this book because I watched too many good business
+                owners quit YouTube 10 videos before it would have worked.&rdquo;
               </p>
             </div>
 
@@ -107,12 +100,12 @@ export default function AboutAuthor() {
             </div>
 
             <a
-              href="https://aaroncuha.com/about"
+              href="https://youtube.com/@aaroncuha"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-8 inline-flex items-center gap-2 font-body font-semibold text-brand-red hover:text-brand-red-light transition-colors"
             >
-              Learn more about Aaron
+              Watch Aaron&apos;s YouTube Channel
               <svg
                 className="w-4 h-4"
                 fill="none"

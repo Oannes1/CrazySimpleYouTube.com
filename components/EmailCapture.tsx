@@ -67,21 +67,24 @@ export default function EmailCapture() {
           <span className="font-body text-xs sm:text-sm tracking-[0.25em] uppercase text-white/50 font-medium">
             Free Bonus
           </span>
-          <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-black text-white text-balance">
-            Get the Chapter
+          <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-normal uppercase text-white">
+            Your Action Steps,
             <br />
-            Companion Kit
+            Ready Tomorrow Morning
           </h2>
           <p className="mt-4 text-white/70 font-body text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
-            Checklists, AI prompt libraries, and video tutorials for every
-            chapter — delivered straight to your inbox.
+            Imagine opening your inbox and having every chapter&apos;s checklists,
+            AI prompts, and video tutorials{' '}
+            <strong className="text-white font-semibold">ready to go</strong>.
           </p>
 
           <div className="mt-7 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-left">
             {[
-              '24 chapter checklists',
-              'AI prompt library',
-              'Video tutorials',
+              '24 chapter-by-chapter checklists',
+              'AI prompts (paste into ChatGPT)',
+              'Video tutorials for every section',
+              'Thumbnail template collection',
+              '90-day launch calendar',
             ].map((item) => (
               <div key={item} className="flex items-center gap-2.5">
                 <svg
@@ -157,8 +160,16 @@ export default function EmailCapture() {
             </p>
           )}
 
-          <p className="mt-4 text-white/30 font-body text-xs">
-            No spam. Unsubscribe anytime. We respect your privacy.
+          <p className="mt-4 text-white/40 font-body text-xs max-w-md mx-auto">
+            Your email stays private. If chapter 1 doesn&apos;t change how you
+            think about YouTube, unsubscribe with one click. No questions.
+          </p>
+
+          {/* P.S. line — Caveat handwritten */}
+          <p className="mt-6 font-accent text-base sm:text-lg text-white/50 max-w-lg mx-auto italic">
+            P.S. — If you&apos;ve tried YouTube before and quit, this kit is
+            specifically for you. Chapter 3 explains why you quit — and it
+            wasn&apos;t your fault.
           </p>
         </motion.div>
       </div>
