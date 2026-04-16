@@ -137,7 +137,7 @@ export default function YouTubeServices() {
           viewport={{ once: true }}
         >
           <a
-            href="https://www.aaroncuha.com/services/youtube-services"
+            href="https://aaroncuha.com/services/youtube-services"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2.5 px-8 py-4 bg-brand-red text-white font-body font-bold text-lg rounded-xl hover:bg-brand-red-light transition-colors hover:shadow-[0_0_40px_rgba(220,38,38,0.2)]"
