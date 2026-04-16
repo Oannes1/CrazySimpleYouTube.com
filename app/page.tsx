@@ -9,6 +9,7 @@ import WhatsInside from '@/components/WhatsInside'
 import Testimonials from '@/components/Testimonials'
 import AboutAuthor from '@/components/AboutAuthor'
 import ValueLadder from '@/components/ValueLadder'
+import YouTubeServices from '@/components/YouTubeServices'
 import EmailCapture from '@/components/EmailCapture'
 import FAQ from '@/components/FAQ'
 import Urgency from '@/components/Urgency'
@@ -28,6 +29,7 @@ export default function Home() {
       <Testimonials />
       <AboutAuthor />
       <ValueLadder />
+      <YouTubeServices />
       <EmailCapture />
       <FAQ />
       <Urgency />
