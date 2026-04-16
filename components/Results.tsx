@@ -76,7 +76,7 @@ export default function Results() {
             The Proof
           </span>
           <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-normal uppercase text-brand-charcoal">
-            Six Industries. One System.
+            Different Industries. One System.
             <br className="hidden sm:block" /> Same Result.
           </h2>
           <p className="mt-5 text-brand-charcoal/60 font-body text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
