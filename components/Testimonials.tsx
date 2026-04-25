@@ -4,21 +4,21 @@ import { motion } from 'framer-motion'
 
 const testimonials = [
   {
-    name: 'Scott Himelstein',
+    name: 'Scott',
     role: 'Real Estate Agent',
     result: '$300K+ revenue in year one',
     quote:
       '12 years on YouTube with 200 subscribers. Then I applied Aaron\'s system — 90 days later I had 2,000 subs and **$87K in commissions**. By year end, over $300K.',
-    initials: 'SH',
+    initials: 'S',
     featured: true,
   },
   {
-    name: 'Rachel Smith',
+    name: 'Rachel',
     role: 'Real Estate Agent',
     result: '1K to 160K subscribers in 18 months',
     quote:
       'Went from 1,000 to **160,000 subscribers in 18 months** using exactly what\'s in this book. The lead generation chapter alone was worth 10x the price.',
-    initials: 'RS',
+    initials: 'R',
     featured: false,
   },
   {
@@ -31,12 +31,12 @@ const testimonials = [
     featured: false,
   },
   {
-    name: 'Leah Courage',
+    name: 'Leah',
     role: 'Real Estate Agent, WA',
     result: '20K subscribers in 8 weeks',
     quote:
       'I was skeptical about YouTube. Then the compound effect kicked in — **20,000 subscribers in just 8 weeks**. The system works exactly like Aaron says it does.',
-    initials: 'LC',
+    initials: 'L',
     featured: false,
   },
   {
@@ -49,30 +49,30 @@ const testimonials = [
     featured: false,
   },
   {
-    name: 'Daniel Kotula',
+    name: 'Daniel',
     role: 'Consultant, Prague',
     result: 'Consistent leads from every video',
     quote:
       'I was doing everything the YouTube gurus said. Six months in: 247 subscribers and **zero clients**. Aaron\'s system completely changed my approach and the leads started flowing.',
-    initials: 'DK',
+    initials: 'D',
     featured: false,
   },
   {
-    name: "Patrick O'Connor",
+    name: 'Patrick',
     role: 'Real Estate Agent',
     result: '10K+ subscribers in 6 weeks',
     quote:
       'I\'ve bought every YouTube course out there. This is the only resource that focuses on **actual business results**, not vanity metrics. Over 10,000 subscribers in six weeks.',
-    initials: 'PO',
+    initials: 'P',
     featured: false,
   },
   {
-    name: 'Natalia Echeverri',
+    name: 'Natalia',
     role: 'Real Estate Agent',
     result: 'Videos ranking on page one',
     quote:
       'The keyword research system changed everything. My videos started **ranking on page one** and the leads followed. This isn\'t theory — it\'s a real system that works.',
-    initials: 'NE',
+    initials: 'N',
     featured: false,
   },
   {

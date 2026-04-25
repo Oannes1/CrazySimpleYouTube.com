@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 const results = [
   {
     industry: 'Real Estate',
-    name: 'Rachel Smith',
+    name: 'Rachel',
     before: '1,000 subscribers',
     after: '160,000 subscribers in 18 months',
     highlight: '1K to 160K in 18 months',
@@ -21,7 +21,7 @@ const results = [
   },
   {
     industry: 'Real Estate',
-    name: 'Scott Himelstein',
+    name: 'Scott',
     before: '200 subscribers after 12 years',
     after: '2,000 subs + $300K+ revenue in year one',
     highlight: '$87K in first 90 days',
@@ -37,7 +37,7 @@ const results = [
   },
   {
     industry: 'Real Estate',
-    name: 'Leah Courage',
+    name: 'Leah',
     before: 'Just getting started on YouTube',
     after: '20,000 subscribers in 8 weeks',
     highlight: '20K subs in 8 weeks',
