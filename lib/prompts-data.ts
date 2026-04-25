@@ -1,0 +1,704 @@
+export interface Prompt {
+  slug: string
+  chapter: number
+  title: string
+  chapterTitle: string
+  category: 'Foundation' | 'Content Creation' | 'Business of YouTube' | 'Scale and Sustainability'
+  setup: string
+  prompt: string
+  closing: string
+}
+
+export const prompts: Prompt[] = [
+  {
+    slug: 'youtube-business-case-builder',
+    chapter: 1,
+    title: 'YouTube Business Case Builder',
+    chapterTitle: 'The $387,000 YouTube Video',
+    category: 'Foundation',
+    setup: `Before you create a single video, I want you to understand the potential ROI for your specific business. Not in theory. In real numbers. Copy this prompt into ChatGPT or Claude and fill in the brackets with your information.`,
+    prompt: `I'm a [YOUR PROFESSION] in [YOUR CITY/MARKET].
+
+My average transaction/client value is $[AMOUNT].
+
+My current conversion rate from lead to client is approximately [X]%.
+
+Help me calculate:
+
+- If I create one video per week and each video generates an average of 2 leads per month after 6 months, what's my potential annual revenue from YouTube?
+
+- What is my 'YouTube Hourly Rate' if each video takes 2 hours to create?
+
+- Compare this ROI to my current marketing methods (cold calling, paid ads, networking events).
+
+- What's the 3-year compound value if my videos continue generating leads indefinitely?
+
+Be specific with numbers. Show your math.`,
+    closing: `This exercise gives you a concrete number you can return to whenever you're tempted to skip a week of content. When you know each video is worth $5,000 or $10,000 or $50,000 over its lifetime, carving out two hours a week stops feeling like a sacrifice and starts feeling like the smartest investment you'll make all month.`,
+  },
+  {
+    slug: 'youtube-strategy-myth-audit',
+    chapter: 2,
+    title: 'YouTube Strategy Myth Audit',
+    chapterTitle: 'Why Most YouTube Advice Is Wrong',
+    category: 'Foundation',
+    setup: `Here's a prompt you can use right now to audit whether your current YouTube strategy is built on bad advice. If you haven't started yet, run this with your planned strategy and catch the mistakes before you make them.`,
+    prompt: `I'm a [YOUR PROFESSION] in [YOUR MARKET] planning my YouTube strategy. Here's what I'm currently doing or planning to do:
+
+- Posting frequency: [X times per week]
+
+- Average video length: [X minutes]
+
+- Primary goal metric: [subscribers/views/other]
+
+- Content approach: [describe your topics]
+
+- Equipment budget: [$ amount]
+
+Based on current YouTube algorithm behavior in 2026, audit this strategy for common myths and mistakes.
+
+Specifically flag if I'm:
+
+- Prioritizing volume over quality
+- Chasing vanity metrics instead of watch time and retention
+- Over-investing in equipment before validating my content strategy
+- Making videos too short to build authority
+- Targeting broad/viral topics instead of searchable niche content
+- Blaming the algorithm instead of optimizing titles, thumbnails, and hooks
+
+Give me a revised strategy that avoids these traps.
+
+Be specific with numbers and timelines.`,
+    closing: `This takes three minutes and might save you six months of wasted effort. Run it before you record your next video.`,
+  },
+  {
+    slug: 'algorithm-optimization-analyzer',
+    chapter: 3,
+    title: 'Algorithm Optimization Analyzer',
+    chapterTitle: 'The 2026 YouTube Algorithm Decoded',
+    category: 'Foundation',
+    setup: `Use this prompt to analyze your channel's algorithm performance and identify specific opportunities you're missing. If you haven't started yet, bookmark this for after you publish your first five videos.`,
+    prompt: `I need help analyzing my YouTube channel's algorithm performance. Here are my current metrics from my top five videos:
+
+Video 1: [Title]
+- CTR: [X]%
+- Average View Duration: [X] min ([X]% of total)
+- Views: [X]
+- Video Length: [X] minutes
+
+[Repeat for videos 2-5]
+
+My channel averages:
+- Overall CTR: [X]%
+- Overall AVD: [X]%
+- Primary traffic source: [Search/Suggested/External]
+
+Please analyze:
+
+- How do my metrics compare to benchmarks for educational/business content?
+- What patterns do you see in my top-performing vs underperforming videos?
+- Is my video length optimized for watch time?
+- What's my biggest algorithm bottleneck right now?
+- Give me 3 specific actions to improve my algorithm performance in the next 30 days.`,
+    closing: `Run this analysis monthly. Your metrics will tell you exactly where the algorithm is rewarding you and where it's holding you back. Small improvements in CTR or AVD can trigger significant jumps in reach. This isn't guesswork. It's data.`,
+  },
+  {
+    slug: 'youtube-business-model-blueprint',
+    chapter: 4,
+    title: 'YouTube Business Model Blueprint',
+    chapterTitle: 'Your YouTube Business Model',
+    category: 'Foundation',
+    setup: `Use this prompt to map out your specific YouTube business model with real numbers from your industry.`,
+    prompt: `I'm a [YOUR PROFESSION] in [YOUR MARKET].
+
+My primary YouTube business model is:
+[Direct Lead Gen / Authority / Digital Products / Affiliate / Ad Revenue]
+
+Here are my business specifics:
+- Average client/transaction value: $[AMOUNT]
+- Current close rate on warm leads: [X]%
+- Monthly client capacity: [X] clients
+- Current lead sources: [list them]
+- Do I have a lead magnet or free resource? [Y/N]
+- Do I have an email/CRM follow-up system? [Y/N]
+
+Based on my model, help me build:
+
+- A viewer-to-client conversion funnel specific to my business
+- A recommended lead magnet that would appeal to my ideal YouTube viewer
+- A CTA script I can use at the end of my videos
+- Revenue projections for 6 months and 12 months based on one video per week
+- The three biggest gaps in my current setup that would prevent YouTube from generating revenue`,
+    closing: `This prompt will force you to think through the entire revenue path before you create a single video. Most creators skip this step and then wonder why their channel doesn't make money. Don't be most creators.`,
+  },
+  {
+    slug: 'youtube-equipment-advisor',
+    chapter: 5,
+    title: 'YouTube Equipment Advisor',
+    chapterTitle: 'The Good Enough Equipment Stack',
+    category: 'Foundation',
+    setup: `Use this prompt to get customized equipment recommendations based on your specific situation, instead of guessing or getting lost in Amazon reviews for three hours.`,
+    prompt: `I'm starting a YouTube channel and need equipment recommendations based on my specific situation:
+
+Content type: [Talking head / Property tours / Tutorials / Interviews / Mixed]
+Primary filming location: [Home office / Various locations / Outdoors / Car]
+Current equipment I already own: [list everything]
+Budget for new equipment: $[AMOUNT]
+Technical comfort level: [Beginner / Intermediate / Advanced]
+Biggest concern: [Audio / Video / Lighting / Portability / Ease of use]
+
+Based on this, recommend:
+
+- The essential equipment I need (and nothing more)
+- What I should skip entirely at this stage
+- The single most impactful upgrade for my money
+- Specific setup tips for my content type
+- A timeline for when to consider upgrading (based on milestones, not calendar dates)`,
+    closing: `Run this before you spend a dollar. It will save you from buying gear you don't need and point you toward the one or two purchases that actually move the needle for your specific situation.`,
+  },
+  {
+    slug: 'youtube-channel-page-optimizer',
+    chapter: 6,
+    title: 'YouTube Channel Page Optimizer',
+    chapterTitle: 'Channel Setup That Converts',
+    category: 'Foundation',
+    setup: `Use this prompt to generate optimized copy for every element of your channel page in one shot. Fill in the brackets and let AI do the heavy drafting. Then edit it to sound like you.`,
+    prompt: `Help me optimize my YouTube channel page for conversions. Here's my info:
+
+- Business/Niche: [WHAT YOU DO]
+- Target audience: [WHO YOU HELP]
+- Key transformation: [WHAT OUTCOME YOU DELIVER]
+- Credibility markers: [EXPERIENCE, RESULTS, CREDS]
+- Content types I create: [VIDEO TOPICS/FORMATS]
+- Posting schedule: [HOW OFTEN]
+- Lead magnet/offer: [WHAT I WANT VIEWERS TO DO]
+
+Please generate:
+
+- Three channel name options (personal brand style)
+- Banner text (under 10 words, fits safe zone)
+- Full channel description (About section) optimized for search
+- Channel trailer script (60-90 seconds)
+- Five playlist names for my content categories
+
+Make everything clear and specific. Avoid jargon or cleverness.`,
+    closing: `This gives you a solid first draft in about three minutes. From there, rewrite anything that doesn't sound like you, tighten the language, and make sure every word earns its place.`,
+  },
+  {
+    slug: 'youtube-topic-idea-generator',
+    chapter: 7,
+    title: 'YouTube Topic Idea Generator',
+    chapterTitle: 'Finding Topics Your Audience Actually Searches For',
+    category: 'Content Creation',
+    setup: `Use this prompt to generate topic ideas, then validate them using the methods above. AI generates the ideas. YouTube autocomplete confirms the demand. Never skip the validation step.`,
+    prompt: `Generate YouTube video topic ideas for my business:
+
+- My business: [WHAT YOU DO]
+- My ideal client: [WHO YOU HELP]
+- My location/market: [IF RELEVANT]
+- Problems I solve: [TOP 3 CLIENT PROBLEMS]
+
+Generate 30 video topic ideas in these categories:
+
+- 10 'How to' tutorials my audience would search for
+- 10 'Mistakes to avoid' or 'Problems' topics
+- 5 'Comparison' topics (X vs Y, Which is better)
+- 5 'What to expect' or 'Process explained' topics
+
+Format each as a searchable title someone would actually type into YouTube's search bar. Avoid clever or vague titles. Include location-specific variations where relevant.`,
+    closing: `This gives you a starting list in about two minutes. But remember, AI is brainstorming, not validating. Take every idea it generates and check it against YouTube autocomplete before adding it to your content plan. If YouTube doesn't suggest it, real people probably aren't searching for it.`,
+  },
+  {
+    slug: 'youtube-title-thumbnail-generator',
+    chapter: 8,
+    title: 'YouTube Title & Thumbnail Generator',
+    chapterTitle: 'Titles and Thumbnails That Get Clicks',
+    category: 'Content Creation',
+    setup: `Use this prompt to generate multiple title options and thumbnail concepts for any video before you film.`,
+    prompt: `Help me create compelling titles and thumbnail concepts for my YouTube video.
+
+- Video topic: [DESCRIBE YOUR VIDEO CONTENT]
+- Target keyword: [MAIN SEARCH TERM TO RANK FOR]
+- Target audience: [WHO IS THIS VIDEO FOR]
+- Main takeaway: [THE #1 THING VIEWERS WILL LEARN]
+
+Please generate:
+
+- Five title options using different formulas (number list, how-to, mistake warning, comparison, insider secret)
+- Rate each title's curiosity factor (1-10) and search optimization (1-10)
+- Three thumbnail concepts describing: the main image, facial expression, text overlay (3-4 words max), and color scheme
+- One contrarian title that challenges conventional wisdom
+- Which title/thumbnail combo works best for click-through AND audience trust
+
+This is for a business channel. Avoid clickbait that damages credibility.`,
+    closing: `Run this for every video before you film. Having your title and thumbnail concept locked in beforehand means you'll capture the right images during the shoot, and your content will actually deliver on the title's promise.`,
+  },
+  {
+    slug: 'youtube-hook-generator',
+    chapter: 9,
+    title: 'YouTube Hook Generator',
+    chapterTitle: 'The First 30 Seconds, Hooks That Keep Viewers Watching',
+    category: 'Content Creation',
+    setup: `Use this prompt to generate multiple hook options for any video before you film. Having five options to choose from means you pick the strongest one, not just the first one you think of.`,
+    prompt: `Help me create compelling opening hooks for my YouTube video.
+
+- Video topic: [WHAT THE VIDEO IS ABOUT]
+- Main value delivered: [WHAT VIEWERS WILL LEARN]
+- Target viewer's problem: [WHAT PAIN POINT THIS SOLVES]
+- My credibility: [EXPERIENCE/RESULTS]
+- Video style: [Educational/Story/Tour/Review]
+
+Please generate:
+
+- A Problem-Agitate-Promise hook (3-4 sentences)
+- A Shocking Statement hook (2-3 sentences)
+- A Story hook opening (3-4 sentences)
+- A Direct Question hook (2-3 sentences)
+- A Preview Stack hook listing 3 specific things they'll learn
+
+For each hook, also provide:
+
+- A one-sentence credibility statement to follow
+- A transition line into the main content
+
+Make each hook conversational and natural. Not salesy or over-hyped, these should sound like something a trusted expert would actually say.`,
+    closing: `Generate hooks before you film, not after. When you know your hook in advance, you can deliver it with confidence and energy. Trying to write a hook in post-production, stuck with whatever you happened to say at the beginning, rarely works as well.`,
+  },
+  {
+    slug: 'youtube-video-structure-generator',
+    chapter: 10,
+    title: 'YouTube Video Structure Generator',
+    chapterTitle: 'Structuring Videos for Maximum Retention',
+    category: 'Content Creation',
+    setup: `Use this prompt to create a retention-focused structure for any video before you script or film.`,
+    prompt: `Help me structure my YouTube video for maximum retention.
+
+- Video topic: [WHAT THE VIDEO COVERS]
+- Target length: [X MINUTES]
+- Content type: [List / How-To / Case Study / Tour]
+- Main points to cover: [LIST YOUR KEY POINTS]
+- Best insight/tip: [YOUR MOST VALUABLE POINT]
+
+Please create:
+
+- A complete video outline with timestamps
+- Identify where to place 5 value peaks throughout the video
+- Suggest 6-8 specific pattern interrupts with timestamps (visual changes, B-roll, tone shifts)
+- Write 3 open loop statements to use at strategic points that tease upcoming content
+- Identify potential drop-off danger zones and how to address them
+- Suggest where to place a mid-video CTA that does not feel forced`,
+    closing: `Structure this so the most valuable content comes at strategic intervals, not all at the beginning. Run this before scripting or filming. Having a clear retention-focused structure in advance makes filming easier and ensures you capture all the B-roll and visual elements you'll need for pattern interrupts.`,
+  },
+  {
+    slug: 'youtube-video-script-outline',
+    chapter: 11,
+    title: 'YouTube Video Script Outline',
+    chapterTitle: 'Scripting and Delivery, Finding Your On-Camera Voice',
+    category: 'Content Creation',
+    setup: `Use this prompt to develop video outlines that sound natural when spoken.`,
+    prompt: `Help me create a detailed outline for a YouTube video.
+
+Video topic: [YOUR TOPIC]
+Target length: [X MINUTES]
+Target audience: [WHO THIS IS FOR]
+Main takeaway: [WHAT VIEWERS SHOULD LEARN/DO]
+My speaking style: [CONVERSATIONAL / PROFESSIONAL / ENERGETIC / ETC.]
+
+Please create:
+
+- A word-for-word hook (first 30 seconds) that creates curiosity
+- A brief credibility statement I can customize
+- A roadmap sentence previewing the content
+- Main content sections with:
+  - Key point to make
+  - Talking points (not full script)
+  - Suggested example or story prompt
+  - Transition to the next section
+- A call to action that feels natural
+- A strong closing statement
+
+Write for spoken delivery. Use conversational language, short sentences, and natural transitions. Avoid jargon and overly formal phrasing.`,
+    closing: `This generates a Level 2 outline: detailed enough to guide you, loose enough to sound natural. Read the output aloud and adjust anything that sounds written rather than spoken. Your goal is an outline you can glance at while filming, not a script you read verbatim.`,
+  },
+  {
+    slug: 'youtube-editing-roi-evaluator',
+    chapter: 12,
+    title: 'YouTube Editing ROI Evaluator',
+    chapterTitle: 'Editing for Engagement, Not Perfection',
+    category: 'Content Creation',
+    setup: `Use this prompt when you're tempted to add an editing element and need a reality check on whether it's worth your time.`,
+    prompt: `Help me decide if this editing element is worth my time.
+
+Editing element I'm considering: [DESCRIBE IT]
+Estimated time to implement: [X MINUTES/HOURS]
+My content type: [Educational/Tutorial/Tour/etc.]
+My current publishing frequency: [HOW OFTEN]
+
+Please evaluate:
+
+- Will this measurably improve viewer retention?
+- Will viewers notice if this element is missing?
+- Is this time better spent on content or promotion?
+- Is this serving my audience or my ego?
+- What's the minimum viable version that achieves 80% of the benefit?
+
+Give me a clear recommendation: implement as planned, implement the minimum version, or skip.`,
+    closing: `This is especially useful when you discover a new editing technique and think "I should do that." Just because something looks impressive doesn't mean it's worth your hours. The question is always: does this serve the viewer's experience, or just your desire to look professional?`,
+  },
+  {
+    slug: 'youtube-video-metadata-optimizer',
+    chapter: 13,
+    title: 'YouTube Video Metadata Optimizer',
+    chapterTitle: 'Publishing and Optimization, The Launch Sequence',
+    category: 'Business of YouTube',
+    setup: `Use this prompt to generate optimized metadata for any video before publishing.`,
+    prompt: `Help me create optimized metadata for my YouTube video.
+
+Video title: [YOUR WORKING TITLE]
+Main topic/keyword: [PRIMARY SEARCH TERM]
+Video summary: [2-3 SENTENCES ABOUT THE VIDEO]
+Key timestamps: [MAJOR SECTIONS WITH APPROX TIMES]
+My lead magnet/offer: [WHAT I WANT VIEWERS TO DO]
+My website: [URL]
+Target audience: [WHO THIS VIDEO IS FOR]
+
+Please generate:
+
+- An optimized video description with:
+  - A compelling first 150 characters with the keyword
+  - A full first paragraph (3-4 sentences)
+  - Formatted timestamps
+  - A CTA section with the lead magnet
+  - A standard about/subscribe section
+- A list of 8-10 relevant tags
+- Three hashtags for the description
+- A pinned comment to drive engagement
+- A short social media caption for promotion
+
+Make all copy sound natural, not keyword-stuffed.`,
+    closing: `Run this before publishing every video. Having your metadata ready in advance means you can upload, paste everything in, and launch without scrambling to write descriptions on the fly. Save your outputs so you can reference what's worked well and maintain consistency.`,
+  },
+  {
+    slug: 'youtube-content-calendar-generator',
+    chapter: 14,
+    title: 'YouTube Content Calendar Generator',
+    chapterTitle: 'Building Your Content Calendar, Consistency That Lasts',
+    category: 'Business of YouTube',
+    setup: `Use this prompt at the start of each quarter to generate a customized content calendar. Having 12 weeks planned in advance eliminates the daily "What should I create?" decision paralysis.`,
+    prompt: `Help me create a content calendar for my YouTube channel.
+
+My niche: [YOUR INDUSTRY/TOPIC]
+Target audience: [WHO YOU SERVE]
+Publishing frequency: [HOW OFTEN YOU CAN COMMIT]
+Busiest time of year: [WHEN YOU HAVE LEAST TIME]
+Seasonal trends: [ANY RELEVANT TIMING]
+My 5 core topics: [LIST MAIN CONTENT PILLARS]
+
+Please create:
+
+- A 12-week content calendar with specific topics
+- Label each video as Pillar, Trending, or Connection content
+- Include a working title for each video
+- Note which videos could be batched together
+- Identify 3 evergreen topics for my emergency stash
+- Suggest how to adjust during my busy season
+
+Target mix: 60% pillar, 25% trending, 15% connection content.`,
+    closing: `Keep your generated calendars in a document and review them quarterly. You'll start to notice patterns: which topics performed well, which felt forced, and what's missing. This historical data makes future planning even more effective.`,
+  },
+  {
+    slug: 'youtube-analytics-diagnosis',
+    chapter: 15,
+    title: 'YouTube Analytics Diagnosis',
+    chapterTitle: 'Analytics That Actually Matter, Reading Your Data',
+    category: 'Business of YouTube',
+    setup: `Use this prompt during your monthly deep-dive to identify patterns you might be missing in your weekly reviews.`,
+    prompt: `Help me understand my YouTube analytics and what to do about them.
+
+- My channel niche: [YOUR TOPIC/INDUSTRY]
+- Current subscriber count: [NUMBER]
+- Average views per video: [NUMBER]
+
+For my recent videos (last 5-10):
+- Average CTR: [X%]
+- Average View Duration: [X minutes or X%]
+- Subscriber conversion: [X per 1,000 views]
+
+Best performing video: [TITLE]
+- CTR: [X%], AVD: [X%], Views: [NUMBER]
+
+Worst performing video: [TITLE]
+- CTR: [X%], AVD: [X%], Views: [NUMBER]
+
+My specific concern: [WHAT'S WORRYING YOU]
+
+Please provide:
+
+- Diagnosis of what these numbers reveal
+- The one metric I should prioritize improving
+- Three specific actions based on this data
+- How my numbers compare to niche benchmarks
+- What I should NOT worry about right now`,
+    closing: `The weekly routine keeps you informed. The monthly AI-assisted analysis keeps you strategic. Together, they ensure you're always improving based on evidence rather than guessing.`,
+  },
+  {
+    slug: 'youtube-shorts-extraction-planner',
+    chapter: 16,
+    title: 'YouTube Shorts Extraction Planner',
+    chapterTitle: 'YouTube Shorts, The Strategic Approach for Business Channels',
+    category: 'Business of YouTube',
+    setup: `Use this prompt after completing each long-form video to identify Shorts opportunities from content you've already created.`,
+    prompt: `Help me identify Shorts opportunities from my long-form content.
+
+- My niche: [YOUR INDUSTRY/TOPIC]
+- Recent video topic: [WHAT THE VIDEO COVERS]
+- Key points covered: [LIST 3-5 MAIN POINTS]
+- Surprising stats or facts mentioned: [LIST THEM]
+- Stories or examples shared: [BRIEFLY DESCRIBE]
+
+Please identify:
+
+- The 3 best moments to extract as standalone Shorts (with hook suggestions)
+- A compelling opening line for each (first 2 sec)
+- Suggested text overlay for each
+- A bridge CTA for each pointing to the full video
+- Which Short has the highest viral potential and why
+
+Focus on moments that stand alone and make viewers want to see more.`,
+    closing: `Run this after each long-form video. It takes five minutes to fill out and will identify two to three Shorts you can create from content you've already produced. Over time, you'll develop an instinct for spotting Short-worthy moments while you're still filming.`,
+  },
+  {
+    slug: 'lead-magnet-development',
+    chapter: 17,
+    title: 'Lead Magnet Development',
+    chapterTitle: 'Building Your Lead Generation System',
+    category: 'Business of YouTube',
+    setup: `Use this prompt to develop your lead magnet concept and build your complete system in one session.`,
+    prompt: `Help me create a high-converting lead magnet for my YouTube channel.
+
+My business: [WHAT YOU DO/SELL]
+My target audience: [WHO YOU SERVE]
+Their biggest frustration: [MAIN PAIN POINT]
+Their desired outcome: [WHAT THEY WANT]
+My most popular video topics: [LIST 3-5]
+Questions I get asked most: [LIST COMMON Q'S]
+
+Please provide:
+
+- Three lead magnet concepts (different formats) with compelling titles
+- For each: what it includes and why it appeals
+- Recommendation for which to create first
+- Landing page headline and 5 benefit bullets
+- A verbal CTA script for my videos
+- Subject lines for a five-email welcome sequence
+
+Focus on attracting qualified prospects likely to become paying clients, not freebie seekers.`,
+    closing: `This gives you everything you need to build your lead generation system in one sitting. The key insight is starting with your audience's problems and desires. Lead magnets that address real pain points convert far better than generic offerings.`,
+  },
+  {
+    slug: 'youtube-lead-consultation-prep',
+    chapter: 18,
+    title: 'YouTube Lead Consultation Prep',
+    chapterTitle: 'Converting YouTube Leads to Clients',
+    category: 'Business of YouTube',
+    setup: `Use this prompt before every consultation call. Five minutes of preparation dramatically improves your conversion rate.`,
+    prompt: `Help me prepare for a consultation call with a YouTube lead.
+
+My service: [WHAT YOU OFFER]
+My typical client: [WHO YOU SERVE BEST]
+My service price: [YOUR FEE/PRICING]
+
+About this lead:
+Videos they mentioned: [IF KNOWN]
+Their inquiry message: [WHAT THEY SAID]
+What I know about their situation: [ANY DETAILS]
+
+Please provide:
+
+- Five tailored discovery questions for their stated situation
+- How to connect my video concepts to their needs
+- Likely objections and specific responses
+- A customized value statement for this lead
+- The ideal next step based on their readiness
+
+Help me enter this call prepared to understand their needs and present a relevant solution.`,
+    closing: `You'll enter conversations prepared rather than reactive, with relevant questions ready and objection responses rehearsed. The five minutes of prep compounds into significantly more closed business over time.`,
+  },
+  {
+    slug: 'youtube-team-documentation-creator',
+    chapter: 19,
+    title: 'YouTube Team Documentation Creator',
+    chapterTitle: 'Building Your YouTube Team',
+    category: 'Scale and Sustainability',
+    setup: `Use this prompt to create the documentation you need before hiring. This generates roughly 80% of what you'll need in one session.`,
+    prompt: `Help me create onboarding documentation for a new team member on my YouTube channel.
+
+Role: [EDITOR / THUMBNAIL DESIGNER / VA]
+My channel niche: [YOUR TOPIC/INDUSTRY]
+My brand voice: [DESCRIBE YOUR TONE AND STYLE]
+My visual style: [DESCRIBE YOUR AESTHETIC]
+Examples of my best work: [DESCRIBE 2-3 VIDEOS]
+What makes those great: [WHAT YOU LIKE ABOUT THEM]
+Things to avoid: [PET PEEVES, STYLE NO-NOS]
+
+Please create:
+
+- A style guide specific to this role
+- A step-by-step process workflow
+- A pre-submission checklist they can self-review
+- Five common mistakes to avoid for this role
+- Three paid test project ideas for candidates
+- A template for giving constructive feedback`,
+    closing: `Make documentation clear enough that someone new could follow it without extensive hand-holding. Refine the output based on your specific preferences, then use it as your onboarding foundation. Good documentation is the difference between a team member who succeeds and one who struggles. Update it continuously as you discover gaps.`,
+  },
+  {
+    slug: 'youtube-creator-mindset-reset',
+    chapter: 20,
+    title: 'YouTube Creator Mindset Reset',
+    chapterTitle: 'The Mental Game, Psychology and Resilience for Creators',
+    category: 'Scale and Sustainability',
+    setup: `Use this prompt when you're in a creative rut, feeling discouraged, or considering quitting. Sometimes an outside perspective, even from AI, can reframe the situation.`,
+    prompt: `I'm a YouTube creator feeling discouraged. Help me get perspective.
+
+- My channel niche: [YOUR TOPIC]
+- How long I've been creating: [MONTHS/YEARS]
+- Current subscriber count: [NUMBER]
+- Videos published: [NUMBER]
+- What's discouraging me specifically: [DESCRIBE]
+
+Please provide:
+
+- Honest perspective on my progress compared to typical channels in this niche and timeframe
+- Three things I should be proud of based on what I've described
+- The one adjustment most likely to change my trajectory
+- A realistic expectation for where I'll be in 6 months if I stay consistent
+- A reminder of why I started and why it matters
+
+Be honest but encouraging. Don't sugarcoat, but help me see what I might be missing.`,
+    closing: `This isn't a replacement for your creator support network. But when it's 11 PM and you're staring at analytics that make you want to quit, having a structured way to process those feelings can keep you from making an emotional decision you'll regret.`,
+  },
+  {
+    slug: 'youtube-community-builder',
+    chapter: 21,
+    title: 'YouTube Community Builder',
+    chapterTitle: 'Building Your YouTube Community, From Viewers to Advocates',
+    category: 'Scale and Sustainability',
+    setup: `Use this prompt to build a complete community engagement strategy for your channel.`,
+    prompt: `Help me develop a community-building strategy for my YouTube channel.
+
+- My channel niche: [YOUR TOPIC/INDUSTRY]
+- My target audience: [WHO YOU SERVE]
+- Current subscriber count: [NUMBER]
+- Average comments per video: [NUMBER]
+- What my audience is trying to achieve: [THEIR GOAL]
+- My channel's core values: [WHAT YOU STAND FOR]
+
+Please provide:
+
+- A suggested identity/name for my community members
+- Five end-of-video questions to spark comments (specific to my niche)
+- Ten community post ideas (mix of polls, questions, behind-the-scenes)
+- Response templates for common comment types (questions, praise, criticism)
+- Three ways to feature community members in my content
+- A weekly community engagement schedule (what to do each day)
+
+Focus on genuine connection, not vanity metrics.`,
+    closing: `This gives you a full playbook you can implement this week. Revisit it every quarter to refresh your approach. AI is great at generating ideas you wouldn't have thought of on your own, but you still have to show up and actually engage. The prompt writes the plan, you execute it.`,
+  },
+  {
+    slug: 'youtube-content-repurposer',
+    chapter: 22,
+    title: 'YouTube Content Repurposer',
+    chapterTitle: 'Repurposing Content, Maximum Reach Minimum Effort',
+    category: 'Scale and Sustainability',
+    setup: `Use this prompt after every video publish to generate a week's worth of repurposed content in about 10 minutes.`,
+    prompt: `Help me repurpose my latest YouTube video for other platforms.
+
+- Video title: [YOUR VIDEO TITLE]
+- Video topic summary: [2-3 SENTENCES ON WHAT THE VIDEO COVERS]
+- Key points covered:
+  - [POINT 1]
+  - [POINT 2]
+  - [POINT 3]
+- Best quote or insight from the video: [MEMORABLE LINE]
+- My target platforms: [YOUR 2 CHOSEN PLATFORMS]
+- My lead magnet or CTA: [WHAT YOU WANT PEOPLE TO DO NEXT]
+
+Please create:
+
+- A LinkedIn post (150-250 words) with a scroll-stopping hook
+- An Instagram caption with 5 relevant hashtags
+- An email to my list announcing this video (casual, brief)
+- Timestamps for key points to clip as Shorts/Reels
+- A blog post outline expanding on the video's main theme
+
+Match each piece to the platform's native style. No generic copy-paste feel.`,
+    closing: `Run this for every video. The AI gives you a strong first draft for each platform. Spend five minutes refining each piece to match your voice, and you've got a full week of content from one prompt. Pair this with OpusClip or Descript to auto-generate your short clips, and your entire repurposing workflow takes under an hour.`,
+  },
+  {
+    slug: 'youtube-business-roi-analyzer',
+    chapter: 23,
+    title: 'YouTube Business ROI Analyzer',
+    chapterTitle: 'Measuring Your YouTube ROI, Tracking What Actually Matters',
+    category: 'Scale and Sustainability',
+    setup: `Run this prompt quarterly to analyze your YouTube business performance and get specific recommendations.`,
+    prompt: `Analyze my YouTube channel's business performance and identify improvements.
+
+My business: [WHAT YOU DO/SELL]
+Average client value: $[AMOUNT]
+Time period: [LAST 3 MONTHS / 6 MONTHS]
+
+YouTube metrics:
+- Total views: [NUMBER]
+- New subscribers: [NUMBER]
+- Videos published: [NUMBER]
+
+Business metrics:
+- Leads from YouTube: [NUMBER]
+- Consultations booked: [NUMBER]
+- Clients acquired: [NUMBER]
+- Revenue from YouTube clients: $[AMOUNT]
+
+Investment:
+- Hours per week on YouTube: [NUMBER]
+- Monthly team/tool costs: $[AMOUNT]
+
+Please provide:
+
+- My conversion rates at each funnel stage
+- How my rates compare to benchmarks (0.5-2% view-to-lead, 10-25% lead-to-consultation, 20-50% consultation-to-client)
+- My YouTube ROI calculation
+- The biggest weakness in my funnel
+- Three specific actions to improve results
+- Projected results if I improve the weakest stage by 50%`,
+    closing: `Ten minutes to gather your numbers. Clear direction on where to focus. Run it every quarter and compare results over time. That trend line matters more than any single quarter's number.`,
+  },
+  {
+    slug: 'personalized-youtube-90-day-roadmap',
+    chapter: 24,
+    title: 'Personalized YouTube 90-Day Roadmap',
+    chapterTitle: 'Your 90-Day Roadmap, From Here to 10,000 Subscribers',
+    category: 'Scale and Sustainability',
+    setup: `Use this prompt to adapt the roadmap to your specific situation, schedule, and constraints.`,
+    prompt: `Help me create a customized 90-day plan to launch my YouTube channel.
+
+- My business: [WHAT YOU DO/SELL]
+- My target audience: [WHO YOU SERVE]
+- My YouTube goal: [LEADS / AUTHORITY / CLIENTS / ETC.]
+- Hours available per week for YouTube: [NUMBER]
+- Current YouTube status: [NEW / HAVE SOME VIDEOS / ETC.]
+- My biggest concern about starting: [WHAT WORRIES YOU MOST]
+
+Please create:
+
+- A customized week-by-week plan for 13 weeks
+- Specific milestones to hit at weeks 4, 8, and 13
+- The top 3 things I should prioritize given my time constraints
+- What I should NOT worry about in the first 90 days
+- How to handle my biggest concern
+- Realistic expectations for results in my specific niche
+
+Make the plan realistic for my available time.`,
+    closing: `If you only have five hours a week, your plan looks different than someone with twenty. The AI helps you prioritize ruthlessly instead of trying to implement everything at once. Run this before you start Week 1, and revisit it anytime you feel overwhelmed about what to focus on next.`,
+  },
+]

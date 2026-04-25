@@ -128,7 +128,7 @@ const faqs = [
   },
   {
     q: 'How does pricing work?',
-    a: 'Each tier has a fixed monthly investment that we share on the discovery call once we know you\'re a fit. We don\'t list pricing publicly because the right tier depends on your stage and goals — and we don\'t want anyone signing up for a tier that\'s wrong for them.',
+    a: 'Each tier has a fixed monthly investment that we share on the discovery call once we know you\'re a fit. We don\'t list pricing publicly because the right tier depends on your stage and goals. We don\'t want anyone signing up for a tier that\'s wrong for them.',
   },
   {
     q: 'Can you do a custom deal?',
