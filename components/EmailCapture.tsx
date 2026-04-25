@@ -19,7 +19,11 @@ export default function EmailCapture() {
       const res = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, firstName }),
+        body: JSON.stringify({
+          email,
+          firstName,
+          tags: ['src_homepage', 'dl_companion_kit'],
+        }),
       })
 
       if (!res.ok) throw new Error('Failed')

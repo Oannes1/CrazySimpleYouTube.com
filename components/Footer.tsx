@@ -68,10 +68,10 @@ export default function Footer() {
               >
                 AaronCuha.com
               </a>
-              <a href="https://aaroncuha.com/privacy" target="_blank" rel="noopener noreferrer" className="hover:text-brand-cream/30 transition-colors">
+              <a href="/privacy" className="hover:text-brand-cream/30 transition-colors">
                 Privacy
               </a>
-              <a href="https://aaroncuha.com/terms" target="_blank" rel="noopener noreferrer" className="hover:text-brand-cream/30 transition-colors">
+              <a href="/terms" className="hover:text-brand-cream/30 transition-colors">
                 Terms
               </a>
             </div>

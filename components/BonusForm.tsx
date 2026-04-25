@@ -20,7 +20,11 @@ export default function BonusForm() {
       const res = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ firstName, email }),
+        body: JSON.stringify({
+          firstName,
+          email,
+          tags: ['src_bonus', 'dl_companion_kit'],
+        }),
       })
 
       if (!res.ok) {
