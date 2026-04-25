@@ -87,7 +87,7 @@ export default function RootLayout({
               },
               publisher: {
                 '@type': 'Organization',
-                name: 'Dominion Partners LLC',
+                name: 'Haymaker Publishing',
               },
               genre: 'Business',
               inLanguage: 'en',

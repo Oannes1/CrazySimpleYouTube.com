@@ -58,7 +58,7 @@ export default function Footer() {
           </div>
 
           <div className="mt-8 pt-6 border-t border-white/[0.04] flex flex-col sm:flex-row items-center justify-between gap-4 text-brand-cream/15 font-body text-xs">
-            <p>&copy; {new Date().getFullYear()} Dominion Partners LLC. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Haymaker LLC. All rights reserved.</p>
             <div className="flex gap-6">
               <a
                 href="https://aaroncuha.com"
