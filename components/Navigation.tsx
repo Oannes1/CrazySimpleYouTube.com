@@ -48,10 +48,10 @@ export default function Navigation() {
               Testimonials
             </a>
             <a
-              href="#services"
+              href="/work-with-me"
               className="text-brand-cream/50 hover:text-brand-cream transition-colors font-body text-[0.85rem]"
             >
-              YouTube Services
+              Work With Aaron
             </a>
             <a
               href="#author"
@@ -99,7 +99,7 @@ export default function Navigation() {
                 {[
                   { label: "What's Inside", href: '#inside' },
                   { label: 'Testimonials', href: '#testimonials' },
-                  { label: 'YouTube Services', href: '#services' },
+                  { label: 'Work With Aaron', href: '/work-with-me' },
                   { label: 'About', href: '#author' },
                 ].map((link) => (
                   <a
