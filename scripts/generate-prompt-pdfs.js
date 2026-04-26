@@ -1,17 +1,17 @@
 /**
- * Generate 24 individual prompt PDFs (one per prompt) plus a bundle.
- *
- * Reads PROMPTS_LIBRARY.md directly (single source of truth, same as
- * lib/prompts-data.ts).
- *
- * Outputs:
- *   public/pdfs/prompts/[slug].pdf  (24 individual)
- *   public/pdfs/csy-prompts-bundle.pdf  (all 24 in one)
+ * Generate 24 individual prompt PDFs + bundle.
+ * Editorial design with embedded fonts (Anton/Inter/Caveat).
  */
 const fs = require('fs')
 const path = require('path')
 const PDFDocument = require('pdfkit')
 const { PDFDocument: PDFLibDocument } = require('pdf-lib')
+const {
+  C,
+  PAGE,
+  registerFonts,
+  isolated,
+} = require('./lib/pdf-design')
 
 const SOURCE = path.join(
   __dirname,
@@ -29,18 +29,6 @@ const BUNDLE_PATH = path.join(__dirname, '..', 'public', 'pdfs', 'csy-prompts-bu
 
 if (!fs.existsSync(OUT_DIR)) fs.mkdirSync(OUT_DIR, { recursive: true })
 
-const RED = '#C41230'
-const DARK = '#1A1A2E'
-const MID = '#666666'
-const LIGHT_BG = '#F8F8F8'
-
-const PAGE_W = 612
-const PAGE_H = 792
-const MARGIN_X = 72
-const MARGIN_TOP = 110
-const MARGIN_BOTTOM = 96
-const CONTENT_W = PAGE_W - MARGIN_X * 2
-
 // === Parse PROMPTS_LIBRARY.md ===
 const md = fs.readFileSync(SOURCE, 'utf8')
 const blocks = md.split(/^## CHAPTER\s+/m).slice(1)
@@ -56,26 +44,22 @@ const prompts = blocks
     const yamlMatch = block.match(/```yaml\n([\s\S]*?)\n```/)
     const yaml = yamlMatch ? yamlMatch[1] : ''
 
-    function yamlField(field) {
-      const re = new RegExp(`^${field}:\\s*(.+)$`, 'm')
-      const m = yaml.match(re)
+    const f = (field) => {
+      const m = yaml.match(new RegExp(`^${field}:\\s*(.+)$`, 'm'))
+      return m ? m[1].trim() : ''
+    }
+    const fb = (field) => {
+      const m = yaml.match(new RegExp(`${field}:\\s*\\|\\s*\\n([\\s\\S]*?)(?=\\n[a-z_]+:|$)`, 'm'))
       return m ? m[1].trim() : ''
     }
 
-    function yamlBlock(field) {
-      const re = new RegExp(`${field}:\\s*\\|\\s*\\n([\\s\\S]*?)(?=\\n[a-z_]+:|$)`, 'm')
-      const m = yaml.match(re)
-      return m ? m[1].trim() : ''
-    }
+    const slug = f('slug') || `chapter-${chapter}`
+    const title = f('title') || titleFromHeader
+    const chapterTitle = f('chapter_title')
+    const category = f('category')
+    const setup = fb('setup')
+    const closing = fb('closing')
 
-    const slug = yamlField('slug') || `chapter-${chapter}`
-    const title = yamlField('title') || titleFromHeader
-    const chapterTitle = yamlField('chapter_title')
-    const category = yamlField('category')
-    const setup = yamlBlock('setup')
-    const closing = yamlBlock('closing')
-
-    // Prompt body — everything inside the **Prompt:** code block
     const ps = block.split(/\*\*Prompt:\*\*/)
     let promptText = ''
     if (ps[1]) {
@@ -89,227 +73,238 @@ const prompts = blocks
 
 console.log(`Parsed ${prompts.length} prompts`)
 
-// === Drawing helpers ===
-function drawHeader(doc, p) {
-  doc.save().rect(0, 0, PAGE_W, 56).fill(RED).restore()
-  doc
-    .fillColor('#FFFFFF')
-    .font('Helvetica-Bold')
-    .fontSize(11)
-    .text(`PROMPT ${p.chapter} OF 24`, MARGIN_X, 16)
-    .fontSize(9)
-    .font('Helvetica')
-    .text(p.category.toUpperCase(), MARGIN_X, 33)
-  doc
-    .font('Helvetica-Bold')
-    .fontSize(11)
-    .text('CRAZYSIMPLEYOUTUBE.COM/PROMPTS', MARGIN_X, 24, {
-      width: CONTENT_W,
-      align: 'right',
-    })
+async function trimTrailing(rawBytes, contentPageCount) {
+  const src = await PDFLibDocument.load(rawBytes)
+  const total = src.getPageCount()
+  if (total <= contentPageCount) return rawBytes
+  const out = await PDFLibDocument.create()
+  out.setTitle(src.getTitle() || '')
+  out.setAuthor(src.getAuthor() || '')
+  out.setSubject(src.getSubject() || '')
+  out.setKeywords(src.getKeywords()?.split(',') || [])
+  const pages = await out.copyPages(src, Array.from({ length: contentPageCount }, (_, i) => i))
+  pages.forEach((p) => out.addPage(p))
+  return Buffer.from(await out.save())
 }
 
-function drawFooter(doc, n, total) {
-  const y = PAGE_H - 36
-  doc.save().rect(0, y, PAGE_W, 36).fill(DARK).restore()
-  doc
-    .fillColor('#FFFFFF')
-    .font('Helvetica')
-    .fontSize(9)
-    .text('© 2026 Aaron Cuha · Crazy Simple YouTube', MARGIN_X, y + 13, {
-      width: CONTENT_W,
-      align: 'left',
-    })
-  doc
-    .font('Helvetica-Bold')
-    .fontSize(9)
-    .text(`Page ${n} of ${total}`, MARGIN_X, y + 13, {
-      width: CONTENT_W,
-      align: 'right',
-    })
-}
+// === COVER ===
+function drawCover(doc, p) {
+  isolated(doc, () => {
+    // Cream background top
+    doc.rect(0, 0, PAGE.width, PAGE.height - 56).fill(C.cream)
 
-// === Render the body of a prompt at the current cursor position ===
-function renderPromptBody(doc, p) {
-  // Title
-  doc
-    .fillColor(DARK)
-    .font('Helvetica-Bold')
-    .fontSize(26)
-    .text(p.title, MARGIN_X, doc.y, { width: CONTENT_W })
-  doc.moveDown(0.3)
-
-  // Chapter source
-  if (p.chapterTitle) {
+    // Massive Anton chapter number — design element
+    const numStr = String(p.chapter).padStart(2, '0')
     doc
-      .font('Helvetica-Oblique')
-      .fontSize(11)
-      .fillColor(MID)
-      .text(`From Chapter ${p.chapter}: ${p.chapterTitle}`)
-    doc.moveDown(0.5)
-  }
-
-  // Red separator
-  doc
-    .save()
-    .moveTo(MARGIN_X, doc.y)
-    .lineTo(MARGIN_X + 80, doc.y)
-    .lineWidth(3)
-    .strokeColor(RED)
-    .stroke()
-    .restore()
-  doc.moveDown(0.8)
-
-  // Setup intro
-  if (p.setup) {
-    doc
-      .font('Helvetica-Bold')
-      .fontSize(10)
-      .fillColor(RED)
-      .text('WHY THIS MATTERS', { width: CONTENT_W })
-    doc.moveDown(0.3)
-    doc
-      .font('Helvetica')
-      .fontSize(11)
-      .fillColor(DARK)
-      .text(p.setup, { width: CONTENT_W })
-    doc.moveDown(1)
-  }
-
-  // Prompt header
-  doc
-    .font('Helvetica-Bold')
-    .fontSize(10)
-    .fillColor(RED)
-    .text('THE PROMPT', { width: CONTENT_W })
-  doc.moveDown(0.3)
-
-  // Prompt body inside a tinted box
-  if (p.prompt) {
-    const boxX = MARGIN_X
-    const startY = doc.y
-    const padY = 16
-    const padX = 18
-
-    // Render text first to measure height
-    doc
-      .font('Courier')
-      .fontSize(10)
-      .fillColor(DARK)
-      .text(p.prompt, boxX + padX, startY + padY, {
-        width: CONTENT_W - padX * 2,
+      .font('display')
+      .fontSize(360)
+      .fillColor(C.red)
+      .fillOpacity(0.13)
+      .text(numStr, -20, 60, {
+        width: 600,
+        align: 'left',
+        lineBreak: false,
+        height: 400,
       })
-    const endY = doc.y + padY
+      .fillOpacity(1)
 
-    // Draw the box behind the text. PDF order matters: we have to
-    // re-render text on top after drawing the rect.
-    // Workaround: clip the rect to NOT cover text by drawing rect first
-    // on a separate path... Actually easier: erase, draw rect, redraw text.
-    // Instead, just leave the text on top of nothing and draw a thin border.
+    // Eyebrow
     doc
-      .save()
-      .lineWidth(1)
-      .strokeColor('#D4D4D4')
-      .roundedRect(boxX, startY, CONTENT_W, endY - startY, 6)
+      .font('body')
+      .fontSize(9)
+      .fillColor(C.red)
+      .text(`${p.category.toUpperCase()}  ·  AI PROMPT  ·  ${p.chapter} OF 24`, PAGE.marginX, 100, {
+        width: PAGE.contentW,
+        characterSpacing: 1.8,
+        lineBreak: false,
+      })
+
+    doc
+      .font('display')
+      .fontSize(13)
+      .fillColor(C.charcoal)
+      .text(`PROMPT ${String(p.chapter).padStart(2, '0')}`, PAGE.marginX, 118, {
+        width: PAGE.contentW,
+        characterSpacing: 0.8,
+        lineBreak: false,
+      })
+
+    // Source chapter (ABOVE the title for prompts — gives title room to wrap)
+    if (p.chapterTitle) {
+      doc
+        .font('body')
+        .fontSize(9)
+        .fillColor(C.mid)
+        .text('FROM CHAPTER', PAGE.marginX, 250, {
+          width: PAGE.contentW,
+          characterSpacing: 1.6,
+          lineBreak: false,
+        })
+      doc
+        .font('display')
+        .fontSize(14)
+        .fillColor(C.charcoal)
+        .text(`${p.chapter}: ${p.chapterTitle}`, PAGE.marginX, 264, {
+          width: PAGE.contentW,
+          characterSpacing: 0.4,
+          height: 22,
+          ellipsis: true,
+          lineBreak: false,
+        })
+    }
+
+    // Title (allow 1-3 lines, scale with length)
+    const titleFontSize = p.title.length > 32 ? 42 : 50
+    doc
+      .font('display')
+      .fontSize(titleFontSize)
+      .fillColor(C.charcoal)
+      .text(p.title.toUpperCase(), PAGE.marginX, 300, {
+        width: PAGE.contentW,
+        lineGap: -4,
+        characterSpacing: -0.5,
+        height: 200,
+      })
+
+    // Red bar (anchored to bottom area, not relative to title)
+    doc.rect(PAGE.marginX, 530, 64, 4).fill(C.red)
+
+    // Bottom dark panel
+    const panelY = PAGE.height - 56 - 90
+    doc.rect(0, panelY, PAGE.width, 90).fill(C.charcoal)
+
+    doc
+      .font('accent')
+      .fontSize(28)
+      .fillColor(C.red)
+      .fillOpacity(0.85)
+      .text('a prompt', PAGE.marginX, panelY + 18, { width: 200, lineBreak: false })
+      .fillOpacity(1)
+
+    doc
+      .font('body')
+      .fontSize(9)
+      .fillColor('rgba(255,255,255,0.5)')
+      .text('FROM', PAGE.marginX, panelY + 18, {
+        width: PAGE.contentW, align: 'right', characterSpacing: 1.6, lineBreak: false,
+      })
+    doc
+      .font('display')
+      .fontSize(14)
+      .fillColor('#FFFFFF')
+      .text('CRAZY SIMPLE YOUTUBE', PAGE.marginX, panelY + 32, {
+        width: PAGE.contentW, align: 'right', characterSpacing: 0.8, lineBreak: false,
+      })
+    doc
+      .font('body')
+      .fontSize(9)
+      .fillColor('rgba(255,255,255,0.5)')
+      .text('BY AARON CUHA', PAGE.marginX, panelY + 52, {
+        width: PAGE.contentW, align: 'right', characterSpacing: 1.6, lineBreak: false,
+      })
+  })
+}
+
+// === BODY ===
+function drawSectionHeader(doc, num, label, isFirst) {
+  if (!isFirst) {
+    if (doc.y > PAGE.height - PAGE.marginBottom - 200) {
+      doc.addPage()
+      doc.y = PAGE.marginTop + 28
+    } else {
+      doc.moveDown(1.4)
+    }
+  }
+  const startY = doc.y
+
+  isolated(doc, () => {
+    doc
+      .font('display')
+      .fontSize(56)
+      .fillColor(C.red)
+      .text(String(num).padStart(2, '0'), PAGE.marginX, startY, {
+        width: 80, lineBreak: false, height: 70,
+      })
+  })
+  isolated(doc, () => {
+    doc
+      .font('display')
+      .fontSize(13)
+      .fillColor(C.mid)
+      .text('STEP', PAGE.marginX + 80, startY + 6, {
+        width: PAGE.contentW - 80, characterSpacing: 1.8, lineBreak: false, height: 14,
+      })
+  })
+  isolated(doc, () => {
+    doc
+      .font('display')
+      .fontSize(20)
+      .fillColor(C.charcoal)
+      .text(label.toUpperCase(), PAGE.marginX + 80, startY + 24, {
+        width: PAGE.contentW - 80, characterSpacing: -0.2, height: 50, ellipsis: true,
+      })
+  })
+
+  doc.x = PAGE.marginX
+  doc.y = startY + 80
+
+  isolated(doc, () => {
+    doc
+      .moveTo(PAGE.marginX, doc.y)
+      .lineTo(PAGE.width - PAGE.marginX, doc.y)
+      .lineWidth(0.5)
+      .strokeColor(C.hairline)
       .stroke()
-      .restore()
-    doc.moveDown(0.6)
-  }
+  })
+  doc.moveDown(0.6)
+}
 
-  // How to use
-  doc.moveDown(0.4)
+function drawPromptBox(doc, promptText) {
+  // Reserve space and draw box first
+  const boxX = PAGE.marginX
+  const boxY = doc.y
+  const padX = 18
+  const padY = 16
+
+  // Render text once to measure size, then draw box, then re-render text on top
   doc
-    .font('Helvetica-Bold')
-    .fontSize(10)
-    .fillColor(RED)
-    .text('HOW TO USE', { width: CONTENT_W })
-  doc.moveDown(0.3)
-  const howToLines = [
-    'Copy the entire prompt above.',
-    'Paste into ChatGPT, Claude, or Gemini.',
-    'Replace bracketed placeholders (like [YOUR PROFESSION]) with your real info.',
-    'Run it. Read the output. Tweak as needed.',
-  ]
-  for (const line of howToLines) {
-    const y0 = doc.y
-    doc
-      .font('Helvetica-Bold')
-      .fontSize(11)
-      .fillColor(RED)
-      .text('•', MARGIN_X, y0, { width: 12 })
-    doc
-      .font('Helvetica')
-      .fontSize(11)
-      .fillColor(DARK)
-      .text(line, MARGIN_X + 16, y0, { width: CONTENT_W - 16 })
-    doc.x = MARGIN_X
-    doc.moveDown(0.2)
-  }
-
-  // Closing note
-  if (p.closing) {
-    doc.moveDown(0.6)
-    const sY = doc.y
-    doc
-      .font('Helvetica-Oblique')
-      .fontSize(11)
-      .fillColor(MID)
-      .text(p.closing, MARGIN_X + 14, sY, { width: CONTENT_W - 14 })
-    const eY = doc.y
-    doc
-      .save()
-      .lineWidth(3)
-      .strokeColor(RED)
-      .moveTo(MARGIN_X, sY)
-      .lineTo(MARGIN_X, eY)
-      .stroke()
-      .restore()
-    doc.x = MARGIN_X
-  }
-
-  // Closing CTA
-  doc.moveDown(1)
-  const CTA_HEIGHT = 90
-  const SPACING = 14
-  const pageBottom = PAGE_H - MARGIN_BOTTOM
-  if (doc.y + SPACING + CTA_HEIGHT > pageBottom) {
-    doc.addPage()
-  } else {
-    doc.moveDown(1)
-  }
-
-  const ctaY = doc.y
-  doc
-    .save()
-    .fillOpacity(0.06)
-    .rect(MARGIN_X, ctaY, CONTENT_W, 80)
-    .fill(RED)
-    .restore()
-  doc
-    .fillOpacity(1)
-    .fillColor(RED)
-    .font('Helvetica-Bold')
-    .fontSize(13)
-    .text('WANT THE OTHER 23?', MARGIN_X + 18, ctaY + 14, {
-      width: CONTENT_W - 36,
+    .font('body')
+    .fontSize(10.5)
+    .fillColor(C.charcoal)
+    .text(promptText, boxX + padX, boxY + padY, {
+      width: PAGE.contentW - padX * 2,
+      lineGap: 4,
     })
+
+  const endY = doc.y + padY
+
+  // Now draw the box behind (using a saved layer)
+  isolated(doc, () => {
+    doc
+      .roundedRect(boxX, boxY, PAGE.contentW, endY - boxY, 8)
+      .fillColor(C.creamDeep)
+      .fillOpacity(0.4)
+      .fill()
+      .fillOpacity(1)
+
+    // Left red accent
+    doc
+      .rect(boxX, boxY, 4, endY - boxY)
+      .fill(C.red)
+  })
+
+  // Re-render text on top so box doesn't cover it
   doc
-    .fillColor(DARK)
-    .font('Helvetica')
-    .fontSize(11)
-    .text(
-      'All 24 AI prompts from the book, free, copy-paste ready:',
-      MARGIN_X + 18,
-      ctaY + 35,
-      { width: CONTENT_W - 36 }
-    )
-  doc
-    .fillColor(RED)
-    .font('Helvetica-Bold')
-    .fontSize(12)
-    .text('crazysimpleyoutube.com/prompts', MARGIN_X + 18, ctaY + 56, {
-      width: CONTENT_W - 36,
+    .font('body')
+    .fontSize(10.5)
+    .fillColor(C.charcoal)
+    .text(promptText, boxX + padX, boxY + padY, {
+      width: PAGE.contentW - padX * 2,
+      lineGap: 4,
     })
+
+  doc.x = PAGE.marginX
+  doc.y = endY + 8
 }
 
 async function generateOnePrompt(p) {
@@ -319,63 +314,228 @@ async function generateOnePrompt(p) {
   const doc = new PDFDocument({
     size: 'LETTER',
     margins: {
-      top: MARGIN_TOP,
-      bottom: MARGIN_BOTTOM,
-      left: MARGIN_X,
-      right: MARGIN_X,
+      top: PAGE.marginTop,
+      bottom: PAGE.marginBottom,
+      left: PAGE.marginX,
+      right: PAGE.marginX,
     },
     info: {
-      Title: `${p.title} | AI Prompt | Crazy Simple YouTube`,
+      Title: `${p.title} — AI Prompt — Crazy Simple YouTube`,
       Author: 'Aaron Cuha',
       Subject: 'AI prompt from Crazy Simple YouTube',
       Keywords: `youtube, ai prompt, ${p.category.toLowerCase()}`,
     },
     bufferPages: true,
+    autoFirstPage: false,
   })
+  registerFonts(doc)
 
   const stream = fs.createWriteStream(outPath)
   doc.pipe(stream)
 
-  doc.x = MARGIN_X
-  doc.y = MARGIN_TOP
+  // Cover
+  doc.addPage()
+  drawCover(doc, p)
 
-  renderPromptBody(doc, p)
+  // Body page
+  doc.addPage()
+  doc.x = PAGE.marginX
+  doc.y = PAGE.marginTop + 28
 
-  // Header + footer on every page
+  // Section 1: Why this matters (the setup)
+  if (p.setup) {
+    drawSectionHeader(doc, 1, 'Why this matters', true)
+    doc
+      .font('body')
+      .fontSize(11.5)
+      .fillColor(C.body)
+      .text(p.setup, { width: PAGE.contentW, lineGap: 5 })
+  }
+
+  // Section 2: The prompt
+  drawSectionHeader(doc, 2, 'The prompt', !p.setup)
+  drawPromptBox(doc, p.prompt)
+
+  // Section 3: How to use
+  drawSectionHeader(doc, 3, 'How to use', false)
+  const howTo = [
+    'Copy the entire prompt above.',
+    'Paste into ChatGPT, Claude, or Gemini.',
+    'Replace the bracketed placeholders with your real info.',
+    'Run it. Read the output. Iterate as needed.',
+  ]
+  for (const h of howTo) {
+    const startY = doc.y
+    isolated(doc, () => {
+      doc
+        .font('display')
+        .fontSize(11)
+        .fillColor(C.red)
+        .text('—', PAGE.marginX, startY + 1, { width: 16, lineBreak: false, height: 14 })
+    })
+    doc
+      .font('body')
+      .fontSize(11)
+      .fillColor(C.body)
+      .text(h, PAGE.marginX + 20, startY, { width: PAGE.contentW - 20, lineGap: 4 })
+    doc.x = PAGE.marginX
+    doc.moveDown(0.3)
+  }
+
+  // Section 4: Closing note (if any)
+  if (p.closing) {
+    drawSectionHeader(doc, 4, "Aaron's note", false)
+    const startY = doc.y
+    isolated(doc, () => {
+      doc
+        .font('display')
+        .fontSize(64)
+        .fillColor(C.red)
+        .fillOpacity(0.4)
+        .text("'", PAGE.marginX - 4, startY - 14, {
+          width: 40, lineBreak: false, height: 50,
+        })
+        .fillOpacity(1)
+    })
+    doc
+      .font('body')
+      .fontSize(13)
+      .fillColor(C.charcoal)
+      .text(p.closing, PAGE.marginX + 36, startY, {
+        width: PAGE.contentW - 46,
+        lineGap: 4,
+        oblique: 8,
+      })
+    doc.x = PAGE.marginX
+    doc.moveDown(0.6)
+  }
+
+  // CTA
+  if (doc.y + 24 + 100 > PAGE.height - PAGE.marginBottom - 28) {
+    doc.addPage()
+    doc.y = PAGE.marginTop + 28
+  } else {
+    doc.moveDown(1.5)
+  }
+  const ctaY = doc.y
+  isolated(doc, () => {
+    doc.rect(PAGE.marginX, ctaY, PAGE.contentW, 100).fill(C.charcoal)
+    doc.rect(PAGE.marginX, ctaY, 4, 100).fill(C.red)
+    doc
+      .font('accent')
+      .fontSize(20)
+      .fillColor('#FFFFFF')
+      .fillOpacity(0.65)
+      .text('want them all?', PAGE.marginX + 22, ctaY + 16, {
+        width: 200, lineBreak: false, height: 24,
+      })
+      .fillOpacity(1)
+    doc
+      .font('display')
+      .fontSize(20)
+      .fillColor('#FFFFFF')
+      .text('GET ALL 24 PROMPTS, FREE.', PAGE.marginX + 22, ctaY + 38, {
+        width: PAGE.contentW - 32, characterSpacing: 0.4, lineBreak: false, height: 22,
+      })
+    doc
+      .font('body')
+      .fontSize(10)
+      .fillColor('rgba(255,255,255,0.65)')
+      .text('Every AI prompt from the book, copy-paste ready.', PAGE.marginX + 22, ctaY + 62, {
+        width: PAGE.contentW - 32, lineBreak: false, height: 14,
+      })
+    doc
+      .font('display')
+      .fontSize(11)
+      .fillColor(C.red)
+      .text('CRAZYSIMPLEYOUTUBE.COM/PROMPTS', PAGE.marginX + 22, ctaY + 80, {
+        width: PAGE.contentW - 32, characterSpacing: 1.2, lineBreak: false, height: 14,
+      })
+  })
+  doc.y = ctaY + 110
+  doc.x = PAGE.marginX
+
+  // Snapshot real page count and apply chrome inline
   const range = doc.bufferedPageRange()
-  const total = range.count
-  for (let i = range.start; i < range.start + total; i++) {
+  const realCount = range.count
+  for (let i = range.start; i < range.start + realCount; i++) {
     doc.switchToPage(i)
-    drawHeader(doc, p)
-    drawFooter(doc, i + 1, total)
+    isolated(doc, () => {
+      const isCover = i === 0
+      if (!isCover) {
+        const y = PAGE.marginTop - 30
+        doc
+          .moveTo(PAGE.marginX, y + 14)
+          .lineTo(PAGE.width - PAGE.marginX, y + 14)
+          .lineWidth(0.5)
+          .strokeColor(C.hairline)
+          .stroke()
+        doc
+          .font('body').fontSize(8).fillColor(C.red)
+          .text(`PROMPT ${p.chapter} OF 24`, PAGE.marginX, y, {
+            width: PAGE.contentW, align: 'left', characterSpacing: 1.6, lineBreak: false,
+          })
+        doc
+          .font('display').fontSize(10).fillColor(C.charcoal)
+          .text(p.title.toUpperCase(), PAGE.marginX, y, {
+            width: PAGE.contentW, align: 'center', characterSpacing: 0.8, lineBreak: false,
+          })
+        doc
+          .font('body').fontSize(8).fillColor(C.mid)
+          .text(`PAGE ${i + 1}`, PAGE.marginX, y, {
+            width: PAGE.contentW, align: 'right', characterSpacing: 1.6, lineBreak: false,
+          })
+      }
+      const fy = PAGE.height - 36
+      doc
+        .moveTo(PAGE.marginX, fy - 4)
+        .lineTo(PAGE.width - PAGE.marginX, fy - 4)
+        .lineWidth(0.5)
+        .strokeColor(C.hairline)
+        .stroke()
+      doc
+        .font('display').fontSize(11).fillColor(C.charcoal)
+        .text('CRAZY SIMPLE YOUTUBE', PAGE.marginX, fy, {
+          width: PAGE.contentW, align: 'left', characterSpacing: 1.2, lineBreak: false,
+        })
+      doc
+        .font('body').fontSize(8).fillColor(C.mid)
+        .text('CRAZYSIMPLEYOUTUBE.COM/PROMPTS', PAGE.marginX, fy + 1, {
+          width: PAGE.contentW, align: 'right', characterSpacing: 1.6, lineBreak: false,
+        })
+    })
   }
 
   doc.end()
 
   return new Promise((resolve) => {
-    stream.on('finish', () => {
+    stream.on('finish', async () => {
+      try {
+        const raw = fs.readFileSync(outPath)
+        const trimmed = await trimTrailing(raw, realCount)
+        if (trimmed.length !== raw.length) fs.writeFileSync(outPath, trimmed)
+      } catch {}
       const sz = fs.statSync(outPath).size
-      resolve({ slug: p.slug, sizeKB: Math.round(sz / 1024), pages: total })
+      resolve({ slug: p.slug, sizeKB: Math.round(sz / 1024) })
     })
   })
 }
 
 async function main() {
-  console.log('Generating individual prompt PDFs...')
+  console.log('Generating individual prompt PDFs (editorial design)...')
   const results = []
   for (const p of prompts) {
     const r = await generateOnePrompt(p)
     results.push(r)
-    console.log(`  ✓ ${r.slug}.pdf (${r.pages}pp, ${r.sizeKB} KB)`)
+    console.log(`  ✓ ${r.slug}.pdf (${r.sizeKB} KB)`)
   }
 
-  // Bundle: stitch all 24 individual PDFs into one master file
-  console.log('\nBuilding bundle PDF...')
+  // Bundle
+  console.log('\nBuilding prompts bundle PDF...')
   const bundle = await PDFLibDocument.create()
   bundle.setTitle('Crazy Simple YouTube — All 24 AI Prompts')
   bundle.setAuthor('Aaron Cuha')
   bundle.setSubject('Companion AI prompts to Crazy Simple YouTube')
-
   for (const r of results) {
     const buf = fs.readFileSync(path.join(OUT_DIR, `${r.slug}.pdf`))
     const src = await PDFLibDocument.load(buf)

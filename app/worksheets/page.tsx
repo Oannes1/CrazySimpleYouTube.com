@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import LeadCaptureForm from '@/components/LeadCaptureForm'
+import EmailGate from '@/components/EmailGate'
 import {
   worksheets,
   type WorksheetPart,
@@ -131,17 +132,25 @@ export default function WorksheetsPage() {
                           Case study: {w.caseStudyPerson}
                         </p>
                       )}
-                      <a
-                        href={worksheetPdfUrl(w)}
-                        target="_blank"
-                        rel="noopener"
-                        className="mt-4 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg border border-brand-red/30 text-brand-red hover:bg-brand-red/[0.06] hover:border-brand-red/50 font-body font-semibold text-xs transition-colors"
-                      >
-                        Download PDF
-                        <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                        </svg>
-                      </a>
+                      <div className="mt-4">
+                        <EmailGate
+                          pdfUrl={worksheetPdfUrl(w)}
+                          tags={['src_worksheets', `dl_worksheet_${w.slug}`]}
+                          listIds={[29]}
+                          assetName={`${w.title} (Chapter ${w.chapter} worksheet)`}
+                          assetType="worksheet"
+                        >
+                          <button
+                            type="button"
+                            className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg border border-brand-red/30 text-brand-red hover:bg-brand-red/[0.06] hover:border-brand-red/50 font-body font-semibold text-xs transition-colors"
+                          >
+                            Download PDF
+                            <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                          </button>
+                        </EmailGate>
+                      </div>
                     </div>
                   ))}
                 </div>
