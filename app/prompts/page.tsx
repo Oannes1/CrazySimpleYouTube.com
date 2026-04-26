@@ -91,6 +91,7 @@ export default function PromptsPage() {
             <div className="mt-6">
               <LeadCaptureForm
                 tags={['src_prompts', 'dl_prompts_bundle']}
+                listIds={[30]}
                 ctaLabel="Send Me the Bundle"
                 successHeading="Bundle on the way."
                 successText="Check your inbox in the next 5 minutes."

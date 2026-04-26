@@ -42,6 +42,7 @@ export default function DiscoveryCallForm() {
             `industry_${businessType.toLowerCase().replace(/\s+/g, '_')}`,
             `stage_${youtubeStage.toLowerCase().replace(/\s+/g, '_')}`,
           ],
+          listIds: [28],
           attributes: {
             INDUSTRY: businessType,
             YOUTUBE_STAGE: youtubeStage,

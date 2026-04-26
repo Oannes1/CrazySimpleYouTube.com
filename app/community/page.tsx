@@ -160,6 +160,7 @@ export default function CommunityPage() {
             <div className="mt-6 max-w-md">
               <LeadCaptureForm
                 tags={['src_community', 'community_waitlist', 'book_owner_unverified']}
+                listIds={[25]}
                 ctaLabel="Claim My 3 Months Free"
                 successHeading="On the list."
                 successText="We'll email you the day the community opens with your invite link."

@@ -52,6 +52,9 @@ export const metadata: Metadata = {
     images: ['/book-cover.jpg'],
   },
   metadataBase: new URL('https://crazysimpleyoutube.com'),
+  verification: {
+    google: 'qUJHiBeSQg8x11jCZWa_wPnPqtr0_ITa9vXGFVD5XjM',
+  },
 }
 
 export default function RootLayout({

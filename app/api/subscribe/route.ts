@@ -7,10 +7,13 @@ const BREVO_API_KEY = process.env.BREVO_API_KEY
  * Add new list IDs after creating them in Brevo.
  */
 const LISTS = {
-  COMPANION_KIT: 21, // existing master list, all free downloaders
-  // BOOK_OWNER: 22,
-  // COMMUNITY_WAITLIST: 23,
-  // BOOK2_WAITLIST: 24,
+  COMPANION_KIT: 21,           // master list — all free downloaders
+  COMMUNITY_WAITLIST: 25,      // Systems Over Hustle pre-launch
+  SET_IN_STONE_WAITLIST: 26,   // Book 2 launch list
+  BOOK_OWNER_VERIFIED: 27,     // confirmed book buyers
+  DISCOVERY_CALL: 28,          // /work-with-me leads
+  WORKSHEETS_BUNDLE: 29,       // /worksheets downloaders
+  PROMPTS_BUNDLE: 30,          // /prompts downloaders
 } as const
 
 /**
