@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import type { GearProduct } from '@/lib/gear-data'
+import { amazonLink } from '@/lib/amazon'
 
 const tierLabels: Record<GearProduct['tier'], { label: string; cls: string }> = {
   starter: {
@@ -41,7 +42,18 @@ function trackClick(slug: string, brand: string) {
 export default function GearCard({ product }: { product: GearProduct }) {
   const tierInfo = tierLabels[product.tier]
   const hasImage = product.imagePath !== ''
-  const hasAmazon = !!product.amazonUrl
+  // Every product gets an Amazon link — either the explicit URL or
+  // an Amazon search URL with the associates tag attached.
+  // Smartphones (camera tier 'starter' with brand Apple/Samsung) skip
+  // since "buying a smartphone" via affiliate isn't useful.
+  const isSmartphone = product.brand === 'Apple/Samsung'
+  const amzUrl = isSmartphone
+    ? null
+    : amazonLink({
+        amazonUrl: product.amazonUrl,
+        brand: product.brand,
+        name: product.name,
+      })
 
   return (
     <div className="rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-brand-red/15 transition-colors overflow-hidden flex flex-col">
@@ -130,16 +142,21 @@ export default function GearCard({ product }: { product: GearProduct }) {
           </p>
         )}
 
-        {/* Buy buttons */}
-        {hasAmazon && (
+        {/* Buy button (skipped only for smartphones since "buy your phone" isn't useful) */}
+        {amzUrl && (
           <a
-            href={product.amazonUrl}
+            href={amzUrl}
             target="_blank"
             rel="sponsored noopener noreferrer"
             onClick={() => trackClick(product.slug, product.brand)}
-            className="mt-4 block w-full text-center py-3 rounded-lg bg-brand-red text-white font-body font-bold text-sm hover:bg-brand-red-light transition-colors"
+            className="mt-4 block w-full text-center py-3 rounded-lg bg-brand-red text-white font-body font-bold text-sm hover:bg-brand-red-light transition-colors group"
           >
-            Buy on Amazon
+            <span className="inline-flex items-center justify-center gap-1.5">
+              View on Amazon
+              <svg className="w-3 h-3 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </span>
           </a>
         )}
       </div>

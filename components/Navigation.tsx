@@ -34,30 +34,36 @@ export default function Navigation() {
           </a>
 
           {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-7">
             <a
-              href="#inside"
+              href="/resources"
               className="text-brand-cream/50 hover:text-brand-cream transition-colors font-body text-[0.85rem]"
             >
-              What&apos;s Inside
+              Resources
             </a>
             <a
-              href="#testimonials"
+              href="/prompts"
               className="text-brand-cream/50 hover:text-brand-cream transition-colors font-body text-[0.85rem]"
             >
-              Testimonials
+              Prompts
+            </a>
+            <a
+              href="/worksheets"
+              className="text-brand-cream/50 hover:text-brand-cream transition-colors font-body text-[0.85rem]"
+            >
+              Worksheets
+            </a>
+            <a
+              href="/gear"
+              className="text-brand-cream/50 hover:text-brand-cream transition-colors font-body text-[0.85rem]"
+            >
+              Gear
             </a>
             <a
               href="/work-with-me"
               className="text-brand-cream/50 hover:text-brand-cream transition-colors font-body text-[0.85rem]"
             >
               Work With Aaron
-            </a>
-            <a
-              href="#author"
-              className="text-brand-cream/50 hover:text-brand-cream transition-colors font-body text-[0.85rem]"
-            >
-              About
             </a>
             <a
               href={AMAZON_LINK}
@@ -97,10 +103,12 @@ export default function Navigation() {
             >
               <div className="px-6 py-8 flex flex-col gap-5">
                 {[
-                  { label: "What's Inside", href: '#inside' },
-                  { label: 'Testimonials', href: '#testimonials' },
+                  { label: 'Resources', href: '/resources' },
+                  { label: 'Prompts', href: '/prompts' },
+                  { label: 'Worksheets', href: '/worksheets' },
+                  { label: 'Gear', href: '/gear' },
+                  { label: 'Community', href: '/community' },
                   { label: 'Work With Aaron', href: '/work-with-me' },
-                  { label: 'About', href: '#author' },
                 ].map((link) => (
                   <a
                     key={link.href}
