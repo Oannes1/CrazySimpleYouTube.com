@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { prompts } from '@/lib/prompts-data'
+import { kits } from '@/lib/kits-data'
 
 const SITE = 'https://crazysimpleyoutube.com'
 
@@ -9,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     { url: `${SITE}/`, lastModified: now, changeFrequency: 'weekly', priority: 1.0 },
     { url: `${SITE}/resources`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${SITE}/kits`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${SITE}/prompts`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${SITE}/worksheets`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${SITE}/gear`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
@@ -27,5 +29,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
-  return [...staticPages, ...promptPages]
+  const kitPages: MetadataRoute.Sitemap = kits.map((k) => ({
+    url: `${SITE}/kits/${k.slug}`,
+    lastModified: now,
+    changeFrequency: 'weekly' as const,
+    priority: 0.85,
+  }))
+
+  return [...staticPages, ...promptPages, ...kitPages]
 }

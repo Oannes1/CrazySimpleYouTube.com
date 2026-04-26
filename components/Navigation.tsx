@@ -54,6 +54,12 @@ export default function Navigation() {
               Worksheets
             </a>
             <a
+              href="/kits"
+              className="text-brand-cream/50 hover:text-brand-cream transition-colors font-body text-[0.85rem]"
+            >
+              Kits
+            </a>
+            <a
               href="/gear"
               className="text-brand-cream/50 hover:text-brand-cream transition-colors font-body text-[0.85rem]"
             >
@@ -106,6 +112,7 @@ export default function Navigation() {
                   { label: 'Resources', href: '/resources' },
                   { label: 'Prompts', href: '/prompts' },
                   { label: 'Worksheets', href: '/worksheets' },
+                  { label: 'Kits', href: '/kits' },
                   { label: 'Gear', href: '/gear' },
                   { label: 'Community', href: '/community' },
                   { label: 'Work With Aaron', href: '/work-with-me' },

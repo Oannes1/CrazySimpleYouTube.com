@@ -105,121 +105,38 @@ export default function GearPage() {
           </div>
         </section>
 
-        {/* Curated Kits — Aaron's complete pre-built shopping lists */}
-        <section className="relative max-w-6xl mx-auto px-5 sm:px-8 mb-20">
-          <div className="text-center mb-10">
-            <span className="font-accent text-2xl text-brand-red/90">just buy the whole kit</span>
-            <h2 className="mt-1 font-display text-3xl sm:text-4xl lg:text-5xl font-normal uppercase text-brand-cream">
-              Aaron&apos;s Curated <span className="text-brand-red">Shopping Lists</span>
-            </h2>
-            <p className="mt-4 font-body text-brand-cream/55 max-w-2xl mx-auto leading-relaxed">
-              Done deciding? Aaron&apos;s built two complete shopping lists on
-              his Amazon storefront. Every product hand-picked, tested, and
-              ready to buy in one click.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-5">
-            {/* YouTube Starter Kit */}
-            <a
-              href="https://www.amazon.com/shop/earth.magazine/list/34BYBXHTOLXZ2"
-              target="_blank"
-              rel="sponsored noopener noreferrer"
-              className="group relative rounded-2xl bg-gradient-to-br from-brand-red/[0.18] to-brand-red/[0.04] border border-brand-red/20 hover:border-brand-red/45 p-7 sm:p-8 transition-all overflow-hidden"
+        {/* Curated Kits hub link */}
+        <section className="relative max-w-5xl mx-auto px-5 sm:px-8 mb-16">
+          <a
+            href="/kits"
+            className="block rounded-2xl bg-gradient-to-br from-brand-red/[0.14] to-brand-red/[0.02] border border-brand-red/25 hover:border-brand-red/45 p-7 sm:p-9 transition-all group overflow-hidden relative"
+          >
+            <div
+              aria-hidden="true"
+              className="absolute -top-6 -right-6 font-display text-[10rem] leading-none text-brand-red/[0.08] select-none pointer-events-none"
             >
-              {/* Big watermark numeral */}
-              <div
-                aria-hidden="true"
-                className="absolute -top-6 -right-6 font-display text-[10rem] leading-none text-brand-red/[0.08] select-none pointer-events-none"
-              >
-                01
-              </div>
-
-              <div className="relative">
-                <div className="font-body text-[0.7rem] tracking-[0.25em] uppercase text-brand-red font-bold">
-                  Kit 01 · Most Popular
-                </div>
-                <h3 className="mt-3 font-display text-2xl sm:text-3xl font-normal uppercase text-brand-cream leading-[0.95]">
-                  YouTube Starter Kit
-                </h3>
-                <p className="mt-4 font-body text-sm text-brand-cream/65 leading-relaxed">
-                  Camera, microphone, lighting, tripod, accessories. Everything
-                  you need to film your first 30 videos at a quality level your
-                  audience will respect.
+              5
+            </div>
+            <div className="relative grid md:grid-cols-[1fr_auto] gap-5 items-center">
+              <div>
+                <span className="font-accent text-xl text-brand-red/85">don&apos;t want to read 65 product cards?</span>
+                <h2 className="mt-1 font-display text-3xl sm:text-4xl font-normal uppercase text-brand-cream leading-[0.95]">
+                  See the 5 Curated Kits Instead
+                </h2>
+                <p className="mt-3 font-body text-brand-cream/65 leading-relaxed max-w-2xl">
+                  Hand-picked combinations for every stage and use case. Starter,
+                  Growth, Pro Studio, Mobile Creator, Podcast. Aaron picks the
+                  products. You hit Buy.
                 </p>
-
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {['Camera', 'Mic', 'Lighting', 'Tripod', 'SD Storage'].map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/[0.06] font-body text-[0.65rem] text-brand-cream/55"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="mt-6 inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-brand-red text-white font-body font-bold text-sm group-hover:bg-brand-red-light transition-colors shadow-lg shadow-brand-red/20">
-                  Shop the Kit on Amazon
-                  <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </div>
               </div>
-            </a>
-
-            {/* Podcast Kit */}
-            <a
-              href="https://www.amazon.com/shop/earth.magazine/list/14QTZEVL6Y4BP"
-              target="_blank"
-              rel="sponsored noopener noreferrer"
-              className="group relative rounded-2xl bg-white/[0.025] border border-white/[0.08] hover:border-brand-red/30 p-7 sm:p-8 transition-all overflow-hidden"
-            >
-              <div
-                aria-hidden="true"
-                className="absolute -top-6 -right-6 font-display text-[10rem] leading-none text-brand-cream/[0.04] select-none pointer-events-none"
-              >
-                02
+              <div className="inline-flex items-center gap-2 px-7 py-4 rounded-xl bg-brand-red text-white font-body font-bold text-base group-hover:bg-brand-red-light transition-colors whitespace-nowrap">
+                See Kits
+                <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
               </div>
-
-              <div className="relative">
-                <div className="font-body text-[0.7rem] tracking-[0.25em] uppercase text-brand-red font-bold">
-                  Kit 02 · For Audio Creators
-                </div>
-                <h3 className="mt-3 font-display text-2xl sm:text-3xl font-normal uppercase text-brand-cream leading-[0.95]">
-                  Podcast Kit
-                </h3>
-                <p className="mt-4 font-body text-sm text-brand-cream/65 leading-relaxed">
-                  Studio-quality audio without the studio price tag.
-                  Microphones, interfaces, headphones, and acoustic treatment
-                  Aaron has tested for podcasts and remote recording.
-                </p>
-
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {['XLR Mic', 'Interface', 'Headphones', 'Stand', 'Treatment'].map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/[0.06] font-body text-[0.65rem] text-brand-cream/55"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="mt-6 inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-brand-red/40 text-brand-red font-body font-bold text-sm hover:bg-brand-red/10 transition-colors">
-                  Shop the Kit on Amazon
-                  <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          <p className="mt-6 text-center font-body text-xs text-brand-cream/35">
-            Both kits link to Aaron&apos;s Amazon Influencer storefront. Every
-            click and purchase supports the free resources on this site.
-          </p>
+            </div>
+          </a>
         </section>
 
         {/* Aaron's Setup featured */}
