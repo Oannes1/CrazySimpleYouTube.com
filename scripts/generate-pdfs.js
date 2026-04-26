@@ -1,28 +1,39 @@
 /**
- * Generate 24 worksheet PDFs + a bundle PDF.
+ * Generate 24 individual worksheet PDFs.
  *
- * Reads scripts/worksheets-content.json (parsed from WORKSHEETS_LIBRARY.md)
- * Outputs to public/pdfs/worksheets/
+ * Reads scripts/worksheets-content.json (parsed from WORKSHEETS_LIBRARY.md).
+ * Outputs to public/pdfs/worksheets/[slug].pdf
+ *
+ * Layout (US Letter, 1" margins):
+ *   - Top of every page: brand red header bar (chapter/title/page number)
+ *   - Body content flows in standard pdfkit text engine
+ *   - Bottom of every page: dark footer bar (site name + URL)
+ *   - Page 1 has an additional hero block above the body
+ *   - End of body: red callout inviting community participation
  */
 const fs = require('fs')
 const path = require('path')
 const PDFDocument = require('pdfkit')
-const { PDFDocument: PDFLibDocument } = require('pdf-lib')
 
 const CONTENT_FILE = path.join(__dirname, 'worksheets-content.json')
 const OUT_DIR = path.join(__dirname, '..', 'public', 'pdfs', 'worksheets')
 
-// Brand colors (per intake guidelines: Arial, brand red, dark)
 const RED = '#C41230'
 const DARK = '#1A1A2E'
-const LIGHT_GRAY = '#666666'
-const BG = '#FFFFFF'
+const MID = '#666666'
+const LIGHT = '#999999'
+
+const PAGE_W = 612
+const PAGE_H = 792
+const MARGIN_X = 72
+const MARGIN_TOP = 110 // leaves room for 56px red header bar + 14px gap
+const MARGIN_BOTTOM = 96 // leaves room for 36px footer bar + 60px gap
+const CONTENT_W = PAGE_W - MARGIN_X * 2
 
 if (!fs.existsSync(OUT_DIR)) fs.mkdirSync(OUT_DIR, { recursive: true })
 
 const worksheets = JSON.parse(fs.readFileSync(CONTENT_FILE, 'utf8'))
 
-// Helper: slug from chapter+title
 function slug(chapter, title) {
   const t = title
     .toLowerCase()
@@ -31,294 +42,357 @@ function slug(chapter, title) {
   return `${String(chapter).padStart(2, '0')}-${t}`
 }
 
-// Helper: convert markdown-ish source to lines we can render
-function bodyToLines(body) {
-  const lines = []
-  const rawLines = body.split('\n')
-
-  for (const line of rawLines) {
-    const trimmed = line.trim()
-    if (!trimmed) {
-      lines.push({ type: 'spacer' })
-      continue
-    }
-
-    // Markdown table — skip for now (just render header line)
-    if (trimmed.startsWith('|')) {
-      lines.push({ type: 'fillable-line' })
-      continue
-    }
-
-    // Bullet
-    if (/^[-*]\s+/.test(trimmed)) {
-      const text = trimmed.replace(/^[-*]\s+/, '')
-      lines.push({ type: 'bullet', text })
-      continue
-    }
-
-    // Checkbox: "☐ ..."
-    if (trimmed.startsWith('☐') || /^\[\s\]/.test(trimmed)) {
-      const text = trimmed.replace(/^☐\s*/, '').replace(/^\[\s\]\s*/, '')
-      lines.push({ type: 'checkbox', text })
-      continue
-    }
-
-    // Numbered list
-    if (/^\d+\.\s+/.test(trimmed)) {
-      const text = trimmed.replace(/^\d+\.\s+/, '')
-      lines.push({ type: 'numbered', text })
-      continue
-    }
-
-    // Block quote
-    if (trimmed.startsWith('>')) {
-      lines.push({ type: 'quote', text: trimmed.replace(/^>\s*/, '') })
-      continue
-    }
-
-    // Sub-header (bold)
-    if (trimmed.startsWith('**') && trimmed.endsWith('**')) {
-      lines.push({ type: 'subhead', text: trimmed.replace(/\*\*/g, '') })
-      continue
-    }
-
-    lines.push({ type: 'paragraph', text: trimmed })
-  }
-
-  return lines
-}
-
-// Strip markdown formatting from text content for clean PDF rendering
 function clean(text) {
   return text
-    .replace(/\*\*(.+?)\*\*/g, '$1') // bold
-    .replace(/\*(.+?)\*/g, '$1') // italic
-    .replace(/`(.+?)`/g, '$1') // code
-    .replace(/\[(.+?)\]\(.+?\)/g, '$1') // links
+    .replace(/\*\*(.+?)\*\*/g, '$1')
+    .replace(/\*(.+?)\*/g, '$1')
+    .replace(/`(.+?)`/g, '$1')
+    .replace(/\[(.+?)\]\(.+?\)/g, '$1')
     .trim()
 }
 
-// Generate one worksheet PDF
-function generateWorksheet(ws) {
+function bodyToLines(body) {
+  const out = []
+  const lines = body.split('\n')
+  for (const raw of lines) {
+    const line = raw.trim()
+    if (!line) {
+      out.push({ type: 'spacer' })
+      continue
+    }
+    if (line.match(/^\|.*-+/)) continue
+    if (line.startsWith('|')) {
+      const cells = line
+        .split('|')
+        .slice(1, -1)
+        .map((c) => c.trim())
+      out.push({ type: 'table', cells })
+      continue
+    }
+    if (line.startsWith('☐') || /^\[\s\]/.test(line)) {
+      out.push({
+        type: 'checkbox',
+        text: line.replace(/^☐\s*/, '').replace(/^\[\s\]\s*/, ''),
+      })
+      continue
+    }
+    if (/^[-*]\s+/.test(line)) {
+      out.push({ type: 'bullet', text: line.replace(/^[-*]\s+/, '') })
+      continue
+    }
+    if (/^\d+\.\s+/.test(line)) {
+      out.push({ type: 'numbered', text: line.replace(/^\d+\.\s+/, '') })
+      continue
+    }
+    if (line.startsWith('>')) {
+      out.push({ type: 'quote', text: line.replace(/^>\s*/, '') })
+      continue
+    }
+    if (line.startsWith('**') && line.endsWith('**') && line.length > 4) {
+      out.push({ type: 'subhead', text: line.replace(/\*\*/g, '') })
+      continue
+    }
+    out.push({ type: 'paragraph', text: line })
+  }
+  return out
+}
+
+function drawHeaderBar(doc, ws, isCover) {
+  doc.save().rect(0, 0, PAGE_W, 56).fill(RED).restore()
+  doc
+    .fillColor('#FFFFFF')
+    .font('Helvetica-Bold')
+    .fontSize(11)
+    .text(`CHAPTER ${ws.chapter}`, MARGIN_X, 16)
+    .fontSize(9)
+    .font('Helvetica')
+    .text('A CRAZY SIMPLE ACTION', MARGIN_X, 33)
+  // Right-aligned site name
+  doc
+    .font('Helvetica-Bold')
+    .fontSize(11)
+    .text('CRAZYSIMPLEYOUTUBE.COM', MARGIN_X, 24, {
+      width: CONTENT_W,
+      align: 'right',
+    })
+}
+
+function drawFooterBar(doc, pageNum, totalPages) {
+  const y = PAGE_H - 36
+  doc.save().rect(0, y, PAGE_W, 36).fill(DARK).restore()
+  doc
+    .fillColor('#FFFFFF')
+    .font('Helvetica')
+    .fontSize(9)
+    .text('© 2026 Aaron Cuha · Crazy Simple YouTube', MARGIN_X, y + 13, {
+      width: CONTENT_W,
+      align: 'left',
+    })
+  doc
+    .font('Helvetica-Bold')
+    .fontSize(9)
+    .text(`Page ${pageNum} of ${totalPages}`, MARGIN_X, y + 13, {
+      width: CONTENT_W,
+      align: 'right',
+    })
+}
+
+async function generateWorksheet(ws) {
   const filename = `${slug(ws.chapter, ws.title)}.pdf`
   const outPath = path.join(OUT_DIR, filename)
 
   const doc = new PDFDocument({
     size: 'LETTER',
-    margins: { top: 72, bottom: 72, left: 72, right: 72 },
+    margins: {
+      top: MARGIN_TOP,
+      bottom: MARGIN_BOTTOM,
+      left: MARGIN_X,
+      right: MARGIN_X,
+    },
     info: {
       Title: `Chapter ${ws.chapter}: ${ws.title} | Crazy Simple YouTube`,
       Author: 'Aaron Cuha',
       Subject: 'A Crazy Simple Action worksheet',
       Keywords: 'youtube, business, lead generation, worksheet',
     },
+    bufferPages: true,
   })
 
   const stream = fs.createWriteStream(outPath)
   doc.pipe(stream)
 
-  // === Cover Page ===
-  // Red header bar
+  // ========== PAGE 1: Cover hero before body ==========
+  // Title block (under the header bar)
+  doc.fillColor(DARK)
+  doc
+    .font('Helvetica-Bold')
+    .fontSize(28)
+    .text(ws.title, MARGIN_X, MARGIN_TOP, { width: CONTENT_W })
+  doc.moveDown(0.4)
+
+  let metaText = `Time to complete: ${ws.time}`
+  if (ws.person && ws.person !== 'N/A' && ws.person !== '') {
+    metaText += `   ·   Case study: ${ws.person}`
+  }
+  doc
+    .font('Helvetica')
+    .fontSize(11)
+    .fillColor(MID)
+    .text(metaText)
+  doc.moveDown(0.6)
+
+  // Red separator
   doc
     .save()
-    .rect(0, 0, 612, 100)
-    .fill(RED)
-    .fontSize(11)
-    .fillColor('#FFFFFF')
-    .font('Helvetica-Bold')
-    .text(`CHAPTER ${ws.chapter}`, 72, 30, { width: 468 })
-    .fontSize(10)
-    .font('Helvetica')
-    .text('A CRAZY SIMPLE ACTION', 72, 50)
-    .restore()
-
-  // Title
-  doc
-    .moveDown(2)
-    .fontSize(28)
-    .fillColor(DARK)
-    .font('Helvetica-Bold')
-    .text(ws.title, 72, 140, { width: 468 })
-
-  // Time + person
-  doc.moveDown(0.5)
-  doc.fontSize(11).font('Helvetica').fillColor(LIGHT_GRAY)
-  let metaLine = `Time: ${ws.time}`
-  if (ws.person && ws.person !== 'N/A') {
-    metaLine += `   |   Case study: ${ws.person}`
-  }
-  doc.text(metaLine)
-
-  // Divider
-  doc.moveDown(1)
-  const dividerY = doc.y
-  doc
-    .moveTo(72, dividerY)
-    .lineTo(540, dividerY)
-    .lineWidth(2)
+    .moveTo(MARGIN_X, doc.y)
+    .lineTo(MARGIN_X + 80, doc.y)
+    .lineWidth(3)
     .strokeColor(RED)
     .stroke()
-  doc.moveDown(1)
+    .restore()
+  doc.moveDown(0.8)
 
-  // Sections
-  for (const section of ws.sections) {
-    if (doc.y > 680) doc.addPage()
+  // ========== Body sections ==========
+  for (let s = 0; s < ws.sections.length; s++) {
+    const section = ws.sections[s]
 
-    // Section header
+    if (s > 0) doc.moveDown(1)
+
     doc
-      .fontSize(16)
-      .fillColor(DARK)
       .font('Helvetica-Bold')
-      .text(clean(section.header), { width: 468 })
-    doc.moveDown(0.4)
+      .fontSize(15)
+      .fillColor(RED)
+      .text(clean(section.header).toUpperCase(), { width: CONTENT_W })
+    doc.moveDown(0.5)
 
-    // Section body
     const lines = bodyToLines(section.body)
     for (const line of lines) {
-      if (doc.y > 720) doc.addPage()
-
       switch (line.type) {
         case 'spacer':
-          doc.moveDown(0.4)
+          doc.moveDown(0.3)
           break
         case 'paragraph':
           doc
+            .font('Helvetica')
             .fontSize(11)
             .fillColor(DARK)
-            .font('Helvetica')
-            .text(clean(line.text), { width: 468 })
+            .text(clean(line.text), { width: CONTENT_W, align: 'left' })
           doc.moveDown(0.5)
           break
         case 'subhead':
-          doc.moveDown(0.3)
+          doc.moveDown(0.4)
           doc
+            .font('Helvetica-Bold')
             .fontSize(12)
             .fillColor(DARK)
-            .font('Helvetica-Bold')
-            .text(clean(line.text), { width: 468 })
+            .text(clean(line.text), { width: CONTENT_W })
           doc.moveDown(0.3)
           break
-        case 'bullet':
+        case 'bullet': {
+          const startY = doc.y
           doc
+            .font('Helvetica-Bold')
             .fontSize(11)
-            .fillColor(DARK)
+            .fillColor(RED)
+            .text('•', MARGIN_X, startY, { width: 12 })
+          doc
             .font('Helvetica')
-            .text(`•  ${clean(line.text)}`, { width: 468, indent: 12 })
+            .fillColor(DARK)
+            .text(clean(line.text), MARGIN_X + 16, startY, {
+              width: CONTENT_W - 16,
+            })
+          doc.x = MARGIN_X
           doc.moveDown(0.3)
           break
+        }
         case 'numbered':
           doc
+            .font('Helvetica')
             .fontSize(11)
             .fillColor(DARK)
-            .font('Helvetica')
-            .text(clean(line.text), { width: 468, indent: 18 })
+            .text(clean(line.text), { width: CONTENT_W, indent: 16 })
           doc.moveDown(0.3)
           break
-        case 'checkbox':
-          // Draw checkbox + text
-          {
-            const y = doc.y
-            doc
-              .lineWidth(1)
-              .strokeColor(DARK)
-              .rect(74, y + 2, 10, 10)
-              .stroke()
-            doc
-              .fontSize(11)
-              .fillColor(DARK)
-              .font('Helvetica')
-              .text(`   ${clean(line.text)}`, 86, y, { width: 454 })
-            doc.moveDown(0.4)
-          }
+        case 'checkbox': {
+          const y = doc.y + 2
+          doc
+            .save()
+            .lineWidth(1)
+            .strokeColor(DARK)
+            .rect(MARGIN_X, y, 11, 11)
+            .stroke()
+            .restore()
+          doc
+            .font('Helvetica')
+            .fontSize(11)
+            .fillColor(DARK)
+            .text(clean(line.text), MARGIN_X + 19, y - 2, {
+              width: CONTENT_W - 19,
+            })
+          doc.x = MARGIN_X
+          doc.moveDown(0.4)
           break
-        case 'fillable-line':
-          {
-            // Draw a fillable line
-            doc.moveDown(0.3)
-            const y = doc.y + 8
+        }
+        case 'quote': {
+          doc.moveDown(0.3)
+          let q = clean(line.text)
+          if (!q.startsWith('"') && !q.startsWith('"')) q = `"${q}"`
+          const sY = doc.y
+          doc
+            .font('Helvetica-Oblique')
+            .fontSize(11)
+            .fillColor(MID)
+            .text(q, MARGIN_X + 14, sY, { width: CONTENT_W - 14 })
+          const eY = doc.y
+          doc
+            .save()
+            .lineWidth(3)
+            .strokeColor(RED)
+            .moveTo(MARGIN_X, sY)
+            .lineTo(MARGIN_X, eY)
+            .stroke()
+            .restore()
+          doc.x = MARGIN_X
+          doc.moveDown(0.4)
+          break
+        }
+        case 'table': {
+          const cellW = CONTENT_W / line.cells.length
+          const y = doc.y
+          const rowH = 26
+          if (y + rowH > PAGE_H - MARGIN_BOTTOM) {
+            doc.addPage()
+          }
+          for (let i = 0; i < line.cells.length; i++) {
+            const cellX = MARGIN_X + i * cellW
             doc
+              .save()
               .lineWidth(0.5)
-              .strokeColor('#999999')
-              .moveTo(72, y)
-              .lineTo(540, y)
+              .strokeColor(LIGHT)
+              .rect(cellX, doc.y, cellW, rowH)
               .stroke()
-            doc.moveDown(0.8)
-          }
-          break
-        case 'quote':
-          doc.moveDown(0.4)
-          {
-            // Don't add quote marks if source already has them
-            let q = clean(line.text)
-            if (!q.startsWith('"')) q = `"${q}"`
+              .restore()
             doc
-              .fontSize(11)
-              .fillColor(LIGHT_GRAY)
-              .font('Helvetica-Oblique')
-              .text(q, { width: 468, indent: 12 })
+              .font('Helvetica-Bold')
+              .fontSize(9)
+              .fillColor(DARK)
+              .text(clean(line.cells[i]), cellX + 6, doc.y + 8, {
+                width: cellW - 12,
+                height: rowH - 12,
+                ellipsis: true,
+              })
           }
-          doc.moveDown(0.4)
+          doc.x = MARGIN_X
+          doc.y = doc.y + rowH + 2
           break
+        }
       }
     }
-
-    doc.moveDown(0.8)
   }
 
-  // === Footer / commitment === (always on last page)
-  if (doc.y > 600) doc.addPage()
+  // ========== Closing CTA ==========
+  // Check if CTA (90px tall + 14px top spacing) fits on current page.
+  // If not, start new page; otherwise add normal spacing.
+  const CTA_HEIGHT = 90
+  const SPACING = 14
+  const pageBottom = PAGE_H - MARGIN_BOTTOM
+  if (doc.y + SPACING + CTA_HEIGHT > pageBottom) {
+    doc.addPage()
+  } else {
+    doc.moveDown(1)
+  }
 
-  doc.moveDown(2)
-  const footerY = doc.y
-
-  // Bottom red bar
+  const ctaY = doc.y
   doc
-    .rect(0, 720, 612, 72)
+    .save()
+    .fillOpacity(0.06)
+    .rect(MARGIN_X, ctaY, CONTENT_W, 80)
     .fill(RED)
-    .fontSize(10)
-    .fillColor('#FFFFFF')
+    .restore()
+  doc
+    .fillOpacity(1)
+    .fillColor(RED)
     .font('Helvetica-Bold')
+    .fontSize(13)
+    .text('WHEN YOU FINISH THIS:', MARGIN_X + 18, ctaY + 14, {
+      width: CONTENT_W - 36,
+    })
+  doc
+    .fillColor(DARK)
+    .font('Helvetica')
+    .fontSize(11)
     .text(
-      'WHEN YOU FINISH, DROP IN THE COMMUNITY:',
-      72,
-      735,
-      { width: 468, align: 'center' }
+      'Drop a win in the community. Get feedback from people doing the same work.',
+      MARGIN_X + 18,
+      ctaY + 35,
+      { width: CONTENT_W - 36 }
     )
-    .fontSize(11)
-    .font('Helvetica')
-    .text('crazysimpleyoutube.com/community', 72, 753, {
-      width: 468,
-      align: 'center',
-    })
-
-  // Restore for body content
-  doc.fillColor(DARK).font('Helvetica')
-
-  // Above the bar: signature
   doc
-    .fontSize(11)
-    .fillColor(LIGHT_GRAY)
-    .font('Helvetica-Oblique')
-    .text('Keep it crazy simple.', 72, 660, { width: 468, align: 'center' })
-  doc
-    .font('Helvetica')
-    .text('Aaron Cuha', 72, 678, { width: 468, align: 'center' })
+    .fillColor(RED)
+    .font('Helvetica-Bold')
+    .fontSize(12)
+    .text(
+      'crazysimpleyoutube.com/community',
+      MARGIN_X + 18,
+      ctaY + 56,
+      { width: CONTENT_W - 36 }
+    )
 
-  // Copyright
-  doc
-    .fontSize(8)
-    .fillColor(LIGHT_GRAY)
-    .text('© 2026 Coach Aaron Cuha. All rights reserved.', 72, 700, {
-      width: 468,
-      align: 'center',
-    })
+  // ========== Add header/footer to every page ==========
+  const range = doc.bufferedPageRange()
+  const total = range.count
+  for (let i = range.start; i < range.start + total; i++) {
+    doc.switchToPage(i)
+    drawHeaderBar(doc, ws, i === 0)
+    drawFooterBar(doc, i + 1, total)
+  }
 
   doc.end()
 
   return new Promise((resolve) => {
     stream.on('finish', () => {
       const sz = fs.statSync(outPath).size
-      resolve({ filename, sizeKB: Math.round(sz / 1024) })
+      resolve({ filename, sizeKB: Math.round(sz / 1024), pages: total })
     })
   })
 }
@@ -329,11 +403,12 @@ async function main() {
   for (const ws of worksheets) {
     const r = await generateWorksheet(ws)
     results.push(r)
-    console.log(`  ✓ ${r.filename} (${r.sizeKB} KB)`)
+    console.log(`  ✓ ${r.filename} (${r.pages}pp, ${r.sizeKB} KB)`)
   }
 
-  // Bundle all PDFs into one
-  console.log('\nBuilding bundle PDF...')
+  // Bundle: stitch all 24 individual worksheet PDFs into one master file
+  const { PDFDocument: PDFLibDocument } = require('pdf-lib')
+  console.log('\nBuilding worksheets bundle PDF...')
   const bundle = await PDFLibDocument.create()
   bundle.setTitle('Crazy Simple YouTube — All 24 Worksheets')
   bundle.setAuthor('Aaron Cuha')
@@ -343,18 +418,14 @@ async function main() {
     const buf = fs.readFileSync(path.join(OUT_DIR, r.filename))
     const src = await PDFLibDocument.load(buf)
     const pages = await bundle.copyPages(src, src.getPageIndices())
-    pages.forEach((p) => bundle.addPage(p))
+    pages.forEach((page) => bundle.addPage(page))
   }
+  const bundlePath = path.join(__dirname, '..', 'public', 'pdfs', 'csy-worksheets-bundle.pdf')
+  fs.writeFileSync(bundlePath, await bundle.save())
+  const sz = fs.statSync(bundlePath).size
+  console.log(`  ✓ csy-worksheets-bundle.pdf (${Math.round(sz / 1024)} KB)`)
 
-  const bundleBytes = await bundle.save()
-  const bundlePath = path.join(OUT_DIR, '..', 'csy-worksheets-bundle.pdf')
-  fs.writeFileSync(bundlePath, bundleBytes)
-  console.log(
-    `  ✓ csy-worksheets-bundle.pdf (${Math.round(
-      bundleBytes.length / 1024
-    )} KB)`
-  )
-  console.log('\nDone.')
+  console.log(`\nDone. ${results.length} individual + 1 bundle.`)
 }
 
 main().catch((e) => {

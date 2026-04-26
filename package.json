@@ -9,7 +9,7 @@
     "lint": "next lint",
     "pdfs:parse": "node scripts/parse-worksheets.js",
     "pdfs:worksheets": "node scripts/parse-worksheets.js && node scripts/generate-pdfs.js",
-    "pdfs:prompts": "node scripts/generate-prompts-pdf.js",
+    "pdfs:prompts": "node scripts/generate-prompt-pdfs.js",
     "pdfs:all": "npm run pdfs:worksheets && npm run pdfs:prompts"
   },
   "dependencies": {
