@@ -382,9 +382,29 @@ async function generateOnePrompt(p) {
     doc.moveDown(0.3)
   }
 
-  // Section 4: Closing note (if any)
+  // Section 4: Make it yours (variation tips)
+  drawSectionHeader(doc, 4, 'Make it yours', false)
+  const variations = [
+    'Run it twice. First with conservative numbers, second with optimistic. Compare the spread.',
+    'Add one constraint specific to your business and ask the AI to factor it in.',
+    "Ask the AI to challenge its own answer. 'What's the strongest argument against this output?'",
+    "Save the best output. Re-run the same prompt every quarter and watch the answer evolve as your business grows.",
+  ]
+  for (const v of variations) {
+    const startY = doc.y
+    isolated(doc, () => {
+      doc.font('display').fontSize(11).fillColor(C.red)
+        .text('—', PAGE.marginX, startY + 1, { width: 16, lineBreak: false, height: 14 })
+    })
+    doc.font('body').fontSize(11).fillColor(C.body)
+      .text(v, PAGE.marginX + 20, startY, { width: PAGE.contentW - 20, lineGap: 4 })
+    doc.x = PAGE.marginX
+    doc.moveDown(0.3)
+  }
+
+  // Section 6: Closing note (if any)
   if (p.closing) {
-    drawSectionHeader(doc, 4, "Aaron's note", false)
+    drawSectionHeader(doc, 5, "Aaron's note", false)
     const startY = doc.y
     isolated(doc, () => {
       doc

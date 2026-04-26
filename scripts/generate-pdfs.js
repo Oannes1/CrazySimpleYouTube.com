@@ -25,6 +25,35 @@ if (!fs.existsSync(OUT_DIR)) fs.mkdirSync(OUT_DIR, { recursive: true })
 
 const worksheets = JSON.parse(fs.readFileSync(CONTENT_FILE, 'utf8'))
 
+// Optional per-chapter context (intro / Aaron's note / case study).
+// Loaded if available; otherwise PDFs render without these enrichments.
+let context = []
+try {
+  const contextPath = path.join(__dirname, '..', 'lib', 'worksheet-context.ts')
+  const tsSource = fs.readFileSync(contextPath, 'utf8')
+  // Extract objects from the array
+  const arr = tsSource.match(/\{\s*chapter:\s*\d+[\s\S]*?\}\s*,?(?=\s*(?:\{|]))/g) || []
+  context = arr.map((s) => {
+    const ch = parseInt(s.match(/chapter:\s*(\d+)/)?.[1] || '0', 10)
+    const why = s.match(/why:\s*'((?:[^'\\]|\\.)*)'/)?.[1] || ''
+    const aaronNote = s.match(/aaronNote:\s*'((?:[^'\\]|\\.)*)'/)?.[1] || ''
+    const caseStudyBlurb = s.match(/caseStudyBlurb:\s*'((?:[^'\\]|\\.)*)'/)?.[1] || ''
+    return {
+      chapter: ch,
+      why: why.replace(/\\'/g, "'").replace(/\\\\/g, '\\'),
+      aaronNote: aaronNote.replace(/\\'/g, "'").replace(/\\\\/g, '\\'),
+      caseStudyBlurb: caseStudyBlurb.replace(/\\'/g, "'").replace(/\\\\/g, '\\'),
+    }
+  })
+  console.log(`Loaded context for ${context.length} chapters`)
+} catch {
+  console.log('No context file yet — generating without enrichments')
+}
+
+function getContext(chapter) {
+  return context.find((c) => c.chapter === chapter) || { why: '', aaronNote: '', caseStudyBlurb: '' }
+}
+
 function slug(chapter, title) {
   const t = title.toLowerCase().replace(/[^a-z0-9 ]/g, '').replace(/\s+/g, '-')
   return `${String(chapter).padStart(2, '0')}-${t}`
@@ -37,6 +66,178 @@ function clean(text) {
     .replace(/`(.+?)`/g, '$1')
     .replace(/\[(.+?)\]\(.+?\)/g, '$1')
     .trim()
+}
+
+/**
+ * Render a Notes / capture block at the end of a worksheet — generous
+ * lined writing area for the reader to flesh out their thinking.
+ */
+function drawNotesBlock(doc) {
+  if (doc.y > PAGE.height - PAGE.marginBottom - 240) {
+    doc.addPage()
+    doc.y = PAGE.marginTop + 28
+  } else {
+    doc.moveDown(1.2)
+  }
+
+  // Section header (matches drawSectionHeader style but with N for "Notes")
+  const startY = doc.y
+  isolated(doc, () => {
+    doc.font('display').fontSize(56).fillColor(C.red)
+      .text('+', PAGE.marginX, startY, { width: 80, lineBreak: false, height: 70 })
+  })
+  isolated(doc, () => {
+    doc.font('display').fontSize(13).fillColor(C.mid)
+      .text('YOUR', PAGE.marginX + 80, startY + 6, {
+        width: PAGE.contentW - 80, characterSpacing: 1.8, lineBreak: false, height: 14,
+      })
+  })
+  isolated(doc, () => {
+    doc.font('display').fontSize(20).fillColor(C.charcoal)
+      .text('NOTES, NEXT STEPS, COMMITMENTS', PAGE.marginX + 80, startY + 24, {
+        width: PAGE.contentW - 80, characterSpacing: -0.2, height: 50, ellipsis: true,
+      })
+  })
+  doc.x = PAGE.marginX
+  doc.y = startY + 80
+
+  isolated(doc, () => {
+    doc.moveTo(PAGE.marginX, doc.y).lineTo(PAGE.width - PAGE.marginX, doc.y)
+      .lineWidth(0.5).strokeColor(C.hairline).stroke()
+  })
+  doc.moveDown(0.6)
+
+  // 8 horizontal writing lines
+  const lineSpacing = 26
+  isolated(doc, () => {
+    doc.lineWidth(0.5).strokeColor(C.light)
+    for (let i = 0; i < 7; i++) {
+      const y = doc.y + i * lineSpacing
+      if (y > PAGE.height - PAGE.marginBottom - 28) break
+      doc.moveTo(PAGE.marginX, y).lineTo(PAGE.width - PAGE.marginX, y).stroke()
+    }
+  })
+  doc.y = doc.y + 6 * lineSpacing + 12
+}
+
+/**
+ * Pull-quote callout: Aaron's voice, inset with red rule.
+ */
+function drawAaronNote(doc, text) {
+  if (!text) return
+  if (doc.y > PAGE.height - PAGE.marginBottom - 130) {
+    doc.addPage()
+    doc.y = PAGE.marginTop + 28
+  } else {
+    doc.moveDown(1)
+  }
+
+  const startY = doc.y
+  // Eyebrow
+  isolated(doc, () => {
+    doc.font('body').fontSize(9).fillColor(C.red)
+      .text("AARON'S NOTE", PAGE.marginX, startY, {
+        width: PAGE.contentW, characterSpacing: 1.8, lineBreak: false, height: 12,
+      })
+  })
+
+  // Big handwritten flourish
+  isolated(doc, () => {
+    doc.font('accent').fontSize(28).fillColor(C.red).fillOpacity(0.5)
+      .text('listen.', PAGE.marginX, startY + 14, { width: 200, lineBreak: false, height: 30 })
+      .fillOpacity(1)
+  })
+
+  doc.x = PAGE.marginX
+  doc.y = startY + 50
+
+  // The note text
+  doc.font('body').fontSize(14).fillColor(C.charcoal)
+    .text(text, PAGE.marginX, doc.y, {
+      width: PAGE.contentW, lineGap: 5, oblique: 6,
+    })
+
+  // Red rule below
+  isolated(doc, () => {
+    doc.moveTo(PAGE.marginX, doc.y + 4).lineTo(PAGE.marginX + 64, doc.y + 4)
+      .lineWidth(2).strokeColor(C.red).stroke()
+  })
+  doc.moveDown(0.6)
+}
+
+/**
+ * Why-this-matters intro at the start of body content.
+ */
+function drawIntro(doc, text) {
+  if (!text) return
+  const startY = doc.y
+
+  isolated(doc, () => {
+    doc.font('body').fontSize(9).fillColor(C.red)
+      .text('WHY THIS MATTERS', PAGE.marginX, startY, {
+        width: PAGE.contentW, characterSpacing: 1.8, lineBreak: false, height: 12,
+      })
+  })
+
+  doc.x = PAGE.marginX
+  doc.y = startY + 18
+
+  doc.font('body').fontSize(13).fillColor(C.body)
+    .text(text, PAGE.marginX, doc.y, {
+      width: PAGE.contentW, lineGap: 5,
+    })
+
+  doc.moveDown(1)
+}
+
+/**
+ * Case study summary box.
+ */
+function drawCaseStudy(doc, person, blurb) {
+  if (!blurb || !person) return
+  if (doc.y > PAGE.height - PAGE.marginBottom - 140) {
+    doc.addPage()
+    doc.y = PAGE.marginTop + 28
+  } else {
+    doc.moveDown(0.8)
+  }
+
+  const startY = doc.y
+
+  // Render text first to measure height
+  doc.x = PAGE.marginX + 24
+
+  doc.font('display').fontSize(11).fillColor(C.red)
+    .text(`A REAL ONE: ${person.toUpperCase()}`, PAGE.marginX + 24, startY + 16, {
+      width: PAGE.contentW - 48, characterSpacing: 1.6, lineBreak: false, height: 14,
+    })
+
+  doc.font('body').fontSize(11).fillColor(C.body)
+    .text(blurb, PAGE.marginX + 24, startY + 36, {
+      width: PAGE.contentW - 48, lineGap: 4,
+    })
+
+  const endY = doc.y + 16
+
+  // Background box behind
+  isolated(doc, () => {
+    doc.rect(PAGE.marginX, startY, PAGE.contentW, endY - startY)
+      .fillOpacity(0.5).fill(C.creamDeep).fillOpacity(1)
+    doc.rect(PAGE.marginX, startY, 4, endY - startY).fill(C.red)
+  })
+
+  // Re-render text on top of background
+  doc.font('display').fontSize(11).fillColor(C.red)
+    .text(`A REAL ONE: ${person.toUpperCase()}`, PAGE.marginX + 24, startY + 16, {
+      width: PAGE.contentW - 48, characterSpacing: 1.6, lineBreak: false, height: 14,
+    })
+  doc.font('body').fontSize(11).fillColor(C.body)
+    .text(blurb, PAGE.marginX + 24, startY + 36, {
+      width: PAGE.contentW - 48, lineGap: 4,
+    })
+
+  doc.x = PAGE.marginX
+  doc.y = endY + 8
 }
 
 function bodyToLines(body) {
@@ -548,12 +749,29 @@ async function generateWorksheet(ws) {
   // Page 2+: body
   startBodyPage(doc)
 
+  const ctx = getContext(ws.chapter)
+
+  // Intro: why this matters (from manuscript)
+  if (ctx.why) drawIntro(doc, ctx.why)
+
+  // Case study summary (if applicable)
+  if (ctx.caseStudyBlurb && ws.person) {
+    drawCaseStudy(doc, ws.person, ctx.caseStudyBlurb)
+  }
+
+  // The exercise itself
   for (let s = 0; s < ws.sections.length; s++) {
     const section = ws.sections[s]
-    drawSectionHeader(doc, s + 1, section.header, s === 0)
+    drawSectionHeader(doc, s + 1, section.header, s === 0 && !ctx.why && !ctx.caseStudyBlurb)
     const lines = bodyToLines(section.body)
     for (const line of lines) renderLine(doc, line)
   }
+
+  // Aaron's note (coaching insight from chapter)
+  if (ctx.aaronNote) drawAaronNote(doc, ctx.aaronNote)
+
+  // Notes block (writable lines)
+  drawNotesBlock(doc)
 
   // Closing CTA
   drawCommunityCTA(doc)
