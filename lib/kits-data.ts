@@ -213,6 +213,50 @@ export const kits: Kit[] = [
     ],
   },
   {
+    slug: 'live-streaming',
+    name: 'The Live Streaming Kit',
+    tagline: 'Studio-quality streams without the broadcast truck.',
+    audience: 'Streamers, live coaches, real-time hosts, anyone running webinars or YouTube Live as a regular channel.',
+    priceRange: '$1,000 to $2,500',
+    promise:
+      'Stream Deck for one-tap scene control. Cam Link to use your real camera as a webcam. Elgato Key Lights you can dim from your phone. Wave:3 USB mic for plug-and-play broadcast audio. The whole setup that makes live look pre-produced.',
+    description:
+      'Live streaming used to require a $10K broadcast rig. Not anymore. This kit gives you one-button scene switching, real-camera image quality (not webcam blur), studio audio, and lighting that adjusts to the room. The difference between an amateur stream and one that grows an audience is rarely the host. It is almost always the production setup. This kit closes that gap.',
+    accent: 'amber',
+    items: [
+      {
+        slug: 'elgato-stream-deck-mk2',
+        categoryLabel: 'Stream Control',
+        reason: 'The brain of your stream. Mute mic, switch scenes, fire alerts, post the link to chat. Once you set it up, you stop touching the keyboard mid-stream.',
+      },
+      {
+        slug: 'sony-zv-e10-ii',
+        categoryLabel: 'Camera',
+        reason: 'Clean HDMI output, autofocus that locks on faces, flip-out screen so you can see yourself. Pair with the Cam Link to use it as a 4K webcam.',
+      },
+      {
+        slug: 'elgato-cam-link-4k',
+        categoryLabel: 'Camera Capture',
+        reason: 'Required to use any HDMI camera as a webcam. Plug, play, look broadcast.',
+      },
+      {
+        slug: 'elgato-wave-3',
+        categoryLabel: 'USB Mic',
+        reason: 'Plug-and-play. Wave Link software lets you control mic, music, alerts on independent channels. Built for streamers.',
+      },
+      {
+        slug: 'elgato-key-light-air',
+        categoryLabel: 'Lighting',
+        reason: 'App-controlled. Mount one as key, one as fill. Dim from your phone without leaving your seat.',
+      },
+      {
+        slug: 'parrot-teleprompter-v3',
+        categoryLabel: 'Optional',
+        reason: 'For scripted segments, intro readings, or live tutorials. Eye contact stays direct, energy stays high.',
+      },
+    ],
+  },
+  {
     slug: 'podcast-essentials',
     name: 'The Podcast Kit',
     tagline: 'Studio-grade audio without the studio price tag.',
