@@ -16,6 +16,105 @@ const LISTS = {
   PROMPTS_BUNDLE: 30,          // /prompts downloaders
 } as const
 
+const TEMPLATES = {
+  ASSET_DELIVERY: 102, // CSY · Asset Delivery (Day 0)
+} as const
+
+const SITE = 'https://crazysimpleyoutube.com'
+
+/**
+ * Look at the tags being applied and decide what asset (if any) we
+ * should email out immediately. Returns null if no transactional send
+ * is needed (e.g. waitlist signup with no document).
+ */
+function pickAssetForDelivery(tags: string[]): {
+  assetName: string
+  assetType: string
+  pdfUrl: string
+} | null {
+  if (tags.includes('dl_worksheets_bundle')) {
+    return {
+      assetName: 'Worksheets Bundle (all 24)',
+      assetType: 'worksheets',
+      pdfUrl: `${SITE}/pdfs/csy-worksheets-bundle.pdf`,
+    }
+  }
+  if (tags.includes('dl_prompts_bundle')) {
+    return {
+      assetName: 'AI Prompts Bundle (all 24)',
+      assetType: 'prompts',
+      pdfUrl: `${SITE}/pdfs/csy-prompts-bundle.pdf`,
+    }
+  }
+  if (tags.includes('dl_companion_kit')) {
+    return {
+      assetName: 'Chapter Companion Kit',
+      assetType: 'companion kit',
+      pdfUrl: `${SITE}/pdfs/csy-worksheets-bundle.pdf`,
+    }
+  }
+  // Per-asset downloads: dl_worksheet_<slug> or dl_prompt_<slug>
+  const wsTag = tags.find((t) => t.startsWith('dl_worksheet_'))
+  if (wsTag) {
+    const slug = wsTag.replace('dl_worksheet_', '')
+    return {
+      assetName: humanize(slug.replace(/^\d+-/, '')),
+      assetType: 'worksheet',
+      pdfUrl: `${SITE}/pdfs/worksheets/${slug}.pdf`,
+    }
+  }
+  const ptTag = tags.find((t) => t.startsWith('dl_prompt_'))
+  if (ptTag) {
+    const slug = ptTag.replace('dl_prompt_', '')
+    return {
+      assetName: humanize(slug),
+      assetType: 'prompt',
+      pdfUrl: `${SITE}/pdfs/prompts/${slug}.pdf`,
+    }
+  }
+  return null
+}
+
+function humanize(slug: string): string {
+  return slug
+    .replace(/-/g, ' ')
+    .replace(/\b\w/g, (c) => c.toUpperCase())
+}
+
+async function sendDeliveryEmail(
+  email: string,
+  firstName: string | undefined,
+  asset: { assetName: string; assetType: string; pdfUrl: string }
+) {
+  if (!BREVO_API_KEY) return
+  try {
+    const res = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: {
+        'api-key': BREVO_API_KEY,
+        'content-type': 'application/json',
+        accept: 'application/json',
+      },
+      body: JSON.stringify({
+        templateId: TEMPLATES.ASSET_DELIVERY,
+        to: [{ email, name: firstName || undefined }],
+        params: {
+          FIRSTNAME: firstName || 'there',
+          ASSET_NAME: asset.assetName,
+          ASSET_TYPE: asset.assetType,
+          PDF_URL: asset.pdfUrl,
+        },
+      }),
+    })
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}))
+      console.error('Brevo transactional email failed:', err)
+    }
+  } catch (e) {
+    console.error('Brevo transactional email error:', e)
+  }
+}
+
 /**
  * Subscribe a contact to Brevo with cumulative tags + attributes.
  *
@@ -139,6 +238,15 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // Send the matching delivery email (fire-and-forget)
+    const asset = pickAssetForDelivery(mergedTags)
+    if (asset) {
+      // Don't await — let the response return immediately
+      sendDeliveryEmail(email, firstName, asset).catch((e) =>
+        console.error('Email delivery error:', e)
+      )
+    }
+
     // Set the unlock cookie on every successful opt-in.
     // This means any form submission anywhere on the site grants
     // the user direct access to PDFs gated by middleware.
@@ -146,6 +254,7 @@ export async function POST(request: NextRequest) {
       success: true,
       tags: mergedTags,
       lists: allListIds,
+      emailSent: !!asset,
     })
     response.cookies.set('csy_unlocked', 'true', {
       maxAge: 60 * 60 * 24 * 365, // 1 year
