@@ -755,8 +755,14 @@ async function generateWorksheet(ws) {
   if (ctx.why) drawIntro(doc, ctx.why)
 
   // Case study summary (if applicable)
-  if (ctx.caseStudyBlurb && ws.person) {
-    drawCaseStudy(doc, ws.person, ctx.caseStudyBlurb)
+  if (ctx.caseStudyBlurb) {
+    // Pull first name from worksheet metadata, fallback to first word of blurb
+    let person = ws.person
+    if (!person || person === 'N/A') {
+      const m = ctx.caseStudyBlurb.match(/^([A-Z][a-z]+)/)
+      person = m ? m[1] : 'A real one'
+    }
+    drawCaseStudy(doc, person, ctx.caseStudyBlurb)
   }
 
   // The exercise itself
