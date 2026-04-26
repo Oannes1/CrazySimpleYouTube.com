@@ -17,7 +17,10 @@ const LISTS = {
 } as const
 
 const TEMPLATES = {
-  ASSET_DELIVERY: 102, // CSY · Asset Delivery (Day 0)
+  ASSET_DELIVERY: 102, // CSY · Asset Delivery (Day 0) — sends a PDF
+  COMMUNITY_WELCOME: 103, // CSY · Community Waitlist Welcome (Day 0)
+  SET_IN_STONE_WELCOME: 104, // CSY · Set in Stone Waitlist Welcome (Day 0)
+  DISCOVERY_CALL: 105, // CSY · Discovery Call Confirmation (Day 0)
 } as const
 
 const SITE = 'https://crazysimpleyoutube.com'
@@ -112,6 +115,49 @@ async function sendDeliveryEmail(
     }
   } catch (e) {
     console.error('Brevo transactional email error:', e)
+  }
+}
+
+/**
+ * Pick a welcome email template based on which list flow this opt-in
+ * came from. Returns null if no welcome flow matches (e.g. just a
+ * generic homepage signup that gets the asset delivery instead).
+ */
+function pickWelcomeTemplate(tags: string[]): number | null {
+  if (tags.includes('community_waitlist')) return TEMPLATES.COMMUNITY_WELCOME
+  if (tags.includes('set_in_stone_waitlist')) return TEMPLATES.SET_IN_STONE_WELCOME
+  if (tags.includes('discovery_call_request')) return TEMPLATES.DISCOVERY_CALL
+  return null
+}
+
+async function sendWelcomeEmail(
+  email: string,
+  firstName: string | undefined,
+  templateId: number
+) {
+  if (!BREVO_API_KEY) return
+  try {
+    const res = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: {
+        'api-key': BREVO_API_KEY,
+        'content-type': 'application/json',
+        accept: 'application/json',
+      },
+      body: JSON.stringify({
+        templateId,
+        to: [{ email, name: firstName || undefined }],
+        params: {
+          FIRSTNAME: firstName || 'there',
+        },
+      }),
+    })
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}))
+      console.error('Brevo welcome email failed:', err)
+    }
+  } catch (e) {
+    console.error('Brevo welcome email error:', e)
   }
 }
 
@@ -238,13 +284,23 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Send the matching delivery email (fire-and-forget)
+    // Decide which Brevo template to fire based on the tag pattern
     const asset = pickAssetForDelivery(mergedTags)
+    let emailFired = false
     if (asset) {
-      // Don't await — let the response return immediately
       sendDeliveryEmail(email, firstName, asset).catch((e) =>
         console.error('Email delivery error:', e)
       )
+      emailFired = true
+    } else {
+      // No PDF asset, but we may still have a welcome flow to trigger
+      const welcomeTemplate = pickWelcomeTemplate(mergedTags)
+      if (welcomeTemplate) {
+        sendWelcomeEmail(email, firstName, welcomeTemplate).catch((e) =>
+          console.error('Welcome email error:', e)
+        )
+        emailFired = true
+      }
     }
 
     // Set the unlock cookie on every successful opt-in.
@@ -254,7 +310,7 @@ export async function POST(request: NextRequest) {
       success: true,
       tags: mergedTags,
       lists: allListIds,
-      emailSent: !!asset,
+      emailSent: emailFired,
     })
     response.cookies.set('csy_unlocked', 'true', {
       maxAge: 60 * 60 * 24 * 365, // 1 year

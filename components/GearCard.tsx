@@ -25,18 +25,27 @@ function formatPrice(low: number, high: number): string {
   return `$${low}–${high}`
 }
 
-function trackClick(slug: string, brand: string) {
-  // Send GA4 event if available
+function trackClick(slug: string, brand: string, url: string) {
+  // GA4 event
   if (typeof window !== 'undefined' && (window as Window & { gtag?: unknown }).gtag) {
     ;(window as unknown as { gtag: (...args: unknown[]) => void }).gtag(
       'event',
       'affiliate_click',
-      {
-        product_slug: slug,
-        product_brand: brand,
-      }
+      { product_slug: slug, product_brand: brand }
     )
   }
+  // Server-side tracker (Supabase if configured)
+  fetch('/api/track', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      slug,
+      brand,
+      url,
+      source: typeof window !== 'undefined' ? window.location.pathname : '',
+    }),
+    keepalive: true,
+  }).catch(() => {})
 }
 
 export default function GearCard({ product }: { product: GearProduct }) {
@@ -148,7 +157,7 @@ export default function GearCard({ product }: { product: GearProduct }) {
             href={amzUrl}
             target="_blank"
             rel="sponsored noopener noreferrer"
-            onClick={() => trackClick(product.slug, product.brand)}
+            onClick={() => trackClick(product.slug, product.brand, amzUrl)}
             className="mt-4 block w-full text-center py-3 rounded-lg bg-brand-red text-white font-body font-bold text-sm hover:bg-brand-red-light transition-colors group"
           >
             <span className="inline-flex items-center justify-center gap-1.5">
