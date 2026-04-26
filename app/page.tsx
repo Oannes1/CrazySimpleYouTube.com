@@ -3,6 +3,7 @@ import Hero from '@/components/Hero'
 import SocialProof from '@/components/SocialProof'
 import ProblemAgitation from '@/components/ProblemAgitation'
 import Results from '@/components/Results'
+import RealEstateCallout from '@/components/RealEstateCallout'
 import MythBuster from '@/components/MythBuster'
 import CompoundEffect from '@/components/CompoundEffect'
 import WhatsInside from '@/components/WhatsInside'
@@ -23,6 +24,7 @@ export default function Home() {
       <SocialProof />
       <ProblemAgitation />
       <Results />
+      <RealEstateCallout />
       <MythBuster />
       <CompoundEffect />
       <WhatsInside />
