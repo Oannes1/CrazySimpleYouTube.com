@@ -139,11 +139,22 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    return NextResponse.json({
+    // Set the unlock cookie on every successful opt-in.
+    // This means any form submission anywhere on the site grants
+    // the user direct access to PDFs gated by middleware.
+    const response = NextResponse.json({
       success: true,
       tags: mergedTags,
       lists: allListIds,
     })
+    response.cookies.set('csy_unlocked', 'true', {
+      maxAge: 60 * 60 * 24 * 365, // 1 year
+      httpOnly: false, // EmailGate component reads this client-side
+      secure: true,
+      sameSite: 'lax',
+      path: '/',
+    })
+    return response
   } catch (error) {
     console.error('Subscribe error:', error)
     return NextResponse.json(
