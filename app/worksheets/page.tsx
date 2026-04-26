@@ -2,7 +2,12 @@ import type { Metadata } from 'next'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import LeadCaptureForm from '@/components/LeadCaptureForm'
-import { worksheets, type WorksheetPart } from '@/lib/worksheets-data'
+import {
+  worksheets,
+  type WorksheetPart,
+  WORKSHEET_BUNDLE_URL,
+  worksheetPdfUrl,
+} from '@/lib/worksheets-data'
 
 export const metadata: Metadata = {
   title: '24 Action Worksheets | Crazy Simple YouTube',
@@ -72,8 +77,10 @@ export default function WorksheetsPage() {
                 tags={['src_worksheets', 'dl_worksheets_bundle']}
                 listIds={[29]}
                 ctaLabel="Send Me the Bundle"
-                successHeading="On the way."
-                successText="Check your inbox in the next 5 minutes for the bundle."
+                successHeading="Bundle ready."
+                successText="Click below to grab the PDF. We also emailed it to you."
+                redirectUrl={WORKSHEET_BUNDLE_URL}
+                redirectDelay={1500}
               />
             </div>
             <p className="mt-3 font-body text-xs text-brand-cream/30 text-center">
@@ -101,7 +108,7 @@ export default function WorksheetsPage() {
                   {items.map((w) => (
                     <div
                       key={w.slug}
-                      className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-brand-red/20 transition-colors"
+                      className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-brand-red/20 transition-colors flex flex-col"
                     >
                       <div className="flex items-start justify-between mb-3">
                         <span
@@ -116,7 +123,7 @@ export default function WorksheetsPage() {
                       <h3 className="font-display text-base sm:text-lg font-normal uppercase text-brand-cream leading-tight">
                         {w.title}
                       </h3>
-                      <p className="mt-2 font-body text-xs text-brand-cream/50 leading-relaxed">
+                      <p className="mt-2 font-body text-xs text-brand-cream/50 leading-relaxed flex-1">
                         {w.shortDesc}
                       </p>
                       {w.caseStudyPerson && (
@@ -124,6 +131,17 @@ export default function WorksheetsPage() {
                           Case study: {w.caseStudyPerson}
                         </p>
                       )}
+                      <a
+                        href={worksheetPdfUrl(w)}
+                        target="_blank"
+                        rel="noopener"
+                        className="mt-4 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg border border-brand-red/30 text-brand-red hover:bg-brand-red/[0.06] hover:border-brand-red/50 font-body font-semibold text-xs transition-colors"
+                      >
+                        Download PDF
+                        <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                      </a>
                     </div>
                   ))}
                 </div>

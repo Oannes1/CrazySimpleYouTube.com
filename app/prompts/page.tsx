@@ -93,8 +93,10 @@ export default function PromptsPage() {
                 tags={['src_prompts', 'dl_prompts_bundle']}
                 listIds={[30]}
                 ctaLabel="Send Me the Bundle"
-                successHeading="Bundle on the way."
-                successText="Check your inbox in the next 5 minutes."
+                successHeading="Bundle ready."
+                successText="Click below to grab the PDF. We also emailed it to you."
+                redirectUrl="/pdfs/csy-prompts-bundle.pdf"
+                redirectDelay={1500}
               />
             </div>
             <p className="mt-3 font-body text-xs text-brand-cream/30 text-center">
