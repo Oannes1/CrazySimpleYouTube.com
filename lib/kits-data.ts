@@ -257,6 +257,133 @@ export const kits: Kit[] = [
     ],
   },
   {
+    slug: 'real-estate-agent',
+    name: 'The Real Estate Agent Kit',
+    tagline: 'Property tours that close deals.',
+    audience: 'Real estate agents, mortgage brokers, property managers. The kit Aaron equips his coaching clients with on day one.',
+    priceRange: '$800 to $1,800',
+    promise:
+      'Filming a great property tour is half cinematography, half audio, and 100 percent practiced. This kit handles the cinematography and audio. The practice part is on you. Walk-and-talk gimbal shots, aerial property reveals from the drone, lavalier audio so you sound clean indoors and out.',
+    description:
+      'Real estate is the highest-converting niche on YouTube right now because the audience is searching for exactly what you sell. The bottleneck is rarely the strategy. It is the production. Listings filmed on a shaky phone with airpod audio look amateur and convert worse. Listings filmed with this kit look like a Netflix property docuseries. Same agent. Same listing. Different result.',
+    accent: 'teal',
+    items: [
+      {
+        slug: 'sony-zv-1-ii',
+        categoryLabel: 'Camera',
+        reason: 'Compact enough to walk a buyer through a property without feeling like a film crew. Flip-out screen for self-recorded intros.',
+      },
+      {
+        slug: 'dji-rs-4',
+        categoryLabel: 'Gimbal',
+        reason: 'Smooth walk-and-talk shots through every room. The single piece of gear that separates an amateur tour from a professional one.',
+      },
+      {
+        slug: 'dji-mini-4-pro',
+        categoryLabel: 'Drone',
+        reason: 'Sub-249g (no FAA registration needed for hobby use). Aerial property reveals that Zillow listings cannot match.',
+      },
+      {
+        slug: 'dji-mic-mini',
+        categoryLabel: 'Wireless Mic',
+        reason: 'Clip on, walk through the house, narrate the value. Disappears under shirts. 48-hour battery in the case.',
+      },
+      {
+        slug: 'dji-osmo-pocket-3',
+        categoryLabel: 'B-Roll Camera',
+        reason: 'Built-in gimbal in a pocket camera. Quick exterior shots, neighborhood B-roll, second-angle inserts during walkthroughs.',
+      },
+      {
+        slug: 'sandisk-extreme-pro-128gb',
+        categoryLabel: 'Storage',
+        reason: 'Buy three. Cards live in your camera, your drone, and your spare bag. Never run out mid-shoot.',
+      },
+    ],
+  },
+  {
+    slug: 'coach-consultant',
+    name: 'The Coach & Consultant Kit',
+    tagline: 'Look studio-grade on Zoom, YouTube, and live calls.',
+    audience: 'Coaches, consultants, financial advisors, attorneys, anyone who runs a service business and lives on video calls.',
+    priceRange: '$700 to $1,400',
+    promise:
+      'You sell expertise. The way you look on a call is the way buyers judge that expertise before you say a word. This kit makes every call (Zoom sales, YouTube studio, client coaching) look like you spent five figures on a studio. You did not.',
+    description:
+      'Most coaches and consultants run their entire business through video and never invest in their video setup. They lose deals to a competitor who looks more polished. This kit fixes that for the price of one missed deal. Plug-and-play webcam, broadcast mic, app-controlled lights, teleprompter for scripted videos. Set it once. Use it for years.',
+    accent: 'amber',
+    items: [
+      {
+        slug: 'elgato-facecam-pro',
+        categoryLabel: 'Webcam',
+        reason: 'Real 4K60 webcam built for creators. Better than any laptop camera, easier than mirrorless. Plug-and-play USB.',
+      },
+      {
+        slug: 'shure-mv7-plus',
+        categoryLabel: 'Microphone',
+        reason: 'USB and XLR in one body. Plug-and-play today, future-proof when you upgrade to an interface. The mic that takes coaches from "phone audio" to "podcast guest" instantly.',
+      },
+      {
+        slug: 'elgato-key-light-air',
+        categoryLabel: 'Lighting',
+        reason: 'App-controlled brightness. Mountable on desk or wall. Get one for key, one for fill. Look great in any room.',
+      },
+      {
+        slug: 'parrot-teleprompter-v3',
+        categoryLabel: 'Teleprompter',
+        reason: 'For scripted YouTube videos and rehearsed sales pitches. Read your script while looking directly at the camera. Eye contact stays locked.',
+      },
+      {
+        slug: 'elgato-stream-deck-mk2',
+        categoryLabel: 'Optional',
+        reason: 'One-tap mic mute, scene switch, snippet paste. The hidden upgrade that removes mid-call awkwardness forever.',
+      },
+    ],
+  },
+  {
+    slug: 'speaker-stage',
+    name: 'The Speaker & Stage Kit',
+    tagline: 'Capture every speaking gig as a year of YouTube content.',
+    audience: 'Keynote speakers, conference presenters, workshop hosts, anyone who stands on stage regularly.',
+    priceRange: '$900 to $2,000',
+    promise:
+      'Most speakers stand on a stage with thousands of dollars in honoraria, perfect lighting, and a captive audience. Then they walk off and lose the footage forever. This kit captures every gig in broadcast quality so one event becomes 30 short clips, 4 long-form videos, and a podcast season for the next 12 months.',
+    description:
+      'A 60-minute keynote contains roughly 30 monetizable moments. Most speakers walk away with the venue\'s blurry highlight reel and call it a day. This kit changes that. Lapel mic that captures clean stage audio independent of the venue\'s sound system. Compact camera for wide shots. Pocket camera for run-and-gun B-roll. Storage that handles a full day of recording.',
+    accent: 'purple',
+    items: [
+      {
+        slug: 'hollyland-lark-m2',
+        categoryLabel: 'Wireless Lavalier',
+        reason: '1000ft range. Clip on before the keynote. Capture broadcast audio independent of the venue board (which usually mixes for the live room, not for clean recording).',
+      },
+      {
+        slug: 'sony-zv-e10-ii',
+        categoryLabel: 'Stage Camera',
+        reason: 'Tripod-mounted at the back of the room. Wide shot of you on stage. Autofocus that locks on faces even in dim conference lighting.',
+      },
+      {
+        slug: 'sony-zv-1-ii',
+        categoryLabel: 'Run-and-Gun Camera',
+        reason: 'Compact backup. Have a friend or colleague capture audience reactions, sponsor signage, behind-scenes B-roll. Editing gold.',
+      },
+      {
+        slug: 'dji-osmo-pocket-3',
+        categoryLabel: 'B-Roll',
+        reason: 'Pocket-sized gimbal cam for arrival, green room, post-event meet-and-greet. Story footage your audience will eat up.',
+      },
+      {
+        slug: 'ubeesize-67-tripod',
+        categoryLabel: 'Tripod',
+        reason: 'Stable wide shot of you on stage. Tall enough to clear the audience.',
+      },
+      {
+        slug: 'sandisk-extreme-pro-128gb',
+        categoryLabel: 'Storage',
+        reason: 'Buy four. One in each camera, two backups. A full day of conference shooting eats cards.',
+      },
+    ],
+  },
+  {
     slug: 'podcast-essentials',
     name: 'The Podcast Kit',
     tagline: 'Studio-grade audio without the studio price tag.',
