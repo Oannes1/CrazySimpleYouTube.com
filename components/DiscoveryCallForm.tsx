@@ -3,13 +3,9 @@
 import { useState } from 'react'
 
 /**
- * Placeholder Brevo Meetings booking URL.
- * Replace with the real URL once Aaron sets up his meeting type in Brevo:
- *   https://meet.brevo.com/aaron-cuha/discovery
+ * Aaron's paid Stripe-powered booking page ($250 for 30 minutes).
  */
-const BREVO_MEETINGS_URL =
-  process.env.NEXT_PUBLIC_BREVO_MEETINGS_URL ||
-  'https://aaroncuha.com/services/youtube-services'
+const BOOK_A_CALL_URL = 'https://www.aaroncuha.com/book-a-call'
 
 export default function DiscoveryCallForm() {
   const [status, setStatus] = useState<
@@ -58,7 +54,7 @@ export default function DiscoveryCallForm() {
       setStatus('success')
       // Redirect to Brevo Meetings booking page
       setTimeout(() => {
-        window.location.href = BREVO_MEETINGS_URL
+        window.location.href = BOOK_A_CALL_URL
       }, 1800)
     } catch (err) {
       setStatus('error')
@@ -91,7 +87,7 @@ export default function DiscoveryCallForm() {
           Sending you to the calendar to pick a time...
         </p>
         <a
-          href={BREVO_MEETINGS_URL}
+          href={BOOK_A_CALL_URL}
           className="mt-4 inline-block font-body font-semibold text-brand-red hover:text-brand-red-light underline text-sm"
         >
           Or click here if it doesn&apos;t auto-redirect

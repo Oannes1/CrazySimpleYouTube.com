@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import QualifierQuiz from '@/components/QualifierQuiz'
-import DiscoveryCallForm from '@/components/DiscoveryCallForm'
 
 export const metadata: Metadata = {
   title: 'Work With Aaron Cuha | Coaching & YouTube Management',
@@ -344,28 +343,91 @@ export default function WorkWithMePage() {
           </div>
         </section>
 
-        {/* Discovery call */}
+        {/* Book a call — paid 1-on-1 */}
         <section
           id="book-call"
-          className="relative max-w-2xl mx-auto px-5 sm:px-8 mb-16 sm:mb-24 scroll-mt-24"
+          className="relative max-w-3xl mx-auto px-5 sm:px-8 mb-16 sm:mb-24 scroll-mt-24"
         >
-          <div className="text-center mb-8">
-            <span className="font-body text-xs tracking-[0.25em] uppercase text-brand-red font-medium">
-              Ready to Talk?
+          <div className="rounded-2xl bg-gradient-to-br from-brand-red/[0.14] to-brand-red/[0.03] border border-brand-red/30 p-7 sm:p-10 text-center">
+            <span className="font-accent text-2xl text-brand-red/90">
+              one-on-one with aaron
             </span>
-            <h2 className="mt-3 font-display text-3xl sm:text-4xl font-normal uppercase text-brand-cream">
-              Book a Discovery Call
+            <h2 className="mt-1 font-display text-3xl sm:text-4xl lg:text-5xl font-normal uppercase text-brand-cream leading-[0.95]">
+              Book a Call
             </h2>
-            <p className="mt-4 font-body text-brand-cream/65 leading-relaxed">
-              30-minute call. We walk through your channel (or your plan to
-              start one), identify the bottleneck, and decide together if
-              working together makes sense. No high-pressure pitch.{' '}
+
+            {/* Price block */}
+            <div className="mt-6 flex items-baseline justify-center gap-3">
+              <span className="font-display text-5xl sm:text-6xl font-normal uppercase text-brand-cream leading-none">
+                $250
+              </span>
+              <span className="font-body text-brand-cream/50 text-base">
+                / 30 minutes
+              </span>
+            </div>
+
+            <p className="mt-6 font-body text-brand-cream/70 leading-relaxed max-w-xl mx-auto">
+              30-minute working session with Aaron. We walk through your
+              channel (or your plan to start one), identify the actual
+              bottleneck, and map your next 90 days.{' '}
               <strong className="text-brand-cream font-semibold">
-                If we&apos;re not a fit, Aaron will tell you.
+                You&apos;ll leave with a clear plan, not a sales pitch.
               </strong>
             </p>
+
+            <p className="mt-4 font-body text-sm text-brand-cream/55 leading-relaxed max-w-xl mx-auto">
+              The $250 is your skin in the game. If working together longer
+              term makes sense, the call fee gets credited toward your first
+              month of coaching.
+            </p>
+
+            <a
+              href="https://www.aaroncuha.com/book-a-call"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-flex items-center gap-2 px-8 py-4 bg-brand-red text-white font-body font-bold text-lg rounded-xl hover:bg-brand-red-light transition-colors shadow-lg shadow-brand-red/25 group"
+            >
+              Book the Call
+              <svg
+                className="w-5 h-5 transition-transform group-hover:translate-x-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2.5}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </a>
+
+            <p className="mt-5 font-body text-xs text-brand-cream/35">
+              Booking and payment handled at aaroncuha.com/book-a-call
+            </p>
           </div>
-          <DiscoveryCallForm />
+
+          {/* Free path for those not ready to pay */}
+          <div className="mt-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] p-6 text-center">
+            <p className="font-body text-sm text-brand-cream/65">
+              Not ready for the call?{' '}
+              <a
+                href="/community"
+                className="text-brand-red hover:text-brand-red-light underline underline-offset-2 font-semibold"
+              >
+                Start with the community
+              </a>{' '}
+              ($47/mo) or{' '}
+              <a
+                href="/bonus"
+                className="text-brand-red hover:text-brand-red-light underline underline-offset-2 font-semibold"
+              >
+                grab the free Chapter Companion Kit
+              </a>
+              .
+            </p>
+          </div>
         </section>
 
         {/* FAQ */}

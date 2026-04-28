@@ -48,20 +48,20 @@ const recommendations = {
   grow: {
     name: 'GROW Coaching',
     why: 'You have time and traction. What you need now is a coach to optimize the system you\'re already running.',
-    cta: 'Book a Discovery Call',
-    href: '#book-call',
+    cta: 'Book a Call ($250)',
+    href: 'https://www.aaroncuha.com/book-a-call',
   },
   scale: {
     name: 'SCALE Done-With-You',
     why: 'You have revenue but limited time. We help with execution while you stay focused on the business.',
-    cta: 'Book a Discovery Call',
-    href: '#book-call',
+    cta: 'Book a Call ($250)',
+    href: 'https://www.aaroncuha.com/book-a-call',
   },
   management: {
     name: 'YouTube Management',
     why: 'You have the business and the capital. You need the channel run for you so you can stay on what you do best.',
-    cta: 'Book a Discovery Call',
-    href: '#book-call',
+    cta: 'Book a Call ($250)',
+    href: 'https://www.aaroncuha.com/book-a-call',
   },
 }
 
@@ -115,6 +115,8 @@ export default function QualifierQuiz() {
         <div className="mt-6 flex flex-wrap gap-3">
           <a
             href={rec.href}
+            target={rec.href.startsWith('http') ? '_blank' : undefined}
+            rel={rec.href.startsWith('http') ? 'noopener noreferrer' : undefined}
             className="inline-flex items-center gap-2 px-7 py-3.5 bg-brand-red text-white font-body font-bold rounded-xl hover:bg-brand-red-light transition-colors"
           >
             {rec.cta}

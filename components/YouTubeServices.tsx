@@ -136,17 +136,25 @@ export default function YouTubeServices() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <a
-            href="https://aaroncuha.com/services/youtube-services"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2.5 px-8 py-4 bg-brand-red text-white font-body font-bold text-lg rounded-xl hover:bg-brand-red-light transition-colors hover:shadow-[0_0_40px_rgba(220,38,38,0.2)]"
-          >
-            View All Services & Book a Call
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <a
+              href="https://www.aaroncuha.com/book-a-call"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-brand-red text-white font-body font-bold text-lg rounded-xl hover:bg-brand-red-light transition-colors hover:shadow-[0_0_40px_rgba(220,38,38,0.2)]"
+            >
+              Book a Call ($250)
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+            <a
+              href="/work-with-me"
+              className="inline-flex items-center justify-center gap-2 px-7 py-4 border border-brand-cream/15 text-brand-cream/80 font-body font-medium text-base rounded-xl hover:border-brand-red/40 hover:text-brand-red transition-colors"
+            >
+              See all coaching tiers
+            </a>
+          </div>
           <p className="mt-4 text-brand-cream/25 font-body text-xs">
             All tiers include a 30-day trial period. Upgrade or downgrade anytime.
           </p>
