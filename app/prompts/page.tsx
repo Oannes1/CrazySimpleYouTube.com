@@ -43,8 +43,47 @@ export default function PromptsPage() {
           </div>
         </section>
 
+        {/* PROMINENT Bundle CTA — above the fold */}
+        <section className="relative max-w-2xl mx-auto px-5 sm:px-8 mb-16">
+          <div className="rounded-2xl bg-gradient-to-br from-brand-red/[0.14] to-brand-red/[0.03] border border-brand-red/30 shadow-[0_24px_80px_rgba(196,18,48,0.10)] p-7 sm:p-9">
+            <div className="text-center">
+              <span className="font-accent text-2xl text-brand-red/90">
+                free, instant, in your inbox
+              </span>
+              <h2 className="mt-1 font-display text-2xl sm:text-3xl lg:text-4xl font-normal uppercase text-brand-cream leading-[0.95]">
+                Get All {prompts.length} Prompts
+                <br />
+                <span className="text-brand-red">As One PDF</span>
+              </h2>
+              <p className="mt-4 font-body text-brand-cream/70 leading-relaxed">
+                Drop your name and email. We email you the complete prompt
+                library as a single printable PDF.{' '}
+                <strong className="text-brand-cream font-semibold">
+                  Free.
+                </strong>{' '}
+                Plus you unlock every other resource on the site instantly.
+              </p>
+            </div>
+            <div className="mt-7">
+              <LeadCaptureForm
+                tags={['src_prompts', 'dl_prompts_bundle']}
+                listIds={[30]}
+                ctaLabel={`Send Me All ${prompts.length} Prompts`}
+                successHeading="Bundle ready."
+                successText="Click below to grab the PDF. We also emailed it to you."
+                redirectUrl="/pdfs/csy-prompts-bundle.pdf"
+                redirectDelay={1500}
+              />
+            </div>
+            <p className="mt-4 font-body text-xs text-brand-cream/35 text-center">
+              No spam. Unsubscribe anytime. Or scroll down to copy individual
+              prompts (each one still requires an email to download as a PDF).
+            </p>
+          </div>
+        </section>
+
         {/* How to use */}
-        <section className="relative max-w-3xl mx-auto px-5 sm:px-8 mb-16">
+        <section className="relative max-w-3xl mx-auto px-5 sm:px-8 mb-12">
           <div className="rounded-2xl bg-white/[0.02] border border-white/[0.06] p-6 sm:p-7">
             <h2 className="font-display text-lg font-normal uppercase text-brand-cream mb-3">
               How to Use These
@@ -52,10 +91,14 @@ export default function PromptsPage() {
             <ol className="space-y-2 font-body text-sm text-brand-cream/65 list-decimal list-inside">
               <li>Open ChatGPT, Claude, or Gemini.</li>
               <li>Find the prompt for your situation below.</li>
-              <li>Click <strong className="text-brand-cream font-semibold">Copy</strong> to grab the full prompt.</li>
+              <li>
+                Click <strong className="text-brand-cream font-semibold">Copy</strong> to grab the full prompt.
+              </li>
               <li>
                 Replace the bracketed placeholders (
-                <code className="px-1.5 py-0.5 rounded bg-white/[0.06] text-brand-cream/80 text-xs">[YOUR PROFESSION]</code>
+                <code className="px-1.5 py-0.5 rounded bg-white/[0.06] text-brand-cream/80 text-xs">
+                  [YOUR PROFESSION]
+                </code>
                 , etc.) with your real info.
               </li>
               <li>Paste into the AI tool. Read the output. Adjust as needed.</li>
@@ -67,41 +110,45 @@ export default function PromptsPage() {
           </div>
         </section>
 
-        {/* Prompts grid */}
+        {/* Prompts grid (24 cards) */}
         <section className="relative max-w-7xl mx-auto px-5 sm:px-8 mb-16">
+          <div className="text-center mb-8">
+            <span className="font-body text-xs tracking-[0.25em] uppercase text-brand-red font-medium">
+              Prefer to Browse?
+            </span>
+            <h2 className="mt-2 font-display text-2xl sm:text-3xl font-normal uppercase text-brand-cream">
+              All {prompts.length} Prompts. Categorized.
+            </h2>
+            <p className="mt-3 font-body text-brand-cream/45 text-sm max-w-xl mx-auto">
+              Filter by chapter group, search by keyword, or grab them one at a
+              time. Each individual download requires a name + email.
+            </p>
+          </div>
           <PromptsGrid prompts={prompts} />
         </section>
 
-        {/* Bundle CTA */}
+        {/* Repeat the email capture below the grid for late scrollers */}
         <section className="relative max-w-2xl mx-auto px-5 sm:px-8 mb-16">
-          <div className="rounded-2xl bg-gradient-to-br from-brand-red/[0.1] to-brand-red/[0.02] border border-brand-red/20 p-7 sm:p-9">
+          <div className="rounded-2xl bg-brand-charcoal-light border border-white/[0.08] p-7 sm:p-9">
             <div className="text-center">
-              <span className="font-body text-xs tracking-[0.2em] uppercase text-brand-red font-bold">
-                Free Bundle
+              <span className="font-accent text-xl text-brand-red/85">
+                still here? grab them all.
               </span>
-              <h2 className="mt-3 font-display text-2xl sm:text-3xl font-normal uppercase text-brand-cream">
-                Get All {prompts.length} As a PDF
+              <h2 className="mt-1 font-display text-xl sm:text-2xl font-normal uppercase text-brand-cream">
+                Bundle of All {prompts.length}, One PDF
               </h2>
-              <p className="mt-3 font-body text-brand-cream/65 leading-relaxed">
-                Drop your email. We&apos;ll send the complete prompt library as
-                one printable PDF, plus the first chapter of the next book when
-                it drops.
-              </p>
             </div>
-            <div className="mt-6">
+            <div className="mt-5">
               <LeadCaptureForm
                 tags={['src_prompts', 'dl_prompts_bundle']}
                 listIds={[30]}
                 ctaLabel="Send Me the Bundle"
                 successHeading="Bundle ready."
-                successText="Click below to grab the PDF. We also emailed it to you."
+                successText="Check your inbox. PDF opens in a new tab now."
                 redirectUrl="/pdfs/csy-prompts-bundle.pdf"
                 redirectDelay={1500}
               />
             </div>
-            <p className="mt-3 font-body text-xs text-brand-cream/30 text-center">
-              No spam. Unsubscribe anytime.
-            </p>
           </div>
         </section>
 
