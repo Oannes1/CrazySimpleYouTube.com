@@ -82,7 +82,7 @@ const faqs = [
   },
   {
     q: 'When does it launch?',
-    a: 'End of May 2026. Founding members (first 100) lock in pricing for life. Get on the waitlist now.',
+    a: 'June 1, 2026. Founding members (first 100) lock in pricing for life. The waitlist is just a sign up. No payment until doors open.',
   },
 ]
 
@@ -106,36 +106,38 @@ export default function CommunityPage() {
               strategies in <em>Crazy Simple YouTube</em> turn into real results.
             </p>
 
-            {/* Pricing card */}
+            {/* Waitlist card */}
             <div className="mt-10 max-w-md mx-auto p-7 sm:p-8 rounded-2xl bg-white/[0.03] border border-white/[0.08]">
               <div className="font-body text-xs tracking-[0.2em] uppercase text-brand-red font-bold">
-                Founding Member Pricing
+                The Waitlist
               </div>
-              <div className="mt-3 flex items-baseline justify-center gap-3">
-                <span className="font-display text-4xl sm:text-5xl font-normal uppercase text-brand-cream">
-                  $47
-                </span>
-                <span className="font-body text-brand-cream/40 text-lg">
-                  /month
-                </span>
-              </div>
-              <div className="mt-1 font-body text-sm text-brand-cream/40">
-                or $450/year (save $114)
-              </div>
+              <h3 className="mt-3 font-display text-2xl sm:text-3xl font-normal uppercase text-brand-cream">
+                Doors Open
+                <br />
+                <span className="text-brand-red">June 1, 2026</span>
+              </h3>
               <p className="mt-4 font-body text-sm text-brand-cream/60 leading-relaxed">
-                First 100 founding members lock in pricing for life. Cancel
-                anytime, no contracts.
+                Sign up for the waitlist now. No payment. No card.{' '}
+                <strong className="text-brand-cream font-semibold">
+                  When doors open June 1, founding-100 members lock in $47/mo
+                  pricing for life
+                </strong>{' '}
+                (or $450/yr).
               </p>
-              <a
-                href={COMMUNITY_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-5 block w-full py-4 bg-brand-red text-white font-body font-bold text-base rounded-xl hover:bg-brand-red-light transition-colors shadow-lg shadow-brand-red/20"
-              >
-                Join the Waitlist
-              </a>
-              <p className="mt-3 font-body text-xs text-brand-cream/30">
-                Launching end of May 2026
+
+              {/* Inline waitlist form */}
+              <div className="mt-6 text-left">
+                <LeadCaptureForm
+                  tags={['src_community', 'community_waitlist']}
+                  listIds={[25]}
+                  ctaLabel="Get on the Waitlist"
+                  successHeading="On the list."
+                  successText="We'll email you when the doors open June 1."
+                />
+              </div>
+
+              <p className="mt-4 font-body text-xs text-brand-cream/40 text-center">
+                Just a sign up. No payment until doors open.
               </p>
             </div>
           </div>
@@ -275,42 +277,35 @@ export default function CommunityPage() {
           </div>
         </section>
 
-        {/* Final CTA */}
-        <section className="relative max-w-3xl mx-auto px-5 sm:px-8 text-center">
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-normal uppercase text-brand-cream">
-            Stop Building Alone.
-          </h2>
-          <p className="mt-4 font-body text-brand-cream/50">
-            $47/month. Cancel anytime. Founding pricing locked for life.
-          </p>
-          <a
-            href={COMMUNITY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center gap-2 px-8 py-4 bg-brand-red text-white font-body font-bold text-lg rounded-xl hover:bg-brand-red-light transition-colors shadow-lg shadow-brand-red/20"
-          >
-            Join the Waitlist
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2.5}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
-            </svg>
-          </a>
-          <p className="mt-6 font-body text-xs text-brand-cream/30">
-            All community details and signup at{' '}
+        {/* Final CTA — waitlist focused */}
+        <section className="relative max-w-2xl mx-auto px-5 sm:px-8">
+          <div className="text-center mb-8">
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-normal uppercase text-brand-cream leading-[0.95]">
+              Stop Building <span className="text-brand-red">Alone.</span>
+            </h2>
+            <p className="mt-4 font-body text-brand-cream/55">
+              Doors open June 1, 2026. Sign up free, lock in founding pricing
+              when the community opens.
+            </p>
+          </div>
+
+          <div className="rounded-2xl bg-white/[0.02] border border-white/[0.08] p-7 sm:p-9">
+            <LeadCaptureForm
+              tags={['src_community', 'community_waitlist']}
+              listIds={[25]}
+              ctaLabel="Get on the Waitlist"
+              successHeading="On the list."
+              successText="We'll email you when the doors open June 1."
+            />
+          </div>
+
+          <p className="mt-5 font-body text-xs text-brand-cream/35 text-center">
+            Just a sign up. No payment now. Read more at{' '}
             <a
               href={COMMUNITY_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-brand-cream/50 underline hover:text-brand-cream"
+              className="text-brand-cream/55 underline hover:text-brand-cream"
             >
               aaroncuha.com/community
             </a>

@@ -110,11 +110,11 @@ const COMMUNITY_TEMPLATE = {
     'CRAZY SIMPLE YOUTUBE  ·  COMMUNITY WAITLIST',
     `You're <span class="red">in.</span><br>Founding spot locked.`,
     `<p class="lead">Hey {{ params.FIRSTNAME | default: "there" }},</p>
-     <p class="lead">Welcome to the founding-100 waitlist for <strong>Systems Over Hustle</strong>. The community opens the end of May 2026, and as one of the first 100, you have <strong>founding pricing locked in for life</strong>.</p>
+     <p class="lead">Welcome to the founding-100 waitlist for <strong>Systems Over Hustle</strong>. The community opens June 1, 2026, and as one of the first 100, you have <strong>founding pricing locked in for life</strong>.</p>
 
      <div class="timeline">
-       <p class="timeline-item"><strong>Now:</strong> You are on the list. We will email you the moment doors open.</p>
-       <p class="timeline-item"><strong>Late May 2026:</strong> Doors open. You get first access plus your founding-pricing invite link.</p>
+       <p class="timeline-item"><strong>Now:</strong> You are on the list. No payment, no card. We will email you the moment doors open.</p>
+       <p class="timeline-item"><strong>June 1, 2026:</strong> Doors open. You get first access plus your founding-pricing invite link.</p>
        <p class="timeline-item"><strong>Inside:</strong> Monthly Q&A with Aaron, peer accountability pods, 12 organized topic channels, and the full templates library.</p>
      </div>
 

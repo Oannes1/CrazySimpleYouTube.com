@@ -30,7 +30,7 @@ const steps = [
     level: 3,
     name: 'Systems Over Hustle',
     price: '$47/mo or $450/yr',
-    description: 'Weekly Q&A, templates, peer pods, and 12 channels. Founding pricing locked for life (first 100). Launching May 2026.',
+    description: 'Weekly Q&A, templates, peer pods, and 12 channels. Founding pricing locked for life (first 100). Doors open June 1, 2026.',
     cta: 'Join the Waitlist',
     href: 'https://aaroncuha.com/community',
     external: true,
