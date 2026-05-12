@@ -1,12 +1,13 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import LeadCaptureForm from '@/components/LeadCaptureForm'
 
 export const metadata: Metadata = {
-  title: 'What\'s Next | Aaron Cuha\'s Next Book',
+  title: 'Crazy Simple YouTube Vol. 2 — From Clients Into Income | Aaron Cuha',
   description:
-    'Get notified when Aaron\'s next book drops. Set in Stone is coming. Drop your email for early access pricing and bonus materials.',
+    'Get notified when Crazy Simple YouTube Vol. 2: From Clients Into Income drops. Drop your email for the first chapter free, pre-order pricing, and bonus materials.',
 }
 
 export default function Book2Page() {
@@ -15,25 +16,45 @@ export default function Book2Page() {
       <Navigation />
       <main className="min-h-screen bg-brand-charcoal pt-28 sm:pt-32 pb-16 noise-overlay">
         {/* Hero */}
-        <section className="relative max-w-4xl mx-auto px-5 sm:px-8 mb-16 sm:mb-20">
-          <div className="text-center">
-            <span className="font-body text-xs sm:text-sm tracking-[0.25em] uppercase text-brand-red font-medium">
-              What&apos;s Next
-            </span>
-            <h1 className="mt-4 font-display text-4xl sm:text-5xl lg:text-6xl font-normal uppercase text-brand-cream leading-[0.95]">
-              <span className="text-brand-red">Set in Stone</span>
-              <br />
-              Is Coming.
-            </h1>
-            <p className="mt-6 font-body text-brand-cream/60 text-lg leading-relaxed max-w-2xl mx-auto">
-              Aaron&apos;s next book picks up where mindset meets execution. The
-              architecture for{' '}
-              <strong className="text-brand-cream font-semibold">
-                building businesses that don&apos;t crumble
-              </strong>
-              {' '}when the market shifts, the algorithm changes, or you have a
-              bad month.
-            </p>
+        <section className="relative max-w-5xl mx-auto px-5 sm:px-8 mb-16 sm:mb-20">
+          <div className="grid md:grid-cols-[1fr_280px] lg:grid-cols-[1fr_340px] gap-10 items-center">
+            <div className="text-center md:text-left order-2 md:order-1">
+              <span className="font-body text-xs sm:text-sm tracking-[0.25em] uppercase text-brand-red font-medium">
+                Crazy Simple YouTube · Vol. 2
+              </span>
+              <h1 className="mt-4 font-display text-4xl sm:text-5xl lg:text-6xl font-normal uppercase text-brand-cream leading-[0.95]">
+                From Clients
+                <br />
+                <span className="text-brand-red">Into Income.</span>
+              </h1>
+              <p className="mt-6 font-body text-brand-cream/65 text-lg leading-relaxed">
+                Vol. 1 turned your YouTube channel into a lead machine. Vol. 2
+                turns those leads into{' '}
+                <strong className="text-brand-cream font-semibold">
+                  multiple revenue streams that compound on each other
+                </strong>
+                . Monetization mastery, team and systems, multi-channel
+                domination, the architecture of a media empire.
+              </p>
+            </div>
+
+            {/* Book 2 cover */}
+            <div className="order-1 md:order-2 flex justify-center md:justify-end">
+              <div className="relative">
+                <Image
+                  src="/book2-cover.jpg"
+                  alt="Crazy Simple YouTube Vol. 2 — From Clients Into Income. The next book by Aaron Cuha."
+                  width={340}
+                  height={520}
+                  priority
+                  className="w-[220px] sm:w-[260px] lg:w-[300px] xl:w-[340px] h-auto rounded-xl drop-shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+                />
+                {/* "Coming Soon" badge */}
+                <div className="absolute -top-3 -right-3 px-3 py-1.5 bg-brand-red text-white text-[0.65rem] font-body font-bold tracking-wider uppercase rounded-full shadow-lg shadow-brand-red/30 whitespace-nowrap">
+                  Vol. 2 · Coming Soon
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -45,8 +66,8 @@ export default function Book2Page() {
             </h2>
             <p className="mt-4 font-body text-brand-cream/60 text-center leading-relaxed">
               Drop your email. You&apos;ll be the first to know when{' '}
-              <em>Set in Stone</em> drops, plus you&apos;ll get the first
-              chapter delivered the moment it&apos;s ready.
+              <em>Vol. 2: From Clients Into Income</em> drops, plus you&apos;ll
+              get the first chapter delivered the moment it&apos;s ready.
             </p>
             <div className="mt-7">
               <LeadCaptureForm

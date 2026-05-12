@@ -141,7 +141,7 @@ export default function Hero() {
           <div className="relative">
             <Image
               src="/book-display.jpg"
-              alt="Crazy Simple YouTube — A Success Guide by Aaron Cuha. Turn Views Into Clients. Vol. 01."
+              alt="Crazy Simple YouTube Vol. 01 — Turn Views Into Clients. A Success Guide by Aaron Cuha. #1 Amazon Bestseller."
               width={600}
               height={450}
               priority
