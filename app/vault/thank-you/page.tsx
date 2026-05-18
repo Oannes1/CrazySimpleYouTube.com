@@ -134,18 +134,6 @@ export default function VaultThankYouPage({
           </a>
         </div>
 
-        {/* Phone text-back */}
-        <div className="mt-6 text-center">
-          <h2 className="font-sans font-bold text-base text-white/80">
-            Or text me directly
-          </h2>
-          <p className="mt-1.5 font-sans text-sm text-white/55 leading-relaxed">
-            Text me at{' '}
-            <strong className="text-white">[AARON_BUSINESS_CELL]</strong>. Tell
-            me you got the Vault. I text back personally.
-          </p>
-        </div>
-
         {/* Footer */}
         <p className="mt-12 text-center font-sans text-xs text-white/30">
           &copy; 2026 Haymaker LLC | Crazy Simple YouTube | Aaron Cuha
