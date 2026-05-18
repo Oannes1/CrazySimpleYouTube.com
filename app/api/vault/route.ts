@@ -144,8 +144,12 @@ export async function POST(request: NextRequest) {
       receiptUrl = (await uploadReceipt(receipt, firstName)) || ''
     }
 
-    // Build Brevo contact
-    const listIds = [LISTS.VAULT_OPT, LISTS.COMPANION_KIT]
+    // Build Brevo contact.
+    // NOTE: deliberately NOT adding to COMPANION_KIT (list 21). That list
+    // has an existing Brevo automation that auto-sends the Chapter
+    // Checklist. Vault signups must only get the Viral Blueprints, so they
+    // go to the dedicated Vault list (31) and Book Buyer list (32) only.
+    const listIds = [LISTS.VAULT_OPT]
     const tags = ['vault-opt', 'cohort-2026']
     if (bookPurchased) {
       listIds.push(LISTS.BOOK_BUYER)
