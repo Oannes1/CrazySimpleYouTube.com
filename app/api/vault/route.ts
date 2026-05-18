@@ -25,6 +25,7 @@ const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL
 const SUPABASE_SECRET = process.env.SUPABASE_SECRET_KEY
 
 const LISTS = {
+  NEWSLETTER: 4, // AC — Systems Over Hustle Newsletter (weekly)
   COMPANION_KIT: 21,
   VAULT_OPT: 31,
   BOOK_BUYER: 32,
@@ -147,10 +148,10 @@ export async function POST(request: NextRequest) {
     // Build Brevo contact.
     // NOTE: deliberately NOT adding to COMPANION_KIT (list 21). That list
     // has an existing Brevo automation that auto-sends the Chapter
-    // Checklist. Vault signups must only get the Viral Blueprints, so they
-    // go to the dedicated Vault list (31) and Book Buyer list (32) only.
-    const listIds = [LISTS.VAULT_OPT]
-    const tags = ['vault-opt', 'cohort-2026']
+    // Checklist. Vault signups go to the Vault list (31) + the weekly
+    // Newsletter (4), plus the Book Buyer list (32) if they checked the box.
+    const listIds = [LISTS.VAULT_OPT, LISTS.NEWSLETTER]
+    const tags = ['viral', 'vault-opt', 'cohort-2026']
     if (bookPurchased) {
       listIds.push(LISTS.BOOK_BUYER)
       tags.push('book-buyer', 'bonus-call-2026')
