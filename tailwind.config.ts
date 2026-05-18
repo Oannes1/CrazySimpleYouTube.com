@@ -19,6 +19,13 @@ const config: Config = {
           'cream-dark': '#e8dfd0',
           'cream-light': '#f7f3eb',
         },
+        // Vault landing page palette (per Listing Velocity briefing)
+        vault: {
+          dark: '#1A1A2E',
+          red: '#C41230',
+          blue: '#457B9D',
+          gold: '#B8860B',
+        },
       },
       fontFamily: {
         display: ['var(--font-anton)', 'Impact', 'sans-serif'],

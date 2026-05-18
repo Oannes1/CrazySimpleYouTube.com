@@ -9,11 +9,23 @@ import type { NextRequest } from 'next/server'
  * intended PDF URL preserved in the `next` search param so we can send
  * them straight to the document after they fill out the form.
  */
+/**
+ * PDFs that are delivered freely by email and must NOT be gated.
+ * The Viral Video Vault is emailed to every Listing Velocity cohort
+ * member, so the link in that email has to resolve without a cookie.
+ */
+const PUBLIC_PDFS = ['/pdfs/the-viral-video-vault.pdf']
+
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
 
   // Only guard PDF assets
   if (!pathname.startsWith('/pdfs/')) {
+    return NextResponse.next()
+  }
+
+  // Freely-delivered PDFs bypass the gate entirely
+  if (PUBLIC_PDFS.includes(pathname)) {
     return NextResponse.next()
   }
 
