@@ -49,14 +49,14 @@ function vaultDeliveryHtml() {
   <tr><td class="pad" style="padding-top:14px;padding-bottom:0;">
     <p class="lead">Hey {{ contact.FIRSTNAME | default: "there" }},</p>
     <p class="lead">As promised. The Viral Video Vault is yours.</p>
-    <p class="lead"><strong>5 pages. The viral formats that work in real estate, reverse-engineered.</strong> The exact hooks, titles, thumbnails, and first-30-second patterns that made them blow up.</p>
+    <p class="lead"><strong>25 deployable viral video blueprints, tier-tagged to your channel size.</strong> Each one ready to film: hooks, the 7-part structure, 5 AI prompts, thumbnail specs, and a full SEO package.</p>
     <div class="cta-wrap">
       <a class="cta cta-gold" href="{{ params.VAULT_URL }}">Download the Vault</a>
     </div>
     <p class="lead">Here is what to do with it:</p>
     <div class="checklist">
       <div class="checkitem">1. Read it once tonight.</div>
-      <div class="checkitem">2. Pick ONE format you want to model.</div>
+      <div class="checkitem">2. Pick ONE blueprint that matches your subscriber tier.</div>
       <div class="checkitem">3. Film it this Sunday.</div>
     </div>
     <p class="lead">Have questions? Hit reply. I read everything.</p>

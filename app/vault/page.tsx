@@ -4,7 +4,7 @@ import VaultForm from '@/components/VaultForm'
 export const metadata: Metadata = {
   title: 'The Viral Video Vault | Crazy Simple YouTube',
   description:
-    'The most viral real estate videos on YouTube, reverse-engineered. The exact formats, hooks, titles, thumbnails, and first-30-second patterns that made them blow up. Free for the Listing Velocity cohort.',
+    'The Top 25 Viral Blueprints: deployable real estate video formats, tier-tagged, with hooks, AI prompts, thumbnail specs, and SEO packages. Free for the Listing Velocity cohort.',
   robots: { index: false, follow: false },
 }
 
@@ -13,12 +13,13 @@ const AMAZON_LINK =
   'https://www.amazon.com/dp/B0GWYK8TX6'
 
 const whatsInside = [
-  '3 viral real estate videos broken down frame-by-frame',
-  'The exact title structures that triggered CTR above 10%',
-  'The thumbnail patterns that outperformed everything else',
-  'The first-30-second hook formula',
-  'Format types that consistently go viral in real estate',
-  'How to model these for YOUR market without copying',
+  '25 deployable viral video blueprints, tier-tagged to your channel size',
+  'A word-for-word sample hook for every single blueprint',
+  'The 7-part video structure with exact timestamps',
+  '5 copy-and-paste AI prompts per blueprint',
+  'The 3-Element Thumbnail Law and a thumbnail spec per video',
+  'A full SEO package: titles, descriptions, tags for each',
+  'The ban list: the words that make viewers smell AI and bounce',
 ]
 
 export default function VaultPage() {
@@ -41,9 +42,10 @@ export default function VaultPage() {
             <span style={{ color: '#C41230' }}>Video Vault</span>
           </h1>
           <p className="mt-6 font-sans text-base sm:text-lg leading-relaxed text-white/70 max-w-2xl mx-auto">
-            5 pages. The most viral real estate videos on YouTube
-            reverse-engineered. The exact formats, hooks, titles, thumbnails,
-            and first-30-second patterns that made them blow up.
+            The Top 25 Viral Blueprints. The exact real estate video formats
+            that blow up on YouTube, tier-tagged to your channel size, each
+            one ready to film with hooks, AI prompts, thumbnail specs, and a
+            full SEO package.
           </p>
           <a
             href="#form"
@@ -159,11 +161,12 @@ export default function VaultPage() {
             their market. Problem: those agents are not growing either.
           </p>
           <p>
-            This Vault is different. It is a reverse-engineering of videos that
-            have hit{' '}
-            <strong className="text-white">100,000+ views</strong>. Real estate
-            videos. Real agents. Pulled apart. Documented. Turned into a 5-page
-            reference.
+            This Vault is different. It is{' '}
+            <strong className="text-white">25 proven blueprints</strong>, each
+            one built from real estate videos that actually went viral. Pulled
+            apart. Documented. Tier-tagged so you film the right one for your
+            current channel size. Hook, structure, prompts, thumbnail, SEO. All
+            of it.
           </p>
           <p>
             If you are running the 90-Day Sprint, this Vault is the difference

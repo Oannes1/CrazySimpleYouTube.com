@@ -36,7 +36,7 @@ const TEMPLATES = {
 }
 
 const SITE = 'https://crazysimpleyoutube.com'
-const VAULT_PDF_URL = `${SITE}/pdfs/the-viral-video-vault.pdf`
+const VAULT_PDF_URL = `${SITE}/pdfs/top-25-viral-blueprints.pdf`
 
 const MAX_FILE_BYTES = 5 * 1024 * 1024
 const ALLOWED_TYPES = ['application/pdf', 'image/jpeg', 'image/png']

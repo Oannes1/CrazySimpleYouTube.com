@@ -14,7 +14,7 @@ import type { NextRequest } from 'next/server'
  * The Viral Video Vault is emailed to every Listing Velocity cohort
  * member, so the link in that email has to resolve without a cookie.
  */
-const PUBLIC_PDFS = ['/pdfs/the-viral-video-vault.pdf']
+const PUBLIC_PDFS = ['/pdfs/top-25-viral-blueprints.pdf']
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
