@@ -224,13 +224,23 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Fire delivery emails (fire-and-forget)
-    sendTemplate(TEMPLATES.VAULT_DELIVERY, email, firstName, {
-      VAULT_URL: VAULT_PDF_URL,
-    }).catch(() => {})
-
+    // Fire delivery emails — AWAIT them so Vercel does not kill the
+    // serverless function before Brevo confirms the send. Earlier
+    // 'fire and forget' caused silent drops (see Rob Hannaford incident).
+    // Brevo transactional sends typically respond in 100-300ms.
+    try {
+      await sendTemplate(TEMPLATES.VAULT_DELIVERY, email, firstName, {
+        VAULT_URL: VAULT_PDF_URL,
+      })
+    } catch (e) {
+      console.error('Vault delivery email failed for', email, e)
+    }
     if (bookPurchased) {
-      sendTemplate(TEMPLATES.BONUS_CALL, email, firstName, {}).catch(() => {})
+      try {
+        await sendTemplate(TEMPLATES.BONUS_CALL, email, firstName, {})
+      } catch (e) {
+        console.error('Bonus call email failed for', email, e)
+      }
     }
 
     return NextResponse.json({ success: true, bookPurchased })

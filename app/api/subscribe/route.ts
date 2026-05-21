@@ -284,22 +284,28 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Decide which Brevo template to fire based on the tag pattern
+    // Decide which Brevo template to fire based on the tag pattern.
+    // AWAIT the send — Vercel serverless can kill background promises
+    // after the response, causing silent email drops. ~200ms latency
+    // is worth it for guaranteed delivery.
     const asset = pickAssetForDelivery(mergedTags)
     let emailFired = false
     if (asset) {
-      sendDeliveryEmail(email, firstName, asset).catch((e) =>
-        console.error('Email delivery error:', e)
-      )
-      emailFired = true
+      try {
+        await sendDeliveryEmail(email, firstName, asset)
+        emailFired = true
+      } catch (e) {
+        console.error('Email delivery error for', email, e)
+      }
     } else {
-      // No PDF asset, but we may still have a welcome flow to trigger
       const welcomeTemplate = pickWelcomeTemplate(mergedTags)
       if (welcomeTemplate) {
-        sendWelcomeEmail(email, firstName, welcomeTemplate).catch((e) =>
-          console.error('Welcome email error:', e)
-        )
-        emailFired = true
+        try {
+          await sendWelcomeEmail(email, firstName, welcomeTemplate)
+          emailFired = true
+        } catch (e) {
+          console.error('Welcome email error for', email, e)
+        }
       }
     }
 
