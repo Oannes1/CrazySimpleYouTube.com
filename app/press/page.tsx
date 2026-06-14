@@ -29,7 +29,7 @@ const interviewQuestions = [
   },
   {
     q: 'How did you build a multi-million dollar coaching business from YouTube without being an influencer?',
-    a: 'Two channels (@VanLife at 120K+ and @GotCoach at 50K+) treated as testing labs. Every strategy in the book was validated on my own channels first before any client paid for it. The book is not theory. It is what worked on me, then on clients.',
+    a: 'Two channels (@VanLife at 138K and @aaroncuha at 101K) treated as testing labs. Every strategy in the book was validated on my own channels first before any client paid for it. The book is not theory. It is what worked on me, then on clients.',
   },
   {
     q: 'What is the YouTube Hourly Rate and why does it matter?',
@@ -50,15 +50,15 @@ const storyAngles = [
   },
   {
     audience: 'Entrepreneurship & Creator Economy',
-    headline: 'From zero to 200K+ subscribers across two channels without being an influencer',
+    headline: 'From zero to 239K+ subscribers across two channels without being an influencer',
     pitch:
-      'Aaron built @VanLife (120K+) and @GotCoach (50K+) specifically as testing grounds, not vanity projects. Every strategy was validated with real data before being put in front of a paying client. The "anti-influencer YouTube playbook" angle.',
+      'Aaron built @VanLife (138K+) and @aaroncuha (101K+) specifically as testing grounds, not vanity projects. Every strategy was validated with real data before being put in front of a paying client. The "anti-influencer YouTube playbook" angle.',
   },
   {
     audience: 'Real Estate Agent & Coach Podcasts',
-    headline: 'The system behind 15,000+ hours of one-on-one coaching, distilled into 24 chapters',
+    headline: 'The system behind 20,000+ hours of one-on-one coaching, distilled into 24 chapters',
     pitch:
-      'Aaron is a Master Certified Business and Real Estate Coach, a licensed broker in twelve states, and a speaker within the Tom Ferry ecosystem. The book is the playbook he wished existed when his coaching clients kept asking the same questions.',
+      'Aaron is a Tom Ferry Mastery Coach, a licensed broker in twelve states, and a speaker within the Tom Ferry ecosystem. The book is the playbook he wished existed when his coaching clients kept asking the same questions.',
   },
 ]
 
@@ -82,8 +82,8 @@ const pullQuotes = [
 ]
 
 const channels = [
-  { label: 'YouTube · @GotCoach', href: 'https://youtube.com/@gotcoach', followers: '50K+ subscribers' },
-  { label: 'YouTube · @VanLife', href: 'https://youtube.com/@vanlife', followers: '120K+ subscribers' },
+  { label: 'YouTube · @aaroncuha', href: 'https://youtube.com/@aaroncuha', followers: '101K subscribers' },
+  { label: 'YouTube · @VanLife', href: 'https://youtube.com/@vanlife', followers: '138K subscribers' },
   { label: 'Instagram · @aaroncuha', href: 'https://instagram.com/aaroncuha', followers: '' },
   { label: 'LinkedIn · /in/aaroncuha', href: 'https://linkedin.com/in/aaroncuha', followers: '' },
   { label: 'X · @AaronCuha', href: 'https://x.com/AaronCuha', followers: '' },
@@ -102,7 +102,7 @@ const factSheet = [
   { label: 'Price', value: '$19.99 paperback · $9.99 Kindle' },
   { label: 'ASIN', value: 'B0GWYK8TX6' },
   { label: 'Genre', value: 'Business · Marketing · Real Estate' },
-  { label: 'Status', value: '#1 Amazon Bestseller' },
+  { label: 'Status', value: '#1 Amazon New Release in Web Marketing (4 weeks running)' },
 ]
 
 export default function PressPage() {
@@ -150,7 +150,7 @@ export default function PressPage() {
             <div className="flex justify-center lg:justify-end">
               <Image
                 src="/book-display.jpg"
-                alt="Crazy Simple YouTube — Vol. 01 — #1 Amazon Bestseller. By Aaron Cuha."
+                alt="Crazy Simple YouTube — Vol. 01 — #1 Amazon New Release in Web Marketing. By Aaron Cuha."
                 width={280}
                 height={420}
                 priority
@@ -207,11 +207,11 @@ export default function PressPage() {
                 Short Bio (~100 words)
               </div>
               <p className="font-body text-brand-cream/80 leading-relaxed">
-                Aaron Cuha is a Master Certified Business and Real Estate Coach
-                with over 15,000 hours of one-on-one coaching experience and the
+                Aaron Cuha is a Tom Ferry Mastery Coach
+                with over 20,000 hours of one-on-one coaching experience and the
                 author of Crazy Simple YouTube. He runs two YouTube channels
                 that serve as personal testing grounds for every strategy he
-                teaches: @VanLife (120,000+ subscribers) and @GotCoach (50,000+
+                teaches: @VanLife (138,000+ subscribers) and @aaroncuha (101,000+
                 subscribers). A licensed real estate broker in twelve states and
                 a speaker within the Tom Ferry ecosystem, Aaron has guided
                 hundreds of agents, coaches, and consultants to build YouTube
@@ -227,20 +227,20 @@ export default function PressPage() {
               </div>
               <div className="space-y-4 font-body text-brand-cream/80 leading-relaxed">
                 <p>
-                  Aaron Cuha is a Master Certified Business and Real Estate
-                  Coach, the author of Crazy Simple YouTube, and the founder of
-                  a YouTube coaching and management practice that serves
-                  business owners across real estate, mortgage, financial
-                  advising, law, and home services.
+                  Aaron Cuha is a Tom Ferry Mastery Coach, the author of
+                  Crazy Simple YouTube, and the founder of a YouTube coaching
+                  and management practice that serves business owners across
+                  real estate, mortgage, financial advising, law, and home
+                  services.
                 </p>
                 <p>
-                  Over 15,000 hours of one-on-one coaching have given him a
+                  Over 20,000 hours of one-on-one coaching have given him a
                   perspective most YouTube educators lack: he doesn&apos;t just
                   know what works in theory. He knows what works when a real
                   estate agent in Weston, Florida has three hours a week and
                   zero patience for complexity. He runs two YouTube channels
                   built on the exact strategies in the book: @VanLife
-                  (120,000+ subscribers) and @GotCoach (50,000+ subscribers).
+                  (138,000+ subscribers) and @aaroncuha (101,000+ subscribers).
                   Every framework Aaron teaches is validated with real data on
                   his own channels before any client pays for it.
                 </p>
@@ -268,8 +268,8 @@ export default function PressPage() {
         <section className="relative max-w-4xl mx-auto px-5 sm:px-8 mb-16">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { number: '170K+', label: 'YouTube Subscribers' },
-              { number: '15K+', label: 'Coaching Hours' },
+              { number: '239K+', label: 'YouTube Subscribers' },
+              { number: '20K+', label: 'Coaching Hours' },
               { number: '12', label: 'Licensed Real Estate States' },
               { number: '$2M+', label: 'Client Revenue Generated' },
             ].map((s) => (

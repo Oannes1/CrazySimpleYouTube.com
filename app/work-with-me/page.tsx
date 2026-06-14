@@ -284,13 +284,13 @@ export default function WorkWithMePage() {
           </h2>
           <div className="mt-6 space-y-4 font-body text-brand-cream/65 leading-relaxed text-[0.95rem]">
             <p className="text-brand-cream/85 font-medium text-base">
-              Master Certified Business and Real Estate Coach. 15,000+ hours of
+              Tom Ferry Mastery Coach. 20,000+ hours of
               one-on-one coaching.
             </p>
             <p>
               Aaron runs two YouTube channels that serve as personal testing
-              grounds: <strong className="text-brand-cream font-semibold">@VanLife (120K+)</strong> and{' '}
-              <strong className="text-brand-cream font-semibold">@GotCoach (50K+)</strong>.
+              grounds: <strong className="text-brand-cream font-semibold">@VanLife (138K)</strong> and{' '}
+              <strong className="text-brand-cream font-semibold">@aaroncuha (101K)</strong>.
               Between them, every strategy he teaches has been tested on his
               own channels before being put in front of a client.
             </p>

@@ -8,7 +8,7 @@ import { gear } from '@/lib/gear-data'
 export const metadata: Metadata = {
   title: 'Curated YouTube Gear Kits | Crazy Simple YouTube',
   description:
-    'Pre-built gear kits for YouTube creators. Phone-first starter kit, growth kit, pro studio kit, mobile creator kit, podcast kit. Hand-picked by Aaron Cuha. Tested across 170K subscribers.',
+    'Pre-built gear kits for YouTube creators. Phone-first starter kit, growth kit, pro studio kit, mobile creator kit, podcast kit. Hand-picked by Aaron Cuha. Tested across 239K subscribers.',
 }
 
 const accentClasses: Record<string, { bg: string; numeral: string; border: string }> = {
@@ -50,7 +50,7 @@ export default function KitsPage() {
             </h1>
             <p className="mt-6 font-body text-brand-cream/65 text-lg leading-relaxed max-w-2xl mx-auto">
               Five kits. Five use cases. Every product hand-picked by Aaron and
-              tested across @VanLife (120K) and @GotCoach (50K). Stop reading
+              tested across @VanLife (138K) and @aaroncuha (101K). Stop reading
               comparison reviews.{' '}
               <strong className="text-brand-cream font-semibold">
                 Pick the kit that matches your stage. Start filming.

@@ -30,7 +30,7 @@ const faqs = [
   },
   {
     q: "What makes this different from YouTube courses and gurus?",
-    a: "Most YouTube educators teach you how to grow a YouTube channel. This book teaches you how to use YouTube to grow a business. Aaron runs two channels (170,000+ combined subscribers) and uses them to generate real client revenue — not to sell courses about YouTube.",
+    a: "Most YouTube educators teach you how to grow a YouTube channel. This book teaches you how to use YouTube to grow a business. Aaron runs two channels (239,000+ combined subscribers) and uses them to generate real client revenue — not to sell courses about YouTube.",
   },
   {
     q: "What's in the free Chapter Companion Kit?",

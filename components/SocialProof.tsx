@@ -41,8 +41,8 @@ function Counter({
 }
 
 const stats = [
-  { value: 200, suffix: 'K+', label: 'YouTube Subscribers' },
-  { value: 15, suffix: 'K+', label: 'Coaching Hours' },
+  { value: 239, suffix: 'K+', label: 'YouTube Subscribers' },
+  { value: 20, suffix: 'K+', label: 'Coaching Hours' },
   { value: 2, suffix: 'M+', label: 'Client Revenue Generated' },
   { value: 1, suffix: 'M+', label: 'Client Channel Subs Built' },
 ]

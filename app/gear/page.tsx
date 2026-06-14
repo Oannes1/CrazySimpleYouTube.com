@@ -7,7 +7,7 @@ import { gear, type GearTier } from '@/lib/gear-data'
 export const metadata: Metadata = {
   title: 'YouTube Equipment Guide | Aaron Cuha',
   description:
-    'The cameras, mics, lights, and tools Aaron Cuha actually uses across @VanLife (120K) and @GotCoach (50K). Updated for 2026. Real recommendations, real affiliate links.',
+    'The cameras, mics, lights, and tools Aaron Cuha actually uses across @VanLife (138K) and @aaroncuha (101K). Updated for 2026. Real recommendations, real affiliate links.',
 }
 
 const tierOrder: GearTier[] = ['starter', 'growth', 'pro']
@@ -83,11 +83,11 @@ export default function GearPage() {
             <p className="mt-6 font-body text-brand-cream/65 text-lg leading-relaxed max-w-2xl mx-auto">
               No sponsored picks. No theoretical lists. This is what runs across{' '}
               <strong className="text-brand-cream font-semibold">
-                @VanLife (120K subs)
+                @VanLife (138K subs)
               </strong>{' '}
               and{' '}
               <strong className="text-brand-cream font-semibold">
-                @GotCoach (50K subs)
+                @aaroncuha (101K subs)
               </strong>{' '}
               right now.
             </p>

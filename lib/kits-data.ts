@@ -136,7 +136,7 @@ export const kits: Kit[] = [
     audience: 'Channels with revenue, ready to scale production quality. Or businesses outsourcing to a content team.',
     priceRange: '$4,000 to $6,000',
     promise:
-      'Full-frame Sony body. Studio shotgun mic. Three-point Aputure lighting. The exact rig Aaron and his managed clients film @GotCoach with. This is what a $300K-per-year YouTube channel looks like behind the camera.',
+      'Full-frame Sony body. Studio shotgun mic. Three-point Aputure lighting. The exact rig Aaron and his managed clients film @aaroncuha with. This is what a $300K-per-year YouTube channel looks like behind the camera.',
     description:
       'Past 10K subs, your gear should match your output. Bigger sensor cameras for cinematic depth of field. Audio that fills out a podcast as easily as a long-form video. Lighting that lets you film any room any time. The ROI math is simple: at this stage one missed lead from a video that looked amateur costs more than this whole kit.',
     accent: 'purple',
@@ -180,7 +180,7 @@ export const kits: Kit[] = [
     audience: 'Travel creators, real estate agents filming property tours, anyone shooting outside a fixed studio.',
     priceRange: '$1,200 to $2,500',
     promise:
-      'The exact gear Aaron uses to film @VanLife (120K+ subs). Compact, durable, capable of shooting from a phone-sized rig or a full mirrorless setup as the situation demands. Fits in a single backpack.',
+      'The exact gear Aaron uses to film @VanLife (138K subs). Compact, durable, capable of shooting from a phone-sized rig or a full mirrorless setup as the situation demands. Fits in a single backpack.',
     description:
       'Static studios are easy. Mobile creation is hard. You need a kit that handles airports, weather, drone shots, and run-and-gun audio. This is the rig Aaron has tested across hundreds of @VanLife videos.',
     accent: 'teal',

@@ -60,8 +60,8 @@ export default function AboutAuthor() {
                 I&apos;m not a YouTube guru. I&apos;m a broker who figured out a system.
               </p>
               <p>
-                Aaron runs two YouTube channels — @VanLife (120,000+ subscribers)
-                and @GotCoach (50,000+ subscribers) — built on the exact strategies
+                Aaron runs two YouTube channels — @VanLife (138,000+ subscribers)
+                and @aaroncuha (101,000+ subscribers) — built on the exact strategies
                 in this book. The credential that matters most:{' '}
                 <strong className="text-brand-cream font-semibold">
                   he uses YouTube to run actual businesses
@@ -69,7 +69,7 @@ export default function AboutAuthor() {
                 To generate leads, close clients, and build revenue.
               </p>
               <p>
-                With over <strong className="text-brand-cream font-semibold">15,000 hours of one-on-one coaching</strong>,
+                With over <strong className="text-brand-cream font-semibold">20,000 hours of one-on-one coaching</strong>,
                 Aaron has helped hundreds of business owners build YouTube channels that
                 generate real revenue. He launched @VanLife specifically as a testing lab —
                 every strategy in this book was validated with real data before it
@@ -83,9 +83,9 @@ export default function AboutAuthor() {
 
             <div className="mt-7 flex flex-wrap gap-2.5">
               {[
-                '200K+ Subscribers',
-                '15K+ Coaching Hours',
-                'Tom Ferry Speaker',
+                '239K+ Subscribers',
+                '20K+ Coaching Hours',
+                'Tom Ferry Mastery Coach',
                 '12-State Broker',
                 'ICF Coach',
                 'NLP Master Practitioner',

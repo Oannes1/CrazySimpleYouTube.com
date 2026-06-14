@@ -59,7 +59,7 @@ export default function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3, ease }}
           >
-            ...and how 200,000+ business owners are copying the system
+            ...and how 239,000+ business owners are copying the system
           </motion.p>
 
           {/* Subhead — NLP presupposition */}
@@ -141,7 +141,7 @@ export default function Hero() {
           <div className="relative">
             <Image
               src="/book-display.jpg"
-              alt="Crazy Simple YouTube Vol. 01 — Turn Views Into Clients. A Success Guide by Aaron Cuha. #1 Amazon Bestseller."
+              alt="Crazy Simple YouTube Vol. 01 — Turn Views Into Clients. A Success Guide by Aaron Cuha. #1 Amazon New Release in Web Marketing."
               width={600}
               height={450}
               priority

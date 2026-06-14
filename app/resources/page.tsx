@@ -35,7 +35,7 @@ const bookCompanion = [
   {
     href: '/gear',
     title: 'Gear Recommendations',
-    desc: 'The cameras, mics, lights, and tools Aaron actually uses across @VanLife and @GotCoach. Updated for 2026.',
+    desc: 'The cameras, mics, lights, and tools Aaron actually uses across @VanLife and @aaroncuha. Updated for 2026.',
     badge: '65 products',
   },
   {
