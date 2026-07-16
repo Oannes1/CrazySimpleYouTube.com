@@ -21,6 +21,10 @@ const nextConfig = {
         destination: '/CSY-Chapter-Checklists.pdf',
         permanent: true,
       },
+      { source: '/viral', destination: '/vault', permanent: true },
+      { source: '/viral-vault', destination: '/vault', permanent: true },
+      { source: '/viralvault', destination: '/vault', permanent: true },
+      { source: '/viral-video-vault', destination: '/vault', permanent: true },
     ]
   },
 }
