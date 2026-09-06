@@ -56,7 +56,7 @@ export default function PromptPage({ params }: PageProps) {
           </nav>
 
           {/* Card */}
-          <PromptCard prompt={prompt} />
+          <PromptCard prompt={prompt} defaultExpanded />
 
           {/* Prev / next */}
           <div className="mt-8 grid sm:grid-cols-2 gap-3">

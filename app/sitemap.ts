@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { prompts } from '@/lib/prompts-data'
 import { kits } from '@/lib/kits-data'
+import { worksheets } from '@/lib/worksheets-data'
 
 const SITE = 'https://crazysimpleyoutube.com'
 
@@ -36,5 +37,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }))
 
-  return [...staticPages, ...promptPages, ...kitPages]
+  const worksheetPages: MetadataRoute.Sitemap = worksheets.map((w) => ({
+    url: `${SITE}/worksheets/${w.slug}`,
+    lastModified: now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }))
+
+  return [...staticPages, ...promptPages, ...kitPages, ...worksheetPages]
 }

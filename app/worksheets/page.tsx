@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import LeadCaptureForm from '@/components/LeadCaptureForm'
@@ -122,7 +123,15 @@ export default function WorksheetsPage() {
                         </span>
                       </div>
                       <h3 className="font-display text-base sm:text-lg font-normal uppercase text-brand-cream leading-tight">
-                        {w.title}
+                        {/* Each worksheet now has its own page. Without this link
+                            those 24 pages exist but nothing on the site points at
+                            them, which is the same as not having them. */}
+                        <Link
+                          href={`/worksheets/${w.slug}`}
+                          className="hover:text-brand-red transition-colors"
+                        >
+                          {w.title}
+                        </Link>
                       </h3>
                       <p className="mt-2 font-body text-xs text-brand-cream/50 leading-relaxed flex-1">
                         {w.shortDesc}

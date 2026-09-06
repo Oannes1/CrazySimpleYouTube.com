@@ -4,6 +4,8 @@ import Link from 'next/link'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import KitBulkButton from '@/components/KitBulkButton'
+import LeadCaptureForm from '@/components/LeadCaptureForm'
+import MobileHandoff from '@/components/MobileHandoff'
 import { kits } from '@/lib/kits-data'
 import { gear } from '@/lib/gear-data'
 import { amazonLink } from '@/lib/amazon'
@@ -297,6 +299,35 @@ export default function KitPage({ params }: PageProps) {
             ) : <div />}
           </div>
         </section>
+
+        {/* Save the kit.
+            61 kit pages, every one of them a real search entry point, and not
+            one of them had any way to capture the person who landed on it. The
+            prompt and worksheet pages have had this for months; kits were the
+            gap. Somebody researching gear is rarely buying in that session. */}
+        <div className="mb-10 rounded-2xl border border-brand-red/20 bg-brand-red/[0.04] p-6 sm:p-8">
+          <h2 className="font-display text-xl sm:text-2xl font-normal uppercase text-brand-cream">
+            Not buying today? Send yourself the kit.
+          </h2>
+          <p className="mt-2 font-body text-sm text-brand-cream/55 leading-relaxed max-w-xl">
+            We will email you this exact list so it is waiting when you are ready.
+            You will also get the new kits and tools as they go up, and you can
+            leave whenever you want.
+          </p>
+          <div className="mt-5 max-w-md">
+            <LeadCaptureForm
+              tags={['src_kits', `dl_kit_${kit.slug}`]}
+              listIds={[29]}
+              ctaLabel="Email me this kit"
+              loadingLabel="Sending..."
+              successHeading="On its way."
+              successText="Check your inbox in the next few minutes."
+              theme="dark"
+            />
+          </div>
+        </div>
+
+        <MobileHandoff assetLabel="kit" />
 
         {/* Back to all kits */}
         <div className="text-center">

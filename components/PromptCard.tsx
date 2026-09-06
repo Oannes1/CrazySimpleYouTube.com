@@ -12,8 +12,17 @@ const pillarColors: Record<Prompt['category'], string> = {
     'bg-purple-500/[0.08] text-purple-400 border-purple-500/20',
 }
 
-export default function PromptCard({ prompt }: { prompt: Prompt }) {
-  const [expanded, setExpanded] = useState(false)
+export default function PromptCard({
+  prompt,
+  defaultExpanded = false,
+}: {
+  prompt: Prompt
+  /** Open on load. True on a prompt's own page, where the prompt IS the page:
+   *  collapsed, both the prompt and the email capture below it sat one click
+   *  away from a visitor who arrived from search specifically to read it. */
+  defaultExpanded?: boolean
+}) {
+  const [expanded, setExpanded] = useState(defaultExpanded)
   const [copied, setCopied] = useState(false)
 
   async function copyPrompt() {

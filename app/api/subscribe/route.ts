@@ -78,6 +78,18 @@ function pickAssetForDelivery(tags: string[]): {
       pdfUrl: `${SITE}/pdfs/prompts/${slug}.pdf`,
     }
   }
+  // Kits are the one asset with no PDF, because the useful version of a gear
+  // kit is the live page: it carries current prices and the one-click cart.
+  // So the link we send is that page. Nothing is promised that does not exist.
+  const kitTag = tags.find((t) => t.startsWith('dl_kit_'))
+  if (kitTag) {
+    const slug = kitTag.replace('dl_kit_', '')
+    return {
+      assetName: `${humanize(slug)} kit`,
+      assetType: 'gear kit',
+      pdfUrl: `${SITE}/kits/${slug}`,
+    }
+  }
   return null
 }
 
