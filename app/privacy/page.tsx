@@ -40,10 +40,10 @@ export default function PrivacyPage() {
               <p className="mt-3">
                 If you have questions about your privacy, email{' '}
                 <a
-                  href="mailto:privacy@aaroncuha.com"
+                  href="mailto:ac@aaroncuha.com"
                   className="text-brand-red hover:text-brand-red-light underline"
                 >
-                  privacy@aaroncuha.com
+                  ac@aaroncuha.com
                 </a>
                 .
               </p>
@@ -172,10 +172,10 @@ export default function PrivacyPage() {
                 <li>
                   Request a copy of all data we have on you by emailing{' '}
                   <a
-                    href="mailto:privacy@aaroncuha.com"
+                    href="mailto:ac@aaroncuha.com"
                     className="text-brand-red hover:text-brand-red-light underline"
                   >
-                    privacy@aaroncuha.com
+                    ac@aaroncuha.com
                   </a>
                   .
                 </li>
@@ -230,10 +230,10 @@ export default function PrivacyPage() {
               <p>
                 Questions, requests, or complaints? Email{' '}
                 <a
-                  href="mailto:privacy@aaroncuha.com"
+                  href="mailto:ac@aaroncuha.com"
                   className="text-brand-red hover:text-brand-red-light underline"
                 >
-                  privacy@aaroncuha.com
+                  ac@aaroncuha.com
                 </a>
                 . We respond within 5 business days.
               </p>

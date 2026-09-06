@@ -190,10 +190,10 @@ export default function TermsPage() {
               <p>
                 Questions about these terms? Email{' '}
                 <a
-                  href="mailto:privacy@aaroncuha.com"
+                  href="mailto:ac@aaroncuha.com"
                   className="text-brand-red hover:text-brand-red-light underline"
                 >
-                  privacy@aaroncuha.com
+                  ac@aaroncuha.com
                 </a>
                 .
               </p>

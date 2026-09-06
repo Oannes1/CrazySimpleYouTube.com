@@ -38,12 +38,12 @@ const steps = [
   },
   {
     level: 4,
-    name: 'GROW Coaching',
-    price: '$997–$5K/mo',
+    name: 'Coaching',
+    price: '$749 to $3,999/mo',
     description:
-      'Personalized coaching, video production, and done-with-you growth.',
-    cta: 'Learn More',
-    href: 'https://aaroncuha.com',
+      'Traction, Momentum or Authority. Private calls on your numbers, a written plan within 24 hours of every one, and at the top tier your videos planned with you before you film.',
+    cta: 'See the tiers',
+    href: 'https://www.aaroncuha.com/coaching',
     external: true,
     featured: false,
   },

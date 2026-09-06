@@ -27,33 +27,31 @@ const tiers = [
     href: '/community',
   },
   {
-    name: 'GROW',
-    tag: 'Coaching + Strategy',
+    name: 'TRACTION',
+    tag: '$749/mo',
     description:
-      'For channels generating leads who want a coach to optimize the system they\'re already running. Twice-monthly 1:1 strategy calls, channel reviews, direct access between calls.',
-    bestFor: 'Channels with traction, ready to optimize',
+      'For owners who need a rhythm and someone holding the standard. Private time on your numbers every month, plus a small group that keeps you honest.',
+    bestFor: 'Publishing already, ready for a rhythm',
     bullets: [
-      '2x/month 1:1 strategy calls',
-      'Monthly channel audits',
-      'Direct access via Voxer',
-      'Templates + content calendars',
-      'Everything in Community',
+      'One 30-minute private call a month',
+      'Monthly small group, capped at eight owners',
+      'A written plan within 24 hours of every call',
+      'Everything in Systems Over Hustle',
     ],
     cta: 'Book a Call',
     href: '#book-call',
   },
   {
-    name: 'SCALE',
-    tag: 'Done With You',
+    name: 'MOMENTUM',
+    tag: '$1,599/mo',
     description:
-      'For channels with revenue who need execution help. Weekly strategy, custom thumbnails, basic editing support, content repurposing. You still film and own the brand.',
-    bestFor: 'Revenue-generating channels, limited time',
+      'For owners already publishing who want to move faster. More contact, and review between the calls rather than only on them.',
+    bestFor: 'Publishing consistently, want to move faster',
     bullets: [
-      'Weekly 1:1 strategy calls',
-      'Custom thumbnails (2x/mo)',
-      'Title and description writing',
-      'Content repurposing (Shorts, social)',
-      'Basic editing support',
+      'Two calls every other week, or one 60-minute a month',
+      'Email and async review between calls, not just on them',
+      'A written plan within 24 hours of every call',
+      'Everything in Traction',
     ],
     cta: 'Book a Call',
     href: '#book-call',
@@ -111,7 +109,7 @@ const faqs = [
   },
   {
     q: "What's the minimum commitment?",
-    a: 'Community is month-to-month, cancel anytime. Coaching tiers (GROW, SCALE) typically start with a 90-day commitment then go month-to-month. YouTube Management has a 6-month minimum because that\'s how long it takes to see real compounding results.',
+    a: 'Systems Over Hustle is month-to-month, cancel anytime. Coaching tiers typically start with a 90-day commitment then go month-to-month, because that is roughly how long it takes to see compounding results.',
   },
   {
     q: 'Do you guarantee results?',
@@ -119,7 +117,7 @@ const faqs = [
   },
   {
     q: "What if I haven't started a channel yet?",
-    a: 'Start with the book and the community. Once you have 5–10 published videos, you\'ll have something to optimize. That\'s when GROW or SCALE makes sense.',
+    a: 'Start with the book and the community. Once you have 5–10 published videos, you\'ll have something to optimize. That\'s when Traction or Momentum makes sense.',
   },
   {
     q: 'Can you guarantee my video will go viral?',

@@ -11,7 +11,10 @@ const LISTS = {
   COMMUNITY_WAITLIST: 25,      // Systems Over Hustle pre-launch
   SET_IN_STONE_WAITLIST: 26,   // Book 2 launch list
   BOOK_OWNER_VERIFIED: 27,     // confirmed book buyers
-  DISCOVERY_CALL: 28,          // /work-with-me leads
+  // Was 28, which DOES NOT EXIST in Brevo. Every id 1 to 60 was checked; 28
+  // is absent, and Brevo rejects a contact create with an invalid list id.
+  // 7 is AC YouTube Leads, where the rest of the site's leads land.
+  DISCOVERY_CALL: 7,           // /work-with-me leads
   WORKSHEETS_BUNDLE: 29,       // /worksheets downloaders
   PROMPTS_BUNDLE: 30,          // /prompts downloaders
 } as const

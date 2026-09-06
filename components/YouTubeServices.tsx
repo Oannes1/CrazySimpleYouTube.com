@@ -2,42 +2,42 @@
 
 import { motion } from 'framer-motion'
 
+// Mirrors src/data/services.ts on aaroncuha.com, which is the single source of
+// truth for the offer ladder. This file previously carried the RETIRED
+// production tiers (GROW $997, SCALE $1,500, ACCELERATE $2,500, ELEVATE
+// $3,750, DOMINATE $5,000) which sold done-for-you video editing and promised
+// "30-50+ leads/month". That whole ladder was replaced and editing was dropped
+// entirely, but this site kept selling it. If the ladder changes again, change
+// it in services.ts first and mirror it here.
 const tiers = [
   {
-    name: 'GROW',
-    price: '$997',
-    tag: 'DIY + Coaching',
-    desc: 'Weekly group coaching, channel audits, content calendars, and done-with-you systems. For self-motivated business owners who want expert guidance.',
-    highlights: ['Weekly strategy calls', 'Monthly channel audits', 'Templates & SEO tools'],
+    name: 'CHANNEL AUDIT AND PLAN',
+    price: '$497',
+    tag: 'One time',
+    desc: 'A complete written audit of your channel, delivered before we speak. Then 60 minutes going through every finding, one to one. Credited in full toward any tier below if you go further.',
+    highlights: ['Full written audit first', '60 minutes, one to one', 'A 90-day plan and your first ten topics'],
   },
   {
-    name: 'SCALE',
-    price: '$1,500',
-    tag: 'Coaching + Editing',
-    desc: 'Everything in GROW plus 1-on-1 strategy calls, custom thumbnails, basic editing support, and content repurposing into Shorts and social clips.',
-    highlights: ['1-on-1 strategy calls', '2 videos edited monthly', 'Content repurposing'],
+    name: 'TRACTION',
+    price: '$749',
+    tag: 'Coaching',
+    desc: 'For owners who need a rhythm and someone holding the standard. Private time on your numbers every month, plus a small group that keeps you honest.',
+    highlights: ['One 30-minute private call a month', 'Monthly small group, capped at eight', 'A written plan within 24 hours of every call'],
   },
   {
-    name: 'ACCELERATE',
-    price: '$2,500',
-    tag: 'Done-With-You',
-    desc: 'Four professional videos monthly, fully edited and optimized. Weekly strategy, keyword research per video, and monthly performance reports.',
-    highlights: ['4 pro videos/month', 'Full editing & optimization', 'ROI tracking & reports'],
+    name: 'MOMENTUM',
+    price: '$1,599',
+    tag: 'Coaching',
+    desc: 'For owners already publishing who want to move faster. More contact, and review between the calls rather than only on them.',
+    highlights: ['Two calls every other week, or one 60-minute', 'Email and async review between calls', 'A written plan within 24 hours of every call'],
     featured: true,
   },
   {
-    name: 'ELEVATE',
-    price: '$3,750',
-    tag: 'Full Funnel',
-    desc: 'Eight videos monthly plus lead generation systems, multi-platform distribution, and paid advertising across YouTube, Instagram, LinkedIn, and TikTok.',
-    highlights: ['8 pro videos/month', 'Lead magnets & CRM setup', 'Multi-platform distribution'],
-  },
-  {
-    name: 'DOMINATE',
-    price: '$5,000',
-    tag: 'Market Ownership',
-    desc: '12+ videos monthly with quarterly shoots, full funnel buildout, community management, and a dedicated account manager. 30-50+ leads/month expected.',
-    highlights: ['12+ videos/month', 'Full funnel & automation', 'Dedicated account manager'],
+    name: 'AUTHORITY',
+    price: '$3,999',
+    tag: 'Coaching',
+    desc: 'The most contact available. Weekly calls, and your videos planned with you before you film rather than fixed afterwards.',
+    highlights: ['Four calls a month, a week apart', 'Four videos planned with you before filming', 'Titles, descriptions, chapters and captions built for each'],
   },
 ]
 

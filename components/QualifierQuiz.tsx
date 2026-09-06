@@ -38,28 +38,31 @@ const questions: Question[] = [
   },
 ]
 
+// Names must match the live ladder in services.ts on aaroncuha.com. These were
+// GROW / SCALE / YouTube Management, all retired, and "YouTube Management" in
+// particular sold a done-for-you service that no longer exists.
 const recommendations = {
   community: {
-    name: 'Community',
+    name: 'Systems Over Hustle',
     why: 'You\'re early. Get the system, get the peer group, and start filming. Once you have momentum, we can talk about leveling up.',
     cta: 'Join the Community',
     href: '/community',
   },
   grow: {
-    name: 'GROW Coaching',
-    why: 'You have time and traction. What you need now is a coach to optimize the system you\'re already running.',
+    name: 'Traction',
+    why: 'You have time and traction. What you need now is a rhythm and someone holding the standard, with private time on your numbers every month.',
     cta: 'Channel Audit and Plan ($497)',
     href: 'https://www.aaroncuha.com/book-a-call',
   },
   scale: {
-    name: 'SCALE Done-With-You',
-    why: 'You have revenue but limited time. We help with execution while you stay focused on the business.',
+    name: 'Momentum',
+    why: 'You are already publishing and want to move faster. More contact, and review between the calls rather than only on them.',
     cta: 'Channel Audit and Plan ($497)',
     href: 'https://www.aaroncuha.com/book-a-call',
   },
   management: {
-    name: 'YouTube Management',
-    why: 'You have the business and the capital. You need the channel run for you so you can stay on what you do best.',
+    name: 'Authority',
+    why: 'You have the business and the capital. Weekly calls, and your videos planned with you before you film rather than fixed afterwards.',
     cta: 'Channel Audit and Plan ($497)',
     href: 'https://www.aaroncuha.com/book-a-call',
   },
