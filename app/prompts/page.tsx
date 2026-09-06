@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
+import CadenceBadge from '@/components/CadenceBadge'
 import PromptsGrid from '@/components/PromptsGrid'
 import LeadCaptureForm from '@/components/LeadCaptureForm'
 import { prompts } from '@/lib/prompts-data'
@@ -28,6 +29,7 @@ export default function PromptsPage() {
             <span className="font-body text-xs sm:text-sm tracking-[0.25em] uppercase text-brand-red font-medium">
               The Companion Library
             </span>
+            <CadenceBadge className="mb-4" />
             <h1 className="mt-4 font-display text-4xl sm:text-5xl lg:text-6xl font-normal uppercase text-brand-cream leading-[0.95]">
               Every AI Prompt
               <br />

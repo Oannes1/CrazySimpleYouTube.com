@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
+import CadenceBadge from '@/components/CadenceBadge'
 import { kits } from '@/lib/kits-data'
 import { gear } from '@/lib/gear-data'
 
@@ -43,6 +44,7 @@ export default function KitsPage() {
         <section className="relative max-w-5xl mx-auto px-5 sm:px-8 mb-16">
           <div className="text-center">
             <span className="font-accent text-2xl text-brand-red/90">just buy the kit</span>
+            <CadenceBadge className="mb-4" />
             <h1 className="mt-2 font-display text-4xl sm:text-5xl lg:text-6xl font-normal uppercase text-brand-cream leading-[0.95]">
               Done Deciding?
               <br />

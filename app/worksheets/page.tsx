@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
+import CadenceBadge from '@/components/CadenceBadge'
 import LeadCaptureForm from '@/components/LeadCaptureForm'
 import EmailGate from '@/components/EmailGate'
 import {
@@ -44,6 +45,7 @@ export default function WorksheetsPage() {
             <span className="font-body text-xs sm:text-sm tracking-[0.25em] uppercase text-brand-red font-medium">
               The Companion Library
             </span>
+            <CadenceBadge className="mb-4" />
             <h1 className="mt-4 font-display text-4xl sm:text-5xl lg:text-6xl font-normal uppercase text-brand-cream leading-[0.95]">
               24 Worksheets
               <br />
@@ -70,8 +72,8 @@ export default function WorksheetsPage() {
                 All 24 Worksheets, One PDF
               </h2>
               <p className="mt-3 font-body text-brand-cream/65 leading-relaxed">
-                Drop your email. We send the complete bundle plus a welcome
-                sequence with one tactical idea per week. Free.
+                Drop your email. We send the complete bundle, then a new free
+                tool every two weeks: a prompt, a kit, or a worksheet. Free.
               </p>
             </div>
             <div className="mt-6">
