@@ -41,8 +41,8 @@ const bookCompanion = [
   {
     href: '/community',
     title: 'Systems Over Hustle',
-    desc: 'The community where book readers turn the strategies into real results. Founding pricing locked for life.',
-    badge: '$47/mo',
+    desc: 'The community where book readers turn the strategies into real results. Founding pricing frozen for as long as you stay.',
+    badge: '$99/mo',
   },
   {
     href: '/work-with-me',

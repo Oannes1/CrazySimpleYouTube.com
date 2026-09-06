@@ -56,7 +56,7 @@ export default function BonusPage() {
             },
             {
               title: 'Community Pre-Access',
-              desc: 'First in line when doors open June 1, 2026',
+              desc: 'First in line, before the doors open publicly',
             },
           ].map((item) => (
             <div

@@ -6,7 +6,7 @@ import LeadCaptureForm from '@/components/LeadCaptureForm'
 export const metadata: Metadata = {
   title: 'The Crazy Simple YouTube Community | Aaron Cuha',
   description:
-    'Get feedback on your channel, ask questions, connect with creators. The Systems Over Hustle community where the strategies in Crazy Simple YouTube turn into real results. $47 a month.',
+    'Get feedback on your channel, ask questions, connect with creators. The Systems Over Hustle community where the strategies in Crazy Simple YouTube turn into real results. $99 a month.',
 }
 
 const COMMUNITY_URL = 'https://www.aaroncuha.com/community'
@@ -82,7 +82,7 @@ const faqs = [
   },
   {
     q: 'When does it launch?',
-    a: 'June 1, 2026. Founding members (first 100) lock in pricing for life. The waitlist is just a sign up. No payment until doors open.',
+    a: 'It is open now, in beta, and we are letting people in a group at a time so the coaching calls stay small. Waitlist goes first, in order. Founding members lock in $99/mo for as long as they stay. The waitlist is just a sign up, no payment.',
   },
 ]
 
@@ -112,17 +112,17 @@ export default function CommunityPage() {
                 The Waitlist
               </div>
               <h3 className="mt-3 font-display text-2xl sm:text-3xl font-normal uppercase text-brand-cream">
-                Doors Open
+                Waitlist Open
                 <br />
-                <span className="text-brand-red">June 1, 2026</span>
+                <span className="text-brand-red">Onboarding In Waves</span>
               </h3>
               <p className="mt-4 font-body text-sm text-brand-cream/60 leading-relaxed">
                 Sign up for the waitlist now. No payment. No card.{' '}
                 <strong className="text-brand-cream font-semibold">
-                  When doors open June 1, founding-100 members lock in $47/mo
-                  pricing for life
+                  Founding members lock in $99/mo, frozen for as long as they
+                  stay
                 </strong>{' '}
-                (or $450/yr).
+                (or $999/yr, which is one month free).
               </p>
 
               {/* Inline waitlist form */}
@@ -132,7 +132,7 @@ export default function CommunityPage() {
                   listIds={[25]}
                   ctaLabel="Get on the Waitlist"
                   successHeading="On the list."
-                  successText="We'll email you when the doors open June 1."
+                  successText="You're on the list. You get an invite before the doors open publicly."
                 />
               </div>
 
@@ -284,7 +284,7 @@ export default function CommunityPage() {
               Stop Building <span className="text-brand-red">Alone.</span>
             </h2>
             <p className="mt-4 font-body text-brand-cream/55">
-              Doors open June 1, 2026. Sign up free, lock in founding pricing
+              Open now and onboarding in waves. Sign up free, lock in founding pricing
               when the community opens.
             </p>
           </div>
@@ -295,7 +295,7 @@ export default function CommunityPage() {
               listIds={[25]}
               ctaLabel="Get on the Waitlist"
               successHeading="On the list."
-              successText="We'll email you when the doors open June 1."
+              successText="You're on the list. You get an invite before the doors open publicly."
             />
           </div>
 

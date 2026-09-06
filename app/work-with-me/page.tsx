@@ -353,32 +353,31 @@ export default function WorkWithMePage() {
               one-on-one with aaron
             </span>
             <h2 className="mt-1 font-display text-3xl sm:text-4xl lg:text-5xl font-normal uppercase text-brand-cream leading-[0.95]">
-              Book a Call
+              Channel Audit and Plan
             </h2>
 
             {/* Price block */}
             <div className="mt-6 flex items-baseline justify-center gap-3">
               <span className="font-display text-5xl sm:text-6xl font-normal uppercase text-brand-cream leading-none">
-                $250
+                $497
               </span>
               <span className="font-body text-brand-cream/50 text-base">
-                / 30 minutes
+                / full audit + 60 minute call
               </span>
             </div>
 
             <p className="mt-6 font-body text-brand-cream/70 leading-relaxed max-w-xl mx-auto">
-              30-minute working session with Aaron. We walk through your
-              channel (or your plan to start one), identify the actual
-              bottleneck, and map your next 90 days.{' '}
+              Aaron audits your channel in full before you meet, then walks
+              you through the whole thing on a 60 minute call: what is working,
+              what is costing you, and the plan for your next 90 days.{' '}
               <strong className="text-brand-cream font-semibold">
                 You&apos;ll leave with a clear plan, not a sales pitch.
               </strong>
             </p>
 
             <p className="mt-4 font-body text-sm text-brand-cream/55 leading-relaxed max-w-xl mx-auto">
-              The $250 is your skin in the game. If working together longer
-              term makes sense, the call fee gets credited toward your first
-              month of coaching.
+              The $497 is credited in full toward any coaching tier if you
+              decide to go further. You keep the written audit either way.
             </p>
 
             <a
@@ -418,7 +417,7 @@ export default function WorkWithMePage() {
               >
                 Start with the community
               </a>{' '}
-              ($47/mo) or{' '}
+              ($99/mo) or{' '}
               <a
                 href="/bonus"
                 className="text-brand-red hover:text-brand-red-light underline underline-offset-2 font-semibold"

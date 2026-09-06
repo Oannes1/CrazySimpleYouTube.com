@@ -3,7 +3,7 @@
 import { useState } from 'react'
 
 /**
- * Aaron's paid Stripe-powered booking page ($250 for 30 minutes).
+ * Aaron's paid Stripe-powered booking page (Channel Audit and Plan, $497).
  */
 const BOOK_A_CALL_URL = 'https://www.aaroncuha.com/book-a-call'
 
@@ -38,7 +38,12 @@ export default function DiscoveryCallForm() {
             `industry_${businessType.toLowerCase().replace(/\s+/g, '_')}`,
             `stage_${youtubeStage.toLowerCase().replace(/\s+/g, '_')}`,
           ],
-          listIds: [28],
+          // Brevo list 28 DOES NOT EXIST. It was almost certainly deleted, and
+          // Brevo rejects a contact create with an invalid list id, so every
+          // submission through this form has been failing. 7 is AC YouTube
+          // Leads, 4 is the Systems Over Hustle newsletter, which is where the
+          // rest of the site's leads go.
+          listIds: [7, 4],
           attributes: {
             INDUSTRY: businessType,
             YOUTUBE_STAGE: youtubeStage,
@@ -166,7 +171,7 @@ export default function DiscoveryCallForm() {
         </p>
       )}
       <p className="font-body text-xs text-brand-cream/30 text-center pt-1">
-        30-minute call. No high-pressure pitch. If we&apos;re not a fit,
+        60-minute call. No high-pressure pitch. If we&apos;re not a fit,
         Aaron will tell you.
       </p>
     </form>
