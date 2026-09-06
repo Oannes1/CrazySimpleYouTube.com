@@ -9,6 +9,29 @@ const socials = [
   { name: 'TikTok', href: 'https://tiktok.com/@aaroncuha' },
 ]
 
+/* Aaron's other properties. The only link off this site used to be
+   "AaronCuha.com" set at 15% opacity next to Privacy and Terms, which is a
+   link a reader will never see and a crawler will barely weigh. A book site
+   that cannot hand a reader to the coach, the community or the assessment is
+   a dead end wearing a domain name. */
+const network = [
+  {
+    name: 'AaronCuha.com',
+    href: 'https://www.aaroncuha.com',
+    blurb: 'Coaching, keynotes, and the rest of the books',
+  },
+  {
+    name: 'Systems Over Hustle',
+    href: 'https://community.aaroncuha.com',
+    blurb: 'The community, the course library, and live group calls',
+  },
+  {
+    name: 'The Proof Test',
+    href: 'https://theprooftest.com',
+    blurb: 'Two minutes to see if your channel is built or bluffing',
+  },
+]
+
 export default function Footer() {
   return (
     <footer className="bg-brand-charcoal border-t border-white/[0.04]">
@@ -29,6 +52,36 @@ export default function Footer() {
         >
           Get Your Copy on Amazon
         </a>
+      </div>
+
+      {/* Network */}
+      <div className="border-t border-white/[0.04]">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 py-10">
+          <p className="font-body text-[0.6rem] tracking-[0.2em] uppercase text-brand-cream/30 font-medium mb-5">
+            More from Aaron
+          </p>
+          <div className="grid sm:grid-cols-3 gap-4">
+            {network.map((n) => (
+              <a
+                key={n.href}
+                href={n.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block rounded-xl border border-white/[0.06] px-5 py-4 hover:border-brand-red/25 hover:bg-white/[0.02] transition-colors"
+              >
+                <span className="block font-body font-bold text-sm text-brand-cream/80 group-hover:text-brand-cream">
+                  {n.name}
+                  <span aria-hidden="true" className="ml-1.5 text-brand-red">
+                    &rarr;
+                  </span>
+                </span>
+                <span className="mt-1 block font-body text-xs text-brand-cream/35 leading-relaxed">
+                  {n.blurb}
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Links */}

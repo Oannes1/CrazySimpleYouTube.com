@@ -27,6 +27,25 @@ const tiers = [
     href: '/community',
   },
   {
+    // The paid entry point. This site had no audit tier at all, which left a
+    // gap between a $99 community and a $749 retainer, and left the "no free
+    // audits" rule with nothing to point people at instead.
+    name: 'CHANNEL AUDIT AND PLAN',
+    tag: '$497 one time',
+    description:
+      'The full diagnosis and a real plan before you commit to anything monthly. Written audit first, then an hour walking you through every finding.',
+    bestFor: 'You want the diagnosis before the commitment',
+    bullets: [
+      'A complete written audit, delivered before we speak',
+      '60 minutes one to one walking through every finding',
+      'A 90-day plan: what to publish, in what order, and why',
+      'Yours to keep and hand to your team either way',
+      'Credits in full toward your first month of any tier',
+    ],
+    cta: 'Book the Audit',
+    href: 'https://www.aaroncuha.com/youtube-strategy-session',
+  },
+  {
     name: 'TRACTION',
     tag: '$749/mo',
     description:
@@ -58,17 +77,22 @@ const tiers = [
     featured: true,
   },
   {
-    name: 'YouTube Management',
-    tag: 'Done For You',
+    // Replaces the old 'YouTube Management' done-for-you tier, which promised
+    // editing, thumbnails and scheduling that Aaron no longer sells. It was
+    // retired from aaroncuha.com months ago and left standing here, so this
+    // site was taking calls for a product that does not exist. AUTHORITY is
+    // what actually sits at the top of the ladder now.
+    name: 'AUTHORITY',
+    tag: '$3,999/mo',
     description:
-      'For established businesses ready to scale YouTube as a primary lead channel. Aaron\'s team runs the channel: editing, thumbnails, SEO, scheduling, analytics. You just film.',
-    bestFor: 'Established businesses scaling YouTube',
+      'For owners ready to own the search results in their market. The semantic work gets done with you: what to make, what it ranks for, and what to fix once the retention data lands.',
+    bestFor: 'Ready to own your market in search',
     bullets: [
-      '4–12+ pro videos monthly',
-      'Full editing & optimization',
-      'Lead gen + funnel buildout',
-      'Multi-platform distribution',
-      'Optional: paid amplification',
+      'Four 30-minute calls or two 60-minute calls a month',
+      'Four videos a month planned with you before you film',
+      'Keywords, titles, descriptions and tags built for each one',
+      'Semantic topic mapping so a video ranks for a subject, not a phrase',
+      'Everything in Momentum, community and group calls included',
     ],
     cta: 'Book a Call',
     href: '#book-call',
@@ -182,7 +206,7 @@ export default function WorkWithMePage() {
               Pick Your Level
             </h2>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
             {tiers.map((tier) => (
               <div
                 key={tier.name}
