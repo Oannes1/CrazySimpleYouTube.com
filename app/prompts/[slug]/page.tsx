@@ -7,15 +7,16 @@ import PromptCard from '@/components/PromptCard'
 import { prompts } from '@/lib/prompts-data'
 
 interface PageProps {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export function generateStaticParams() {
   return prompts.map((p) => ({ slug: p.slug }))
 }
 
-export function generateMetadata({ params }: PageProps): Metadata {
-  const prompt = prompts.find((p) => p.slug === params.slug)
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params
+  const prompt = prompts.find((p) => p.slug === slug)
   if (!prompt) return { title: 'Prompt not found' }
 
   return {
@@ -29,11 +30,12 @@ export function generateMetadata({ params }: PageProps): Metadata {
   }
 }
 
-export default function PromptPage({ params }: PageProps) {
-  const prompt = prompts.find((p) => p.slug === params.slug)
+export default async function PromptPage({ params }: PageProps) {
+  const { slug } = await params
+  const prompt = prompts.find((p) => p.slug === slug)
   if (!prompt) notFound()
 
-  const idx = prompts.findIndex((p) => p.slug === params.slug)
+  const idx = prompts.findIndex((p) => p.slug === slug)
   const prev = idx > 0 ? prompts[idx - 1] : null
   const next = idx < prompts.length - 1 ? prompts[idx + 1] : null
 

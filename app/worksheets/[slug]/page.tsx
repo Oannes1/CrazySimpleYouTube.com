@@ -25,7 +25,7 @@ import {
  */
 
 interface PageProps {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 const partColors: Record<WorksheetPart, string> = {
@@ -39,8 +39,9 @@ export function generateStaticParams() {
   return worksheets.map((w) => ({ slug: w.slug }))
 }
 
-export function generateMetadata({ params }: PageProps): Metadata {
-  const w = worksheets.find((x) => x.slug === params.slug)
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params
+  const w = worksheets.find((x) => x.slug === slug)
   if (!w) return { title: 'Worksheet not found' }
 
   const desc = `${w.shortDesc} A free printable worksheet from Crazy Simple YouTube, chapter ${w.chapter}. Takes about ${w.timeMinutes} minutes.`
@@ -56,11 +57,12 @@ export function generateMetadata({ params }: PageProps): Metadata {
   }
 }
 
-export default function WorksheetPage({ params }: PageProps) {
-  const w = worksheets.find((x) => x.slug === params.slug)
+export default async function WorksheetPage({ params }: PageProps) {
+  const { slug } = await params
+  const w = worksheets.find((x) => x.slug === slug)
   if (!w) notFound()
 
-  const idx = worksheets.findIndex((x) => x.slug === params.slug)
+  const idx = worksheets.findIndex((x) => x.slug === slug)
   const prev = idx > 0 ? worksheets[idx - 1] : null
   const next = idx < worksheets.length - 1 ? worksheets[idx + 1] : null
 
@@ -123,8 +125,8 @@ export default function WorksheetPage({ params }: PageProps) {
             <div className="mt-5">
               <EmailGate
                 pdfUrl={worksheetPdfUrl(w)}
-                tags={['src_worksheets', `dl_worksheet_${w.slug}`]}
-                listIds={[29]}
+                form="worksheet"
+                asset={w.slug}
                 assetName={`${w.title} (Chapter ${w.chapter} worksheet)`}
                 assetType="worksheet"
               >

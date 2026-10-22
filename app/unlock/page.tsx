@@ -10,13 +10,13 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 }
 
-export default function UnlockPage({
+export default async function UnlockPage({
   searchParams,
 }: {
-  searchParams: { next?: string }
+  searchParams: Promise<{ next?: string }>
 }) {
   // Sanitize: only allow same-origin /pdfs/* paths
-  const raw = searchParams.next || ''
+  const raw = (await searchParams).next || ''
   const next = raw.startsWith('/pdfs/') ? raw : '/resources'
 
   // Try to derive a friendly asset name from the path

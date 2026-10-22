@@ -16,7 +16,7 @@ import type { NextRequest } from 'next/server'
  */
 const PUBLIC_PDFS = ['/pdfs/top-25-viral-blueprints.pdf']
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl
 
   // Only guard PDF assets

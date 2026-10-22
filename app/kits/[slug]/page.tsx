@@ -11,15 +11,16 @@ import { gear } from '@/lib/gear-data'
 import { amazonLink } from '@/lib/amazon'
 
 interface PageProps {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export function generateStaticParams() {
   return kits.map((k) => ({ slug: k.slug }))
 }
 
-export function generateMetadata({ params }: PageProps): Metadata {
-  const kit = kits.find((k) => k.slug === params.slug)
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params
+  const kit = kits.find((k) => k.slug === slug)
   if (!kit) return { title: 'Kit not found' }
   return {
     title: `${kit.name} | Crazy Simple YouTube Gear Kits`,
@@ -54,12 +55,13 @@ const accentClasses: Record<string, { wash: string; numeral: string; rule: strin
   },
 }
 
-export default function KitPage({ params }: PageProps) {
-  const kit = kits.find((k) => k.slug === params.slug)
+export default async function KitPage({ params }: PageProps) {
+  const { slug } = await params
+  const kit = kits.find((k) => k.slug === slug)
   if (!kit) notFound()
 
   const cls = accentClasses[kit.accent]
-  const idx = kits.findIndex((k) => k.slug === params.slug)
+  const idx = kits.findIndex((k) => k.slug === slug)
   const prev = idx > 0 ? kits[idx - 1] : null
   const next = idx < kits.length - 1 ? kits[idx + 1] : null
 
@@ -316,8 +318,8 @@ export default function KitPage({ params }: PageProps) {
           </p>
           <div className="mt-5 max-w-md">
             <LeadCaptureForm
-              tags={['src_kits', `dl_kit_${kit.slug}`]}
-              listIds={[29]}
+              form="kit"
+              asset={kit.slug}
               ctaLabel="Email me this kit"
               loadingLabel="Sending..."
               successHeading="On its way."

@@ -68,8 +68,7 @@ export default function PromptsPage() {
             </div>
             <div className="mt-7">
               <LeadCaptureForm
-                tags={['src_prompts', 'dl_prompts_bundle']}
-                listIds={[30]}
+                form="prompts_bundle"
                 ctaLabel={`Send Me All ${prompts.length} Prompts`}
                 successHeading="Bundle ready."
                 successText="Click below to grab the PDF. We also emailed it to you."
@@ -142,8 +141,7 @@ export default function PromptsPage() {
             </div>
             <div className="mt-5">
               <LeadCaptureForm
-                tags={['src_prompts', 'dl_prompts_bundle']}
-                listIds={[30]}
+                form="prompts_bundle"
                 ctaLabel="Send Me the Bundle"
                 successHeading="Bundle ready."
                 successText="Check your inbox. PDF opens in a new tab now."

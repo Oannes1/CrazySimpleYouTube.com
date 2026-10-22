@@ -196,8 +196,8 @@ export default function PromptCard({
                 </button>
                 <EmailGate
                   pdfUrl={promptPdfUrl(prompt)}
-                  tags={['src_prompts', `dl_prompt_${prompt.slug}`]}
-                  listIds={[30]}
+                  form="prompt"
+                  asset={prompt.slug}
                   assetName={prompt.title}
                   assetType="prompt"
                 >
