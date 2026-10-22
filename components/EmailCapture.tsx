@@ -22,7 +22,7 @@ export default function EmailCapture() {
         body: JSON.stringify({
           email,
           firstName,
-          tags: ['src_homepage', 'dl_companion_kit'],
+          form: 'homepage',
         }),
       })
 

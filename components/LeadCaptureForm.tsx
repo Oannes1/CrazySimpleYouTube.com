@@ -3,10 +3,10 @@
 import { useState } from 'react'
 
 interface LeadCaptureFormProps {
-  /** Brevo tags to apply on submit, e.g. ["src_book2", "dl_book2_chapter1"] */
-  tags: string[]
-  /** Optional additional Brevo list IDs to add the contact to */
-  listIds?: number[]
+  /** Form name the server maps to Brevo lists and tags, e.g. "book2_waitlist" */
+  form: string
+  /** Asset slug for per-asset forms (worksheet, prompt, kit) */
+  asset?: string
   /** Optional URL to redirect to on success */
   redirectUrl?: string
   /** Delay before redirect (ms) */
@@ -28,8 +28,8 @@ interface LeadCaptureFormProps {
 }
 
 export default function LeadCaptureForm({
-  tags,
-  listIds,
+  form,
+  asset,
   redirectUrl,
   redirectDelay = 2500,
   ctaLabel = 'Get Free Access',
@@ -62,8 +62,8 @@ export default function LeadCaptureForm({
           email,
           firstName,
           lastName: lastName || undefined,
-          tags,
-          listIds,
+          form,
+          asset,
         }),
       })
 

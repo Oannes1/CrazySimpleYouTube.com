@@ -1,4 +1,6 @@
+import { randomUUID } from 'crypto'
 import { NextRequest, NextResponse } from 'next/server'
+import { checkBotId } from 'botid/server'
 
 /**
  * Viral Video Vault combined form handler.
@@ -15,7 +17,8 @@ import { NextRequest, NextResponse } from 'next/server'
  *   - Creates/updates a Brevo contact
  *   - Always adds to VAULT_OPT_2026 (list 31) + master Companion list (21)
  *   - If bookPurchased: also adds to BOOK_BUYER_2026 (list 32) + tags
- *   - Uploads the receipt to Supabase Storage if configured
+ *   - Uploads the receipt to Supabase Storage if configured, under a random
+ *     file name, and stores a signed link (not a public one) in Brevo
  *   - Fires the Vault Delivery email (template 106) for everyone
  *   - Fires the Bonus Call Confirmation email (template 107) for book buyers
  */
@@ -41,16 +44,20 @@ const VAULT_PDF_URL = `${SITE}/pdfs/top-25-viral-blueprints.pdf`
 
 const MAX_FILE_BYTES = 5 * 1024 * 1024
 const ALLOWED_TYPES = ['application/pdf', 'image/jpeg', 'image/png']
+const RECEIPT_EXT: Record<string, string> = {
+  'application/pdf': 'pdf',
+  'image/jpeg': 'jpg',
+  'image/png': 'png',
+}
+// How long the receipt link saved on the Brevo contact keeps working.
+const RECEIPT_LINK_SECONDS = 60 * 60 * 24 * 365
 
-async function uploadReceipt(
-  file: File,
-  firstName: string
-): Promise<string | null> {
+async function uploadReceipt(file: File): Promise<string | null> {
   if (!SUPABASE_URL || !SUPABASE_SECRET) return null
   try {
-    const ext = file.name.split('.').pop() || 'bin'
-    const safeName = firstName.toLowerCase().replace(/[^a-z0-9]/g, '')
-    const path = `receipts/${safeName}-${Date.now()}.${ext}`
+    // Random name so nobody can guess another buyer's receipt path
+    const ext = RECEIPT_EXT[file.type] || 'bin'
+    const path = `receipts/${randomUUID()}.${ext}`
     const buf = Buffer.from(await file.arrayBuffer())
 
     const res = await fetch(
@@ -69,7 +76,26 @@ async function uploadReceipt(
       console.error('Supabase receipt upload failed:', res.status)
       return null
     }
-    return `${SUPABASE_URL}/storage/v1/object/public/vault-receipts/${path}`
+
+    // Signed link, so the receipt still opens once the bucket is private
+    const signed = await fetch(
+      `${SUPABASE_URL}/storage/v1/object/sign/vault-receipts/${path}`,
+      {
+        method: 'POST',
+        headers: {
+          apikey: SUPABASE_SECRET,
+          Authorization: `Bearer ${SUPABASE_SECRET}`,
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({ expiresIn: RECEIPT_LINK_SECONDS }),
+      }
+    )
+    if (!signed.ok) {
+      console.error('Supabase receipt signing failed:', signed.status)
+      return null
+    }
+    const { signedURL } = (await signed.json()) as { signedURL?: string }
+    return signedURL ? `${SUPABASE_URL}/storage/v1${signedURL}` : null
   } catch (e) {
     console.error('Receipt upload error:', e)
     return null
@@ -104,6 +130,11 @@ async function sendTemplate(
 
 export async function POST(request: NextRequest) {
   try {
+    const verdict = await checkBotId()
+    if (verdict.isBot) {
+      return NextResponse.json({ error: 'Access denied' }, { status: 403 })
+    }
+
     if (!BREVO_API_KEY) {
       return NextResponse.json(
         { error: 'Server configuration error' },
@@ -142,7 +173,7 @@ export async function POST(request: NextRequest) {
           { status: 400 }
         )
       }
-      receiptUrl = (await uploadReceipt(receipt, firstName)) || ''
+      receiptUrl = (await uploadReceipt(receipt)) || ''
     }
 
     // Build Brevo contact.

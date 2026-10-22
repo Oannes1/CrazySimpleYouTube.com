@@ -32,22 +32,9 @@ export default function DiscoveryCallForm() {
         body: JSON.stringify({
           email,
           firstName,
-          tags: [
-            'src_workwithme',
-            'discovery_call_request',
-            `industry_${businessType.toLowerCase().replace(/\s+/g, '_')}`,
-            `stage_${youtubeStage.toLowerCase().replace(/\s+/g, '_')}`,
-          ],
-          // Brevo list 28 DOES NOT EXIST. It was almost certainly deleted, and
-          // Brevo rejects a contact create with an invalid list id, so every
-          // submission through this form has been failing. 7 is AC YouTube
-          // Leads, 4 is the Systems Over Hustle newsletter, which is where the
-          // rest of the site's leads go.
-          listIds: [7, 4],
-          attributes: {
-            INDUSTRY: businessType,
-            YOUTUBE_STAGE: youtubeStage,
-          },
+          form: 'discovery_call',
+          industry: businessType,
+          youtubeStage,
         }),
       })
 
