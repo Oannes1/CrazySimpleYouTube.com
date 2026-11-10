@@ -43,7 +43,7 @@ function vaultDeliveryHtml() {
 <table role="presentation" class="container" width="600">
   <tr><td><div class="h-stripe"></div></td></tr>
   <tr><td class="pad" style="padding-bottom:0;">
-    <div class="eyebrow">LISTING VELOCITY COHORT</div>
+    <div class="eyebrow">CRAZY SIMPLE YOUTUBE</div>
     <h1 class="h1">Your <span class="red">Viral Video Vault</span> is here.</h1>
   </td></tr>
   <tr><td class="pad" style="padding-top:14px;padding-bottom:0;">
@@ -63,7 +63,7 @@ function vaultDeliveryHtml() {
     <p class="signature">Aaron</p>
   </td></tr>
   <tr><td class="pad" style="padding-top:0;"><hr class="divider">
-    <p class="small"><strong style="color:rgba(250,247,238,0.7);">P.S.</strong> If you confirmed you bought the book, watch your inbox. I am sending the bonus call details separately.</p>
+    <p class="small"><strong style="color:rgba(250,247,238,0.7);">P.S.</strong> These blueprints go hand in hand with my book, Crazy Simple YouTube. If you do not have it yet, <a href="https://www.amazon.com/dp/B0GWYK8TX6" style="color:#B8860B;text-decoration:underline;">grab it on Amazon</a>.</p>
   </td></tr>
   <tr><td class="footer">
     <a href="https://crazysimpleyoutube.com">crazysimpleyoutube.com</a>

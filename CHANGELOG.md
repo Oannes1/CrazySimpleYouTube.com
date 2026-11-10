@@ -2,6 +2,36 @@
 
 Newest first. One entry per working session. Plain language, no dashes.
 
+## 2026-11-10 | Viral Video Vault email and PDF cover made right for any signup
+
+**Why**
+- Aaron wants to use the Vault as a lead magnet on the website. Both the delivery
+  email and the PDF cover were labeled for the Listing Velocity cohort.
+
+**Done**
+- Brevo template 106 ("Your Viral Video Vault is here."), changed live through the
+  Brevo API. Two edits only:
+  - Top label "LISTING VELOCITY COHORT" now reads "CRAZY SIMPLE YOUTUBE".
+  - The P.S. about the book buyer bonus call is replaced with: "These blueprints go
+    hand in hand with my book, Crazy Simple YouTube. If you do not have it yet, grab
+    it on Amazon." (links to the Amazon listing).
+  Subject, sender, body, button and the PDF link are unchanged.
+- `scripts/create-vault-templates.js` carries the same two edits so the repo copy of
+  the template matches what is live in Brevo.
+- `public/pdfs/top-25-viral-blueprints.pdf`: the cover line "FOR LISTING VELOCITY
+  CLIENTS" is removed. Still 108 pages. A page by page text comparison shows page 1
+  as the only page that differs. The MASTER and TOP 10 documents keep that line.
+
+**Left open (waiting on Aaron)**
+- The book checkbox on /vault, `/vault/thank-you` and Brevo template 107 still promise
+  a 2 hour live Zoom in "late June 2026".
+- `/vault/thank-you` and the last page of the PDF still list the old coaching tiers
+  and "YouTube Management".
+- The form still tags every signup `VAULT_SOURCE: session-6-2026` and `cohort-2026`.
+  A new website lead magnet form should send its own source.
+- The PDF cover runs four lines past the first page (title line, site links, call
+  link, handles land alone on page 2). That was true before today.
+
 ## 2026-11-10 | Viral Video Vault PDF: founder line corrected
 
 **Done**
