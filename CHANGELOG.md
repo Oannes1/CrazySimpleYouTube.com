@@ -2,6 +2,35 @@
 
 Newest first. One entry per working session. Plain language, no dashes.
 
+## 2026-11-10 | Viral Video Vault PDF: cover now fits on page 1
+
+**Why**
+- The cover ran long. Page 1 ended at "Coach Aaron Cuha" and the next four lines
+  (the coach title line, the two site links, the strategy call link and the social
+  handles) sat alone at the top of an otherwise blank page 2.
+
+**Done**
+- `public/pdfs/top-25-viral-blueprints.pdf` rebuilt with tighter cover spacing. The
+  whole cover is on page 1 and "HOW TO USE THIS PLAYBOOK" starts page 2.
+- Spacing only. No wording changed anywhere, including the last page. The cover has
+  the same lines in the same order, and all three cover links still click through.
+- Page count is now 107 (was 108). Old pages 3 to 108 match new pages 2 to 107 in a
+  page by page text comparison. All 82 links in the document are still there. The
+  table of contents has no page numbers, so nothing else depends on the count.
+- What moved: the gap above "CRAZY SIMPLE YOUTUBE" (60pt to 18pt), the gap under the
+  subtitle (36pt to 12pt) and the gap under "DEPLOYABLE VIRAL BLUEPRINTS" (112pt of
+  filler to 36pt). Top and bottom white space on the cover now match.
+- Same file also replaced in the book folder (old one archived as V5), both Drive
+  copies and the community library. The generator stays out of this repo because
+  the repo is public.
+
+**Left open (waiting on Aaron)**
+- This closes the cover item in the entry below. The other three items there are
+  still open.
+- The MASTER (50 blueprints) and TOP 10 documents for Listing Velocity clients have
+  the same four line cover overflow. They were left alone on purpose. They are not
+  served from this site.
+
 ## 2026-11-10 | Viral Video Vault email and PDF cover made right for any signup
 
 **Why**
