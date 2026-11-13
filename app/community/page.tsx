@@ -128,8 +128,7 @@ export default function CommunityPage() {
               {/* Inline waitlist form */}
               <div className="mt-6 text-left">
                 <LeadCaptureForm
-                  tags={['src_community', 'community_waitlist']}
-                  listIds={[25]}
+                  form="community_waitlist"
                   ctaLabel="Get on the Waitlist"
                   successHeading="On the list."
                   successText="You're on the list. You get an invite before the doors open publicly."
@@ -161,8 +160,7 @@ export default function CommunityPage() {
 
             <div className="mt-6 max-w-md">
               <LeadCaptureForm
-                tags={['src_community', 'community_waitlist', 'book_owner_unverified']}
-                listIds={[25]}
+                form="community_waitlist_book_owner"
                 ctaLabel="Claim My 3 Months Free"
                 successHeading="On the list."
                 successText="We'll email you the day the community opens with your invite link."
@@ -291,8 +289,7 @@ export default function CommunityPage() {
 
           <div className="rounded-2xl bg-white/[0.02] border border-white/[0.08] p-7 sm:p-9">
             <LeadCaptureForm
-              tags={['src_community', 'community_waitlist']}
-              listIds={[25]}
+              form="community_waitlist"
               ctaLabel="Get on the Waitlist"
               successHeading="On the list."
               successText="You're on the list. You get an invite before the doors open publicly."

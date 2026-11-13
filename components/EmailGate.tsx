@@ -22,10 +22,10 @@ function writeCookie(name: string, value: string, days: number) {
 interface EmailGateProps {
   /** PDF URL the user gets after opting in */
   pdfUrl: string
-  /** Brevo tags (cumulative). e.g. ['src_prompts', 'dl_prompt_youtube-business-case-builder'] */
-  tags: string[]
-  /** Brevo list IDs in addition to the master Companion Kit list (21) */
-  listIds?: number[]
+  /** Form name the server maps to Brevo lists and tags, e.g. 'prompt' */
+  form: string
+  /** Asset slug for per-asset forms, e.g. 'youtube-business-case-builder' */
+  asset?: string
   /** Document title for context, e.g. "YouTube Business Case Builder" */
   assetName: string
   /** Asset type for headline copy */
@@ -38,8 +38,8 @@ interface EmailGateProps {
 
 export default function EmailGate({
   pdfUrl,
-  tags,
-  listIds,
+  form,
+  asset,
   assetName,
   assetType = 'document',
   children,
@@ -77,7 +77,7 @@ export default function EmailGate({
       const res = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, firstName, tags, listIds }),
+        body: JSON.stringify({ email, firstName, form, asset }),
       })
       if (!res.ok) {
         const data = await res.json().catch(() => ({}))

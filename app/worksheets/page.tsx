@@ -78,8 +78,7 @@ export default function WorksheetsPage() {
             </div>
             <div className="mt-6">
               <LeadCaptureForm
-                tags={['src_worksheets', 'dl_worksheets_bundle']}
-                listIds={[29]}
+                form="worksheets_bundle"
                 ctaLabel="Send Me the Bundle"
                 successHeading="Bundle ready."
                 successText="Click below to grab the PDF. We also emailed it to you."
@@ -146,8 +145,8 @@ export default function WorksheetsPage() {
                       <div className="mt-4">
                         <EmailGate
                           pdfUrl={worksheetPdfUrl(w)}
-                          tags={['src_worksheets', `dl_worksheet_${w.slug}`]}
-                          listIds={[29]}
+                          form="worksheet"
+                          asset={w.slug}
                           assetName={`${w.title} (Chapter ${w.chapter} worksheet)`}
                           assetType="worksheet"
                         >

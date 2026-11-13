@@ -23,7 +23,7 @@ export default function BonusForm() {
         body: JSON.stringify({
           firstName,
           email,
-          tags: ['src_bonus', 'dl_companion_kit'],
+          form: 'bonus',
         }),
       })
 

@@ -1,4 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { checkBotId } from 'botid/server'
+import { z } from 'zod'
+import { worksheets } from '@/lib/worksheets-data'
+import { prompts } from '@/lib/prompts-data'
+import { kits } from '@/lib/kits-data'
 
 const BREVO_API_KEY = process.env.BREVO_API_KEY
 
@@ -177,41 +182,144 @@ async function sendWelcomeEmail(
 }
 
 /**
- * Subscribe a contact to Brevo with cumulative tags + attributes.
+ * Every form on the site, keyed by name. The server decides which lists and
+ * tags each form gets. The browser only says which form it is, so nobody can
+ * post their own list IDs or attributes and drop an address onto any list.
+ * COMPANION_KIT (21) is always added on top as the master pool.
+ */
+type AssetKind = 'worksheet' | 'prompt' | 'kit'
+
+const FORMS: Record<
+  string,
+  { lists: number[]; tags: string[]; asset?: AssetKind }
+> = {
+  homepage: { lists: [], tags: ['src_homepage', 'dl_companion_kit'] },
+  bonus: { lists: [], tags: ['src_bonus', 'dl_companion_kit'] },
+  // 7 is AC YouTube Leads, 4 is the Systems Over Hustle newsletter.
+  discovery_call: {
+    lists: [LISTS.DISCOVERY_CALL, 4],
+    tags: ['src_workwithme', 'discovery_call_request'],
+  },
+  worksheets_bundle: {
+    lists: [LISTS.WORKSHEETS_BUNDLE],
+    tags: ['src_worksheets', 'dl_worksheets_bundle'],
+  },
+  worksheet: {
+    lists: [LISTS.WORKSHEETS_BUNDLE],
+    tags: ['src_worksheets'],
+    asset: 'worksheet',
+  },
+  prompts_bundle: {
+    lists: [LISTS.PROMPTS_BUNDLE],
+    tags: ['src_prompts', 'dl_prompts_bundle'],
+  },
+  prompt: {
+    lists: [LISTS.PROMPTS_BUNDLE],
+    tags: ['src_prompts'],
+    asset: 'prompt',
+  },
+  kit: { lists: [LISTS.WORKSHEETS_BUNDLE], tags: ['src_kits'], asset: 'kit' },
+  community_waitlist: {
+    lists: [LISTS.COMMUNITY_WAITLIST],
+    tags: ['src_community', 'community_waitlist'],
+  },
+  community_waitlist_book_owner: {
+    lists: [LISTS.COMMUNITY_WAITLIST],
+    tags: ['src_community', 'community_waitlist', 'book_owner_unverified'],
+  },
+  book2_waitlist: {
+    lists: [LISTS.SET_IN_STONE_WAITLIST],
+    tags: ['src_book2', 'set_in_stone_waitlist'],
+  },
+  unlock: { lists: [], tags: ['src_unlock'] },
+}
+
+// Asset slugs must be real ones, since the slug ends up in the emailed link.
+const ASSET_SLUGS: Record<AssetKind, Set<string>> = {
+  worksheet: new Set(worksheets.map((w) => w.slug)),
+  prompt: new Set(prompts.map((p) => p.slug)),
+  kit: new Set(kits.map((k) => k.slug)),
+}
+
+// Same values as the dropdowns on /work-with-me.
+const INDUSTRIES = [
+  'real-estate',
+  'mortgage',
+  'coaching',
+  'consulting',
+  'financial-advisor',
+  'attorney',
+  'contractor',
+  'other',
+] as const
+const YOUTUBE_STAGES = ['not-started', 'early', 'growing', 'established'] as const
+
+const name = z.string().trim().max(60).optional()
+
+const SubscribeSchema = z.object({
+  form: z.enum(Object.keys(FORMS) as [string, ...string[]]),
+  asset: z.string().max(100).optional(),
+  email: z.string().trim().toLowerCase().max(254).pipe(z.email()),
+  firstName: name,
+  lastName: name,
+  industry: z.enum(INDUSTRIES).optional(),
+  youtubeStage: z.enum(YOUTUBE_STAGES).optional(),
+})
+
+/**
+ * Subscribe a contact to Brevo.
  *
  * Body shape:
- *   email      (required)
- *   firstName  (optional)
- *   lastName   (optional)
- *   tags       (optional) array of strings, e.g.
- *              ["src_homepage", "dl_companion_kit"]
- *   listIds    (optional) additional Brevo list IDs to add to.
- *              COMPANION_KIT (21) is always included as the master pool.
- *   attributes (optional) extra attributes, e.g.
- *              { INDUSTRY: "real-estate", AMAZON_ORDER_ID: "111-..." }
+ *   form         (required) one of the FORMS keys above
+ *   asset        (required for worksheet, prompt, kit) the asset slug
+ *   email        (required)
+ *   firstName    (optional)
+ *   lastName     (optional)
+ *   industry     (discovery_call only)
+ *   youtubeStage (discovery_call only)
  *
  * Behavior:
- *   Dedupes by email (Brevo upsert).
+ *   Bots are turned away by Vercel BotID before anything else happens.
+ *   Lists and tags come from FORMS, never from the request.
  *   Tags ACCUMULATE on the contact (existing tags merged with new ones).
- *   Existing attributes are not overwritten unless explicitly passed.
+ *   For a contact that already exists, only empty attributes get filled in.
+ *   An anonymous form post never overwrites a name or anything else on file.
  */
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json()
-    const {
-      email,
-      firstName,
-      lastName,
-      tags = [],
-      listIds = [],
-      attributes = {},
-    } = body
+    const verdict = await checkBotId()
+    if (verdict.isBot) {
+      return NextResponse.json({ error: 'Access denied' }, { status: 403 })
+    }
 
-    if (!email || typeof email !== 'string' || !email.includes('@')) {
+    const parsed = SubscribeSchema.safeParse(
+      await request.json().catch(() => null)
+    )
+    if (!parsed.success) {
       return NextResponse.json(
         { error: 'Valid email is required' },
         { status: 400 }
       )
+    }
+    const { form, asset, email, firstName, lastName, industry, youtubeStage } =
+      parsed.data
+    const config = FORMS[form]
+
+    const tags = [...config.tags]
+    if (config.asset) {
+      if (!asset || !ASSET_SLUGS[config.asset].has(asset)) {
+        return NextResponse.json({ error: 'Unknown download' }, { status: 400 })
+      }
+      tags.push(`dl_${config.asset}_${asset}`)
+    }
+    if (form === 'discovery_call') {
+      if (!industry || !youtubeStage) {
+        return NextResponse.json(
+          { error: 'Pick a business type and YouTube stage' },
+          { status: 400 }
+        )
+      }
+      tags.push(`industry_${industry}`, `stage_${youtubeStage}`)
     }
 
     if (!BREVO_API_KEY) {
@@ -223,10 +331,11 @@ export async function POST(request: NextRequest) {
     }
 
     const allListIds = Array.from(
-      new Set([LISTS.COMPANION_KIT, ...listIds])
+      new Set<number>([LISTS.COMPANION_KIT, ...config.lists])
     )
 
-    // Fetch existing contact to merge tags rather than overwrite
+    // Look up the contact so we can merge tags and leave existing data alone
+    let existing: { attributes?: Record<string, unknown> } | null = null
     let existingTags: string[] = []
     const fetchResponse = await fetch(
       `https://api.brevo.com/v3/contacts/${encodeURIComponent(email)}`,
@@ -240,7 +349,7 @@ export async function POST(request: NextRequest) {
     )
 
     if (fetchResponse.ok) {
-      const existing = await fetchResponse.json()
+      existing = await fetchResponse.json()
       const currentTagsAttr = existing?.attributes?.TAGS
       if (typeof currentTagsAttr === 'string' && currentTagsAttr.length > 0) {
         existingTags = currentTagsAttr.split(',').map((t: string) => t.trim())
@@ -251,49 +360,70 @@ export async function POST(request: NextRequest) {
 
     const mergedTags = Array.from(new Set([...existingTags, ...tags]))
 
-    const finalAttributes: Record<string, unknown> = { ...attributes }
-    if (firstName) finalAttributes.FIRSTNAME = firstName
-    if (lastName) finalAttributes.LASTNAME = lastName
-    if (mergedTags.length > 0) {
-      finalAttributes.TAGS = mergedTags.join(',')
+    const offered: Record<string, string | undefined> = {
+      FIRSTNAME: firstName || undefined,
+      LASTNAME: lastName || undefined,
+      INDUSTRY: industry,
+      YOUTUBE_STAGE: youtubeStage,
+    }
+    const finalAttributes: Record<string, unknown> = {
+      TAGS: mergedTags.join(','),
+    }
+    for (const [key, value] of Object.entries(offered)) {
+      const current = existing?.attributes?.[key]
+      if (value && (current === undefined || current === null || current === '')) {
+        finalAttributes[key] = value
+      }
     }
 
-    const upsertResponse = await fetch('https://api.brevo.com/v3/contacts', {
-      method: 'POST',
-      headers: {
-        'api-key': BREVO_API_KEY,
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify({
-        email,
-        attributes: finalAttributes,
-        listIds: allListIds,
-        updateEnabled: true,
-      }),
-    })
+    const brevoHeaders = {
+      'api-key': BREVO_API_KEY,
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    }
 
-    if (!upsertResponse.ok) {
-      const errorData = await upsertResponse.json().catch(() => ({}))
+    const saveResponse = existing
+      ? await fetch(
+          `https://api.brevo.com/v3/contacts/${encodeURIComponent(email)}`,
+          {
+            method: 'PUT',
+            headers: brevoHeaders,
+            body: JSON.stringify({
+              attributes: finalAttributes,
+              listIds: allListIds,
+            }),
+          }
+        )
+      : await fetch('https://api.brevo.com/v3/contacts', {
+          method: 'POST',
+          headers: brevoHeaders,
+          body: JSON.stringify({
+            email,
+            attributes: finalAttributes,
+            listIds: allListIds,
+            updateEnabled: false,
+          }),
+        })
+
+    if (!saveResponse.ok) {
+      const errorData = await saveResponse.json().catch(() => ({}))
       if (errorData.code === 'duplicate_parameter') {
+        // Contact appeared between our lookup and the create. Just add
+        // them to the lists and leave their attributes as they are.
         for (const listId of allListIds) {
           await fetch(
             `https://api.brevo.com/v3/contacts/lists/${listId}/contacts/add`,
             {
               method: 'POST',
-              headers: {
-                'api-key': BREVO_API_KEY,
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-              },
+              headers: brevoHeaders,
               body: JSON.stringify({ emails: [email] }),
             }
           )
         }
       } else {
-        console.error('Brevo upsert error:', errorData)
+        console.error('Brevo save error:', errorData)
         return NextResponse.json(
-          { error: 'Failed to subscribe', detail: errorData?.message },
+          { error: 'Failed to subscribe' },
           { status: 500 }
         )
       }
@@ -303,17 +433,19 @@ export async function POST(request: NextRequest) {
     // AWAIT the send — Vercel serverless can kill background promises
     // after the response, causing silent email drops. ~200ms latency
     // is worth it for guaranteed delivery.
-    const asset = pickAssetForDelivery(mergedTags)
+    // Only this submission's tags count here, so an old tag on the contact
+    // cannot pick which email goes out.
+    const delivery = pickAssetForDelivery(tags)
     let emailFired = false
-    if (asset) {
+    if (delivery) {
       try {
-        await sendDeliveryEmail(email, firstName, asset)
+        await sendDeliveryEmail(email, firstName, delivery)
         emailFired = true
       } catch (e) {
         console.error('Email delivery error for', email, e)
       }
     } else {
-      const welcomeTemplate = pickWelcomeTemplate(mergedTags)
+      const welcomeTemplate = pickWelcomeTemplate(tags)
       if (welcomeTemplate) {
         try {
           await sendWelcomeEmail(email, firstName, welcomeTemplate)
@@ -327,10 +459,10 @@ export async function POST(request: NextRequest) {
     // Set the unlock cookie on every successful opt-in.
     // This means any form submission anywhere on the site grants
     // the user direct access to PDFs gated by middleware.
+    // Do not echo tags or lists back: they would reveal what is on file
+    // for any email address someone types in.
     const response = NextResponse.json({
       success: true,
-      tags: mergedTags,
-      lists: allListIds,
       emailSent: emailFired,
     })
     response.cookies.set('csy_unlocked', 'true', {

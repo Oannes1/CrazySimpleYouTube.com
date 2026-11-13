@@ -10,12 +10,12 @@ const AMAZON_LINK =
   process.env.NEXT_PUBLIC_AMAZON_LINK ||
   'https://www.amazon.com/dp/B0GWYK8TX6'
 
-export default function VaultThankYouPage({
+export default async function VaultThankYouPage({
   searchParams,
 }: {
-  searchParams: { book?: string }
+  searchParams: Promise<{ book?: string }>
 }) {
-  const bookPurchased = searchParams.book === 'true'
+  const bookPurchased = (await searchParams).book === 'true'
 
   return (
     <main className="min-h-screen bg-vault-dark text-white antialiased flex items-center">

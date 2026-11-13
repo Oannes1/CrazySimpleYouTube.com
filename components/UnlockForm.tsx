@@ -31,15 +31,10 @@ export default function UnlockForm({ next, assetName, assetType }: UnlockFormPro
     const firstName = (fd.get('firstName') as string)?.trim()
     const email = (fd.get('email') as string)?.trim().toLowerCase()
 
-    // Derive tags from the destination URL
-    const tagSource = assetType === 'prompt'
-      ? 'src_prompts'
-      : assetType === 'worksheet'
-        ? 'src_worksheets'
-        : 'src_unlock'
+    // Derive the form from the destination URL. The server picks the
+    // lists and tags for it.
+    const isAsset = assetType === 'prompt' || assetType === 'worksheet'
     const slug = next.replace(/^\/pdfs\/(prompts|worksheets)\//, '').replace(/\.pdf$/, '')
-    const assetTag = `dl_${assetType}_${slug}`
-    const listIds = assetType === 'prompt' ? [30] : assetType === 'worksheet' ? [29] : []
 
     try {
       const res = await fetch('/api/subscribe', {
@@ -48,8 +43,8 @@ export default function UnlockForm({ next, assetName, assetType }: UnlockFormPro
         body: JSON.stringify({
           email,
           firstName,
-          tags: [tagSource, assetTag],
-          listIds,
+          form: isAsset ? assetType : 'unlock',
+          asset: isAsset ? slug : undefined,
         }),
       })
       if (!res.ok) {

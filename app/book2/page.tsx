@@ -71,8 +71,7 @@ export default function Book2Page() {
             </p>
             <div className="mt-7">
               <LeadCaptureForm
-                tags={['src_book2', 'set_in_stone_waitlist']}
-                listIds={[26]}
+                form="book2_waitlist"
                 ctaLabel="Send Me the First Chapter"
                 successHeading="You're on the list."
                 successText="When the first chapter is ready, it lands in your inbox first."
